@@ -1,0 +1,277 @@
+/* Login */
+
+.welcome {
+    height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.welcome.forget-password .forget-overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 19.58%);
+}
+
+.welcome.welcome.forget-password .message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 35%;
+    z-index: 30;
+    background-color: #ffffff;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.welcome.welcome.forget-password .message svg {
+    color: var(--tartiary-color);
+    width: 14%;
+    margin: 10px 0px;
+}
+
+.welcome.welcome.forget-password .message p {
+    margin: 1px 0px;
+}
+
+.welcome.welcome.forget-password .message button {
+    margin: 10px 0px;
+}
+
+.welcome .welcoming {
+    position: absolute;
+    top: 24px;
+    left: 42px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.welcome .logo {
+    position: absolute;
+    top: 0;
+    right: 80%;
+    z-index: 2;
+    width: 16%;
+    height: auto;
+}
+
+.welcome .welcome-show {
+    position: absolute;
+    top: 230px;
+    left: 0;
+    z-index: 2;
+    width: 50%;
+    height: auto;
+}
+
+.welcome .hi-show {
+    position: absolute;
+    top: 214px;
+    left: -42px;
+    z-index: 2;
+    width: 46%;
+    height: auto;
+}
+
+.welcome .logIn {
+    position: absolute;
+    top: 195px;
+    right: 15%;
+    z-index: 3;
+    width: 27.2%;
+    /* padding-bottom: 200px; */
+}
+
+.welcome.forget-password .logIn {
+    width: 45%;
+}
+
+.welcome.confirm-password .logIn {
+    right: 13%;
+    width: 50%;
+}
+
+.welcome .logIn .header {
+    color: #605E5C;
+    font-size: 3.125rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.welcome.welcome.forget-password .logIn .header {
+    font-size: 2.5rem;
+}
+
+.welcome .logIn .sub-header {
+    font-size: 1.5rem;
+    color: #605E5C;
+    text-align: center;
+    font-weight: 400;
+}
+
+.welcome.confirm-password .logIn .sub-header {
+    font-size: 1.125rem;
+    color: #605E5C;
+    text-align: center;
+    font-weight: 300;
+}
+
+.welcome .logIn form {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.welcome.welcome.forget-password .logIn form {
+    width: 70%;
+    margin: 40px auto 0px;
+}
+
+.welcome .logIn form label {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.welcome .logIn form input {
+    height: 1.875rem;
+    width: 100%;
+    padding-left: 5px;
+    border: none;
+    border-bottom: 1px solid var(--stroke-form-border);
+    background: transparent;
+}
+
+.welcome .logIn form input:focus {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.welcome .logIn form input::-webkit-placeholder {
+    font-size: 1rem;
+    color: #938B8B;
+}
+
+.welcome .logIn form input::-moz-placeholder {
+    font-size: 1rem;
+    color: #938B8B;
+}
+
+.welcome .logIn form input::placeholder {
+    font-size: 1rem;
+    color: #938B8B;
+}
+
+.welcome .logIn form .user {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.welcome .logIn form .password {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.welcome .logIn form .remember-forget {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.welcome .logIn form .remember-forget .remember {
+    font-size: 0.875rem;
+    color: #605E5C;
+    line-height: 1.25rem;
+    text-shadow: 1px 2px 2px #00000049;
+    cursor: pointer;
+}
+
+.welcome .logIn form .remember-forget .forget {
+    font-size: 0.875rem;
+    color: var(--secondary-color);
+    line-height: 1.25rem;
+    text-shadow: 1px 2px 2px #00000049;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.welcome .logIn form .submitButton {
+    text-align: center;
+}
+
+.welcome.forget-password .logIn form .submitButton {
+    text-align: left;
+}
+
+.welcome .logIn form .submitButton button {
+    padding: 15px 45px;
+    margin: 0 auto;
+}
+
+.welcome.welcome.forget-password .logIn form .submitButton button {
+    margin: 20px 0 0;
+    padding: 10px 65px;
+}
+
+@media screen and (max-width: 768px) {
+    .welcome .welcome-show {
+        display: none;
+    }
+    .welcome .hi-show {
+        display: none;
+    }
+    .welcome .logIn {
+        top: 200px;
+        width: 90%;
+        right: 10%;
+        padding-bottom: 100px;
+    }
+    .welcome.forget-password .logIn {
+        width: 90%;
+    }
+    .welcome .logo {
+        position: absolute;
+        top: 50px;
+        right: 47%;
+        z-index: 2;
+        width: 130px;
+        height: auto;
+    }
+    .welcome .submitButton {
+        text-align: center;
+    }
+    .welcome.forget-password .logIn form .submitButton {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .welcome .logIn {
+        right: 17%;
+    }
+    .welcome.confirm-password .logIn {
+        right: 17%;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .welcome .logIn {
+        width: 95%;
+    }
+}

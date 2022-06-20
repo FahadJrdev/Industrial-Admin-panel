@@ -1,0 +1,363 @@
+.adding-investor-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 19.58%);
+    z-index: 100;
+    top: 0;
+    left: 0;
+    position: fixed;
+}
+
+.adding-investor {
+    background-color: var(--bg-primary-color);
+    -webkit-transition: width .4s ease, background-color .4s ease, border-color .4s;
+    transition: width .4s ease, background-color .4s ease, border-color .4s;
+    height: 100%;
+    box-shadow: var(--drop-box-shadow);
+    width: 71%;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    border-radius: 20px 0px 0px 20px;
+    position: fixed;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.investor-add {
+    width: 100%;
+    -webkit-transition: border-color .4s;
+    transition: border-color .4s;
+    scrollbar-width: none;
+    overflow-x: hidden;
+    padding: 20px 40px;
+}
+
+.investor-add .header-add {
+    display: flex;
+    align-items: center;
+}
+
+.investor-add .header-add button {
+    padding: 10px 25px;
+}
+
+.investor-add .header-add h1 {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-low-dark);
+    line-height: 180%;
+    margin-left: 20px;
+}
+
+.investor-add form {
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+.investor-add .information {
+    margin-bottom: 25px;
+}
+
+.investor-add .information h1 {
+    color: var(--tartiary-color);
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.investor-add .information ul {
+    width: 100%;
+    display: flex;
+    margin: 30px 0px;
+}
+
+.investor-add .information ul li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 35px;
+    position: relative;
+}
+
+.investor-add .information ul li label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.investor-add .information ul li input {
+    border: 1px solid var(--input-border);
+    height: 30px;
+    padding-left: 10px;
+    z-index: 298;
+}
+
+.investor-add .information ul li input::-webkit-input-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.investor-add .information ul li input::-moz-input-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.investor-add .information ul li input::-ms-input-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.investor-add .information ul li input:focus {
+    outline: none;
+    box-shadow: var(--box-shadow-inset);
+}
+
+.investor-add .information ul li input~svg {
+    position: absolute;
+    top: 27px;
+    left: 120px;
+    width: 20px;
+    color: var(--input-border);
+}
+
+.investor-add .information ul li select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    height: 30px;
+    padding-left: 10px;
+    z-index: 300;
+    background: transparent;
+}
+
+.investor-add .information ul li .selectInput {
+    position: absolute;
+    top: 23px;
+    left: 0;
+}
+
+.investor-add .information ul li select option:first-child {
+    font-size: 14px;
+    color: var(--input-border);
+}
+
+.investor-add .information ul li select:focus {
+    outline: none;
+    box-shadow: var(--box-shadow-inset);
+}
+
+.investor-add .information ul li select~svg {
+    position: absolute;
+    top: 21px;
+    left: 110px;
+    width: 30px;
+    color: var(--text-dark);
+    z-index: 299;
+}
+
+.investor-add .information ul li #input_201px {
+    width: 201px;
+}
+
+.investor-add .information ul li #input_180px {
+    width: 180px;
+}
+
+.investor-add .information ul li #input_155px {
+    width: 155px;
+}
+
+.investor-add .information ul li #input_149px {
+    width: 149px;
+}
+
+.investor-add .information ul li #input_295px {
+    width: 295px;
+}
+
+.investor-add .information ul li #input_295px~input::placeholder {
+    font-size: 12px;
+}
+
+.investor-add .information ul li #input_146px {
+    width: 146px;
+}
+
+.investor-add .information ul li #input_146px~input {
+    width: 146px;
+}
+
+.investor-add .information ul li #input_146px~svg {
+    left: 110px;
+}
+
+.investor-add .information ul li #input_170px {
+    width: 170px;
+}
+
+.investor-add .information ul li #input_170px~input {
+    width: 170px;
+}
+
+.investor-add .information ul li #input_170px~input::placeholder {
+    font-size: 12px;
+}
+
+.investor-add .information ul li #input_170px~svg {
+    left: 132px;
+}
+
+.investor-add .information ul li #input_199px {
+    width: 199px;
+}
+
+.investor-add .information ul li #input_199px~input {
+    width: 199px;
+}
+
+.investor-add .information ul li #input_199px~svg {
+    left: 161px;
+}
+
+.investor-add .Permit-information {
+    position: relative;
+}
+
+.investor-add .Permit-information ul {
+    display: block;
+    margin-bottom: 0;
+}
+
+.investor-add .Permit-information ul li {
+    display: inline-flex;
+    margin-bottom: 20px;
+}
+
+.investor-add .information .toggle_permission {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    position: absolute;
+    width: 50%;
+    top: 0;
+    left: 335px;
+}
+
+.investor-add .Permit-information .toggle_permission p {
+    font-size: 14px;
+    color: var(--input-border);
+    margin-right: 3px;
+}
+
+.investor-add .Permit-information .toggle_permission .switch {
+    margin-right: 5px;
+}
+
+.investor-add .Permit-information button {
+    padding: 0px 20px;
+    font-size: 24px;
+    font-weight: 300;
+    margin-top: 20px;
+}
+
+.investor-add form .submit-form {
+    position: relative;
+    width: 100%;
+    height: 50px;
+}
+
+.investor-add form .submit-form button {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 10px 70px;
+}
+
+@media screen and (max-width: 768px) {
+    .investor-add .information ul {
+        margin: 0px;
+    }
+    .investor-add .information ul li #input_201px {
+        width: 100%;
+    }
+    .investor-add .information ul li #input_180px {
+        width: 100%;
+    }
+    .investor-add .information ul li #input_155px {
+        width: 100%;
+    }
+    .investor-add .information ul li #input_149px {
+        width: 100%;
+    }
+    .investor-add .information ul li #input_295px {
+        width: 100%;
+    }
+    .investor-add .information ul li #input_295px~input::placeholder {
+        font-size: 12px;
+    }
+    .investor-add .information ul li #input_146px {
+        width: 100%;
+    }
+    .investor-add .information ul li #input_146px~input {
+        width: 100%;
+    }
+    .investor-add .information ul li #input_146px~svg {
+        left: 222px;
+    }
+    .investor-add .information ul li #input_170px {
+        width: 100%;
+    }
+    .investor-add .information ul li #input_170px~input {
+        width: 100%;
+    }
+    .investor-add .information ul li #input_170px~input::placeholder {
+        font-size: 12px;
+    }
+    .investor-add .information ul li #input_170px~svg {
+        left: 222px;
+    }
+    .investor-add .information ul li #input_199px {
+        width: 100%;
+    }
+    .investor-add .information ul li #input_199px~input {
+        width: 100%;
+    }
+    .investor-add .information ul li #input_199px~svg {
+        left: 222px;
+    }
+    .investor-add .information ul li #input_170px~svg {
+        left: 260px;
+    }
+    .investor-add .information ul li #input_146px~svg {
+        left: 260px;
+    }
+    .investor-add .information ul li #input_199px~svg {
+        left: 260px;
+    }
+    .investor-add form .submit-form button {
+        width: 100%;
+        margin: 0px 0px 15px;
+    }
+    .investor-add .information .toggle_permission {
+        margin: 10px 0px;
+        position: static;
+    }
+}

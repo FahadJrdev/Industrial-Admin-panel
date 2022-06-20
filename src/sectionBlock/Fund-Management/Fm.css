@@ -1,0 +1,121 @@
+.management {
+    padding: 40px 0px;
+    height: 100vh;
+}
+
+.management button {
+    margin-bottom: 25px;
+}
+
+.management button:first-child {
+    padding: 10px 30px;
+    margin-right: 40px;
+}
+
+.management .fund-item {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 30px;
+    margin-top: 25px;
+}
+
+.management .fund-item li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    cursor: pointer;
+    width: 100%;
+}
+
+.management .fund-item p {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.management .fund-item svg {
+    width: 10%;
+}
+
+.FundInfo {
+    margin-left: 10px;
+}
+
+.FundInfo ul {
+    display: flex;
+    margin: 30px 0 25px 0;
+}
+
+.FundInfo ul li {
+    display: flex;
+    flex-direction: column;
+    width: 23%;
+    height: 10%;
+    margin-right: 20px;
+}
+
+.FundInfo ul li label {
+    font-size: 12px;
+    color: #000000;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.FundInfo ul li p {
+    font-size: 14px;
+    color: var(--input-border);
+    padding-left: 10px;
+}
+
+.FundInfo ul li svg {
+    width: 10%;
+    cursor: pointer;
+}
+
+.FundInfo ul li input {
+    font-size: 14px;
+    color: var(--input-border);
+    padding-left: 10px;
+    height: 30px;
+}
+
+.FundInfo ul li input:focus {
+    outline: none;
+}
+
+.FundInfo .submit-button {
+    margin-top: 50px;
+}
+
+@media screen and (max-width: 768px) {
+    .management button {
+        width: 100%;
+    }
+    .FundInfo ul li svg {
+        margin-left: auto;
+    }
+    .FundInfo ul {
+        width: 100%;
+        flex-direction: column;
+        margin: 0;
+    }
+    .FundInfo ul li {
+        width: 90%;
+        margin-bottom: 25px;
+    }
+    .FundInfo .submit-button button {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+    .management {
+        padding: 0px;
+    }
+    .management button:first-child {
+        margin-top: 40px;
+    }
+    .FundInfo ul:first-child li:last-child {
+        order: 1 !important;
+    }
+}

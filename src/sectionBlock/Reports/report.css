@@ -1,0 +1,26 @@
+.reports {
+    width: 100%;
+    display: flex;
+    margin-top: 30px;
+}
+
+.reports .document {
+    margin-right: 30px;
+    text-align: center;
+}
+
+.reports svg {
+    color: var(--tartiary-color);
+}
+
+@media screen and (max-width:768px) {
+    .reports {
+        display: flex;
+        flex-direction: column;
+    }
+    .reports ul {
+        display: flex;
+        justify-content: center;
+        margin: 0px 0px 40px 20px;
+    }
+}

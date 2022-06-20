@@ -1,0 +1,112 @@
+.general-information {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.general-information .investor-information {
+    width: 100%;
+    padding: 10px 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.general-information .investor-information .current-information {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    padding-top: 30px;
+}
+
+.general-information .investor-information .current-information ul {
+    display: flex;
+}
+
+.general-information .investor-information .current-information ul li {
+    font-size: 15px;
+    color: var(--text-low-dark);
+    width: 50%;
+    padding-bottom: 20px;
+    line-height: 163.5%;
+}
+
+.general-information .investor-information .current-information ul li:first-child {
+    font-weight: 500;
+}
+
+.general-information .investor-information .information-customizer {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px 30px 0px;
+}
+
+.general-information .investor-information .information-customizer button {
+    margin-bottom: 15px;
+    padding: 12px 30px;
+}
+
+.general-information .information-customizer {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px 30px 0px;
+}
+
+.general-information .information-customizer button {
+    margin-bottom: 15px;
+    padding: 12px 30px;
+}
+
+.general-information .investor-document {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+.general-information .investor-document h2 {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.general-information .investor-document .documents {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 30px 0px 100px;
+    text-align: center;
+}
+
+.general-information .investor-document .documents .document {
+    margin-right: 30px;
+}
+
+.general-information .investor-document .documents .document svg {
+    color: var(--primary-color);
+}
+
+@media screen and (max-width: 768px) {
+    .general-information .investor-document .documents {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 30px 0px 100px;
+        text-align: center;
+    }
+    .general-information .investor-document .documents ul {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 10px 0px;
+    }
+    .general-information .investor-information .current-information {
+        width: 100%;
+        padding-top: 0px;
+    }
+    .general-information .investor-document .documents {
+        margin: 30px 0px 20px;
+    }
+}

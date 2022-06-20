@@ -1,0 +1,73 @@
+.GI {
+    display: flex;
+    padding: 40px 0px;
+    justify-content: space-around;
+}
+
+.GI .GI-information button {
+    width: 40%;
+    height: 44px;
+    margin-bottom: 30px;
+}
+
+.GI .GI-document {
+    padding: 5px;
+    background-color: var(--bg-secondary-color);
+    border: 1px solid var(--border-secondary-color);
+    border-radius: 13px;
+}
+
+.GI .GI-document .documents {
+    height: 483px;
+    overflow-x: hidden;
+}
+
+.GI .GI-document .documents .document-body {
+    height: 100%;
+}
+
+.GI .GI-document .documents ul {
+    display: flex;
+}
+
+.GI .GI-document .document svg {
+    color: var(--primary-color);
+}
+
+.GI .GI-document .document p {
+    color: var(--text-low-dark);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 127%;
+}
+
+.GI .GI-document h2 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 33px;
+    color: var(--text-low-dark);
+}
+
+.GI .document p {
+    text-align: center;
+}
+
+.GI .document {
+    margin: 10px 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .GI {
+        flex-direction: column;
+        padding: 0px 0px 40px;
+    }
+    .GI .GI-information {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .GI .GI-information button {
+        width: 100%;
+    }
+}

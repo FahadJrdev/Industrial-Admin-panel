@@ -1,0 +1,71 @@
+.BasicInfo {
+    margin-left: 10px;
+}
+
+.BasicInfo ul {
+    display: flex;
+    margin: 30px 0 25px 0;
+}
+
+.BasicInfo ul li {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 10%;
+    margin-right: 20px;
+}
+
+.BasicInfo ul li label {
+    font-size: 12px;
+    color: #000000;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.BasicInfo ul li p {
+    font-size: 14px;
+    color: var(--input-border);
+    padding-left: 10px;
+}
+
+.BasicInfo ul li svg {
+    width: 10%;
+    cursor: pointer;
+}
+
+.BasicInfo ul li input {
+    font-size: 14px;
+    color: var(--input-border);
+    padding-left: 10px;
+    height: 30px;
+}
+
+.BasicInfo ul li input:focus {
+    outline: none;
+}
+
+.BasicInfo .submit-button {
+    margin-top: 50px;
+}
+
+@media screen and (max-width: 768px) {
+    .BasicInfo ul li svg {
+        margin-left: auto;
+    }
+    .BasicInfo ul {
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+    }
+    .BasicInfo ul li {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .BasicInfo .submit-button button {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .BasicInfo ul:first-child li:last-child {
+        order: 1 !important;
+    }
+}

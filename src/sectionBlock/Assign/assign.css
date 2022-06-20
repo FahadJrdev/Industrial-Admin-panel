@@ -1,0 +1,339 @@
+.adding-investor-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 19.58%);
+    z-index: 100;
+    top: 0;
+    left: 0;
+    position: fixed;
+}
+
+.adding-investor {
+    background-color: var(--bg-primary-color);
+    -webkit-transition: width .4s ease, background-color .4s ease, border-color .4s;
+    transition: width .4s ease, background-color .4s ease, border-color .4s;
+    height: 100%;
+    box-shadow: var(--drop-box-shadow);
+    width: 71%;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    border-radius: 20px 0px 0px 20px;
+    position: fixed;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.investor-add {
+    width: 100%;
+    -webkit-transition: border-color .4s;
+    transition: border-color .4s;
+    scrollbar-width: none;
+    overflow-x: hidden;
+    padding: 20px 40px;
+}
+
+.investor-add.cfund {
+    height: 100%;
+}
+
+.investor-add .header-add {
+    display: flex;
+    align-items: center;
+}
+
+.investor-add .header-add button {
+    padding: 10px 25px;
+}
+
+.investor-add .header-add h1 {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-low-dark);
+    line-height: 180%;
+    margin-left: 20px;
+}
+
+.investor-add .assignment {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 25px;
+}
+
+.investor-add .assignment p {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.investor-add .assignment ul {
+    width: 95%;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 100;
+    padding-top: 35px;
+    cursor: pointer;
+    z-index: 300;
+}
+
+.investor-add .assignment ul li {
+    background-color: white;
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: 400;
+    padding: 3px 5px;
+}
+
+.investor-add .assignment ul li:hover {
+    background: #f0f0f0;
+    cursor: pointer;
+}
+
+.investor-add .assignment input {
+    width: 95%;
+    height: 30px;
+    position: absolute;
+    z-index: 290;
+    top: 28px;
+    font-size: 14px;
+    color: var(--text-dark);
+    padding-left: 15px;
+    font-weight: 100;
+}
+
+.investor-add .assignment-input {
+    padding: 10px 0px;
+    border-bottom: 1px solid var(--tartiary-color);
+}
+
+.investor-add .assignment-input ul {
+    margin: 15px 0px;
+    display: flex;
+}
+
+.investor-add .assignment-input ul li {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    width: 30%;
+}
+
+.investor-add .assignment-input ul li label {
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+}
+
+.investor-add .assignment-input input {
+    width: 100%;
+    padding-left: 5px;
+    height: 30px;
+    font-size: 14px;
+    color: var(--text-dark);
+    font-weight: 100;
+}
+
+.investor-add .assignment-input input:focus {
+    outline: none;
+}
+
+.investor-add .assignment-input select:focus {
+    outline: none;
+}
+
+.investor-add .assignment input:focus {
+    outline: none;
+}
+
+.investor-add .project-data {
+    padding: 10px 0px;
+}
+
+.investor-add .project-data p {
+    margin: 5px 0px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--tartiary-color);
+}
+
+.investor-add .project-data ul {
+    display: flex;
+    border-bottom: 1px solid var(--tartiary-color);
+    padding: 5px 0px 15px;
+}
+
+.investor-add .project-data ul li {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    width: 30%;
+    position: relative;
+}
+
+.investor-add .project-data ul li label {
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+}
+
+.investor-add .project-data input {
+    width: 100%;
+    padding-left: 5px;
+    height: 30px;
+    font-size: 14px;
+    color: var(--text-dark);
+    font-weight: 100;
+    position: absolute;
+    z-index: 290;
+    top: 23px;
+    left: 0;
+}
+
+.investor-add .project-data input:focus {
+    outline: none;
+}
+
+.investor-add .project-data select:focus {
+    outline: none;
+}
+
+.investor-add .project-data input::placeholder {
+    color: var(--input-border);
+    font-size: 14px;
+    padding-left: 15px;
+}
+
+.investor-add .project-data select {
+    width: 100%;
+    height: 30px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    height: 30px;
+    padding-left: 10px;
+    z-index: 300;
+    background: transparent;
+    font-size: 14px;
+    color: var(--text-dark);
+    padding-left: 15px;
+    font-weight: 100;
+}
+
+.investor-add .project-data svg {
+    position: absolute;
+    right: 10px;
+    top: 23px;
+    width: 30px;
+    color: var(--text-dark);
+    z-index: 299;
+}
+
+.investor-add .project-data select option {
+    color: var(--input-border);
+}
+
+.investor-add .project-data select option:hover {
+    background-color: #c4c4c428;
+}
+
+.investor-add .assignment input:focus {
+    outline: none;
+}
+
+.investor-add .assignment select:focus {
+    outline: none;
+}
+
+.investor-add .assignment input::placeholder {
+    color: var(--input-border);
+    font-size: 14px;
+    padding-left: 15px;
+}
+
+.investor-add .assignment svg {
+    position: absolute;
+    right: 60px;
+    top: 27px;
+    width: 30px;
+    color: var(--text-dark);
+    z-index: 299;
+}
+
+.investor-add .assignment select option {
+    color: var(--input-border);
+}
+
+.investor-add .assignment select option:hover {
+    background-color: #c4c4c428;
+}
+
+.investor-add form {
+    height: 100%;
+}
+
+.investor-add .assignment-body form {
+    padding-left: 0px;
+}
+
+.investor-add form .submit {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.css-b62m3t-container {
+    position: relative;
+    box-sizing: border-box;
+    width: 95%;
+}
+
+@media screen and (max-width: 768px) {
+    .investor-add .assignment input {
+        width: 85%;
+    }
+    .investor-add .assignment-input ul {
+        flex-direction: column;
+        margin: 0px;
+    }
+    .investor-add .assignment-input ul li {
+        width: 85%;
+        margin-bottom: 10px;
+    }
+    .investor-add .project-data ul {
+        flex-direction: column;
+        margin: 0;
+    }
+    .investor-add .project-data ul li {
+        width: 85%;
+        margin-bottom: 10px;
+    }
+    .investor-add .project-data ul {
+        border-bottom: none;
+    }
+    .investor-add form .submit {
+        justify-content: flex-start;
+    }
+    .investor-add form .submit .button {
+        width: 85%;
+        margin: 30px 0px;
+    }
+    .investor-add .project-data .investor-data li {
+        margin-bottom: 45px;
+    }
+    .investor-add .project-data .investor-data li:first-child {
+        margin-bottom: 15px;
+    }
+    .css-b62m3t-container {
+        width: 85%;
+    }
+}

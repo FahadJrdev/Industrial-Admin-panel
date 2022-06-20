@@ -1,0 +1,252 @@
+.adding-investor.approval {
+    width: 50%;
+}
+
+.adding-investor-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 19.58%);
+    z-index: 100;
+    top: 0;
+    left: 0;
+    position: fixed;
+}
+
+.adding-investor.generate {
+    background-color: var(--bg-primary-color);
+    -webkit-transition: width .4s ease, background-color .4s ease, border-color .4s;
+    transition: width .4s ease, background-color .4s ease, border-color .4s;
+    height: 100%;
+    box-shadow: var(--drop-box-shadow);
+    width: 48.6%;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    border-radius: 20px 0px 0px 20px;
+    position: fixed;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.investor-add {
+    width: 100%;
+    -webkit-transition: border-color .4s;
+    transition: border-color .4s;
+    scrollbar-width: none;
+    overflow-x: hidden;
+    padding: 20px 40px;
+}
+
+.investor-add .header-add {
+    display: flex;
+    align-items: center;
+}
+
+.investor-add .header-add button {
+    padding: 10px 25px;
+}
+
+.investor-add .header-add h1 {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-low-dark);
+    line-height: 180%;
+    margin-left: 20px;
+}
+
+.approval .investor-add .header-add h1 {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 180%;
+}
+
+.investor-add .approval-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.approval .investor-add {
+    height: 100%;
+}
+
+.approval .investor-add form {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.approval .investor-add form ul {
+    display: flex;
+    margin: 5px 0px;
+}
+
+.approval .investor-add form ul .inputSelect {
+    display: flex;
+    flex-direction: column;
+}
+
+.approval .investor-add form ul .inputSelect li {
+    margin-bottom: 11px;
+}
+
+.approval .investor-add form li {
+    display: flex;
+    flex-direction: column;
+    margin-right: 25px;
+    width: 100%;
+}
+
+.approval .investor-add form li label {
+    font-size: 12px;
+    line-height: 24px;
+    font-weight: 600;
+    color: rgba(133, 133, 133, 1);
+    padding-left: 30px;
+}
+
+.approval .investor-add form li input {
+    border: 1px solid var(--stroke-color);
+    border-radius: 100px;
+    height: 43px;
+    margin-bottom: 15px;
+    padding-left: 30px;
+}
+
+.approval .investor-add form li input:focus {
+    outline: none;
+}
+
+.approval .investor-add form li textarea {
+    border: 1px solid var(--stroke-color);
+    border-radius: 20px;
+    margin-bottom: 15px;
+    padding-left: 30px;
+    padding-top: 10px;
+    resize: none;
+}
+
+.approval .investor-add form li textarea::placeholder {
+    font-size: 16px;
+    color: var(--text-low-dark);
+    font-weight: 400;
+}
+
+.approval .investor-add form li textarea:focus {
+    outline: none;
+}
+
+.approval .approval-body button {
+    width: 30%;
+    margin-left: 15px;
+    margin-bottom: 25px;
+}
+
+.approval .approval-body p {
+    font-size: 14px;
+    line-height: 25.2px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-left: 30px;
+}
+
+.approval .approval-body>button {
+    padding: 10px 45px;
+    display: inline-flex;
+    justify-content: space-between;
+    width: 98%;
+    margin-left: 15px;
+    border-radius: 100px;
+    border: 2px solid var(--tartiary-color);
+    color: var(--tartiary-color);
+    margin-top: 25px;
+}
+
+.approval .approval-body .button {
+    width: 30%;
+}
+
+.approval .approvalForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.approval .approvalForm .submit {
+    display: flex;
+    justify-content: center;
+}
+
+.investor-add .information ul li input~svg {
+    position: absolute;
+    top: 27px;
+    left: 120px;
+    width: 20px;
+    color: var(--input-border);
+}
+
+.investor-add .approvalForm.information ul li select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    z-index: 300;
+    background: transparent;
+    border: 1px solid var(--stroke-color);
+    border-radius: 100px;
+    height: 43px;
+    padding-left: 30px;
+}
+
+.investor-add .approvalForm.information ul li .selectInput {
+    position: absolute;
+    top: 29px;
+    left: 0;
+    width: 100%;
+}
+
+.investor-add .information ul li select option:first-child {
+    font-size: 14px;
+    color: var(--input-border);
+}
+
+.investor-add .information ul li select:focus {
+    outline: none;
+    box-shadow: var(--box-shadow-inset);
+}
+
+.investor-add .approvalForm.information ul li select~svg {
+    position: absolute;
+    top: 34px;
+    left: 220px;
+    width: 30px;
+    color: var(--text-dark);
+    z-index: 299;
+}
+
+.investor-add .information ul li .input_201px {
+    width: 100%;
+}
+
+.approval .approval-body .approvalInformationHeader {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 180%;
+    margin-left: 25px;
+}
+
+@media screen and (max-width: 768px) {
+    .investor-add .approvalForm.information ul li select~svg {
+        left: 260px;
+    }
+    .approval .approval-body .button {
+        width: 50%;
+    }
+}

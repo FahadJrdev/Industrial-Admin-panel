@@ -1,0 +1,19 @@
+.App .main {
+    position: relative;
+    z-index: 1;
+    margin-left: 300px;
+    -webkit-transition: margin-left .2s ease;
+    transition: margin-left .2s ease;
+    background-color: var(--background-body);
+    color: var(--text-primary);
+    padding: 10px 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .App .main {
+        margin-left: 0;
+    }
+    .App {
+        margin-left: -5px;
+    }
+}

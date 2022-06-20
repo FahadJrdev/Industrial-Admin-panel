@@ -1,0 +1,289 @@
+.investor-add .information ul li {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-right: 35px;
+    position: relative;
+}
+
+.investor-add .information ul li label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.investor-add .information ul li input {
+    border: 1px solid var(--input-border);
+    height: 30px;
+    padding-left: 10px;
+    z-index: 298;
+}
+
+.investor-add .information ul li input::-webkit-input-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.investor-add .information ul li input::-moz-input-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.investor-add .information ul li input::-ms-input-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.investor-add .information ul li input:focus {
+    outline: none;
+    box-shadow: var(--box-shadow-inset);
+}
+
+.investor-add .information ul li input~svg {
+    position: absolute;
+    top: 27px;
+    left: 120px;
+    width: 20px;
+    color: var(--input-border);
+}
+
+.investor-add .information ul li select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    height: 30px;
+    padding-left: 10px;
+    z-index: 300;
+    background: transparent;
+}
+
+.investor-add .information ul li .selectInput {
+    position: absolute;
+    top: 23px;
+    left: 0;
+    width: 100%;
+}
+
+.investor-add .information ul li select option:first-child {
+    font-size: 14px;
+    color: var(--input-border);
+}
+
+.investor-add .information ul li select:focus {
+    outline: none;
+    box-shadow: var(--box-shadow-inset);
+}
+
+.investor-add .information ul li select~svg {
+    position: absolute;
+    top: 23px;
+    left: 180px;
+    width: 30px;
+    color: var(--text-dark);
+    z-index: 299;
+}
+
+.investor-add .information ul li .input_201px {
+    width: 100%;
+}
+
+.adding-investor-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 19.58%);
+    z-index: 100;
+    top: 0;
+    left: 0;
+    position: fixed;
+}
+
+.adding-investor {
+    background-color: var(--bg-primary-color);
+    -webkit-transition: width .4s ease, background-color .4s ease, border-color .4s;
+    transition: width .4s ease, background-color .4s ease, border-color .4s;
+    height: 100%;
+    box-shadow: var(--drop-box-shadow);
+    width: 71%;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    border-radius: 20px 0px 0px 20px;
+    position: fixed;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.investor-add {
+    width: 100%;
+    -webkit-transition: border-color .4s;
+    transition: border-color .4s;
+    scrollbar-width: none;
+    overflow-x: hidden;
+    padding: 20px 40px;
+}
+
+.investor-add.aproject {
+    height: 100%;
+}
+
+.investor-add .header-add {
+    display: flex;
+    align-items: center;
+}
+
+.investor-add .header-add button {
+    padding: 10px 25px;
+}
+
+.investor-add .header-add h1 {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-low-dark);
+    line-height: 180%;
+    margin-left: 20px;
+}
+
+.investor-add .add-project {
+    position: relative;
+    padding-top: 10px;
+    height: 100%;
+}
+
+.investor-add .add-project ul {
+    display: flex;
+}
+
+.investor-add .add-project .lastUl {
+    margin-top: 35px;
+}
+
+.investor-add .add-project ul li {
+    display: flex;
+    flex-direction: column;
+    margin-right: 37px;
+    width: 25%;
+}
+
+.investor-add .add-project .positioned_input {
+    position: absolute;
+    top: 90px;
+    width: 100%;
+}
+
+.investor-add .add-project ul li label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.investor-add .add-project ul li input {
+    height: 30px;
+    border: 1px solid var(--input-border);
+    padding-left: 10px;
+}
+
+.investor-add .add-project ul li input:focus {
+    box-shadow: var(--box-shadow-inset);
+    outline: none;
+}
+
+.investor-add .add-project ul li input::placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+}
+
+.investor-add .add-project ul li input::-webkit-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+}
+
+.investor-add .add-project ul li input::-moz-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+}
+
+.investor-add .add-project ul li.dateInput {
+    width: 20.6%;
+}
+
+.investor-add .add-project ul li textarea {
+    height: 110px;
+    border: 1px solid var(--input-border);
+    padding-left: 10px;
+    padding-top: 5px;
+    resize: none;
+    width: 218%;
+}
+
+.investor-add .add-project ul li textarea:focus {
+    box-shadow: var(--box-shadow-inset);
+    outline: none;
+}
+
+.investor-add .add-project ul li textarea::placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+}
+
+.investor-add .add-project ul li textarea::-webkit-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+}
+
+.investor-add .add-project ul li textarea::-moz-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+}
+
+.investor-add .add-project button {
+    position: absolute;
+    bottom: 3%;
+    right: 16%;
+}
+
+@media screen and (max-width: 768px) {
+    .investor-add .information ul li {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    .investor-add .header-add button svg {
+        margin: 0;
+    }
+    .investor-add .header-add h1 {
+        font-size: 25px !important;
+        margin-left: 0;
+    }
+    .adding-investor {
+        width: 100% !important;
+        margin-bottom: 30px;
+    }
+    .investor-add .information ul {
+        flex-direction: column;
+    }
+    .investor-add .add-project button {
+        position: static;
+        width: 100%;
+        margin: 20px 0px;
+    }
+    .investor-add .add-project ul li textarea {
+        width: 100%;
+    }
+}

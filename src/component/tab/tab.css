@@ -1,0 +1,118 @@
+.tab {
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--stroke-color);
+}
+
+.tab ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tab ul li {
+    margin-right: 30px;
+    padding: 10px;
+    position: relative;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-low-dark);
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.tab ul li.color1.active {
+    color: var(--primary-color);
+}
+
+.tab ul li.color2.active {
+    color: var(--secondary-color);
+}
+
+.tab ul li.color3.active {
+    color: var(--tartiary-color);
+}
+
+.tab ul li::after {
+    content: '';
+    height: 5px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 92%;
+    transition: all 0.4s ease;
+}
+
+.tab ul li.color1.active::after {
+    background-color: var(--primary-color);
+}
+
+.tab ul li.color2.active::after {
+    background-color: var(--secondary-color);
+}
+
+.tab ul li.color3.active::after {
+    background-color: var(--tartiary-color);
+}
+
+.tab ul li.color1.active.inactive::after {
+    background: none;
+}
+
+.tab ul li.color2.active.inactive::after {
+    background: none;
+}
+
+.tab ul li.color3.active.inactive::after {
+    background: none;
+}
+
+.tab .process-info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-right: 50px;
+}
+
+.tab .process-info svg {
+    margin-left: 5px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.tab .process-info .configuration {
+    width: 22px;
+}
+
+.tab .configuration:hover path {
+    stroke: var(--color-hover);
+}
+
+.tab .custom-icon:hover path {
+    fill: var(--color-hover);
+}
+
+@media screen and (max-width: 768px) {
+    .tab ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .tab ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        width: 100%;
+        color: var(--text-low-dark);
+    }
+    .tab ul li:active {
+        color: black;
+    }
+    .tab ul li svg {
+        color: var(--text-hidden);
+    }
+}

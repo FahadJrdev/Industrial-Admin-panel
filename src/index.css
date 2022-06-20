@@ -1,0 +1,209 @@
+:root {
+    --primary-color: #45A3FF;
+    --secondary-color: #FF7A17;
+    --tartiary-color: #85B900;
+    --text-primary: #404040;
+    --text-secondary: #b3b6bc;
+    --text-dark: #4F4F4F;
+    --text-low-dark: #858585;
+    --text-light: #979797;
+    --text-hidden: #c7c7c7;
+    --background-hover: rgba(69, 163, 255, 0.1);
+    --color-hover: #FF7A17;
+    --stroke-color: #F0F0F0;
+    --background-body: #FFFFFF;
+    --bg-primary-color: #FFFFFF;
+    --title-font-color: #2f384e;
+    --bg-secondary-color: #FDFDFF;
+    --border-secondary-color: #EBEBEB;
+    --input-border: #A19F9D;
+    --stroke-form-border: rgba(147, 139, 139, 0.16);
+    --drop-box-shadow: 0px 10px 60px 0px rgba(0, 0, 0, 0.05);
+    --card-box-shadow: 0px 16px 24px 0px rgba(0, 0, 0, 0.06), 0px 2px 6px 0px rgba(0, 0, 0, 0.04), 0px 0px 1px 0px rgba(0, 0, 0, 0.04);
+    --box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.07), -4px -4px 13px #fff, 6px 6px 30px rgba(0, 0, 0, 0.05);
+    --box-shadow-inset: -4px -4px 16px rgba(255, 255, 255, 0.25), 4px 4px 8px rgba(66, 83, 107, 0.09), inset 0 -4px 14px #fff, inset 0 2px 6px rgba(66, 83, 107, 0.22);
+    --box-shadow-simle: 2px 2px 16px rgba(33, 36, 49, 0.16);
+    --button-bg: #eef0f6;
+    --button-bg-hover: #f6f7fc;
+    --element-border-color: #eef0f6;
+    --border-color: rgba(209, 217, 230, 0.9);
+}
+
+html {
+    font-size: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    list-style: none;
+    list-style-type: none;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text-primary);
+    background: var(--bg-primary-color);
+}
+
+#root {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    body {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 1.3rem;
+}
+
+h3 {
+    font-size: 1rem;
+}
+
+h4 {
+    font-size: 0.8rem;
+}
+
+h5 {
+    font-size: 0.7rem;
+}
+
+h6 {
+    font-size: 0.6rem;
+}
+
+@media screen and (min-width:768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.8rem;
+    }
+    h3 {
+        font-size: 1.4rem;
+    }
+    h4 {
+        font-size: 1rem;
+    }
+    h5 {
+        font-size: 0.8rem;
+    }
+    h6 {
+        font-size: 0.7rem;
+    }
+}
+
+body.scrolling {
+    overflow-y: hidden;
+}
+
+a,
+button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+::selection {
+    background-color: var(--primary-color);
+    color: var(--text-color-grey);
+}
+
+img,
+video,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.dn {
+    display: none !important;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.welcome::-webkit-scrollbar,
+#cities::-webkit-scrollbar,
+.investor-add::-webkit-scrollbar,
+.sidebar-wrapper::-webkit-scrollbar,
+.documents::-webkit-scrollbar,
+.investorCard .Ltds.show::-webkit-scrollbar {
+    width: 5px;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+.welcome::-webkit-scrollbar-thumb,
+#cities::-webkit-scrollbar-thumb,
+.investor-add::-webkit-scrollbar-thumb,
+.sidebar-wrapper::-webkit-scrollbar-thumb,
+.documents::-webkit-scrollbar-thumb,
+.investorCard .Ltds.show::-webkit-scrollbar-thumb {
+    background: var(--background-hover);
+    border-radius: 10px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+.welcome::-webkit-scrollbar-track,
+#cities::-webkit-scrollbar-track,
+.investor-add::-webkit-scrollbar-track,
+.sidebar-wrapper::-webkit-scrollbar-track,
+.documents::-webkit-scrollbar-track,
+.investorCard .Ltds.show::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px transparent;
+    box-shadow: inset 0 0 5px transparent;
+    border-radius: 10px;
+}

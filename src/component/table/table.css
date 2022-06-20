@@ -1,0 +1,166 @@
+.table {
+    margin-bottom: 30px;
+}
+
+.table .table-lists {
+    padding: 10px 10px 15px 10px;
+    width: 100%;
+    border: 2px solid var(--stroke-color);
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: -10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.table .table-responsive {
+    width: 100%;
+}
+
+.table .table-lists .listHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    line-height: 163%;
+    width: 100%;
+    margin: 0 auto 25px;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--text-low-dark);
+    padding: 0px 30px 0px 50px;
+}
+
+.table .table-lists .listHeader .listHeaderItem {
+    width: 20%;
+}
+
+.table .table-lists .listHeader .listHeaderItem:first-child {
+    width: 25%;
+}
+
+.table .table-lists .listHeader .listHeaderItem:last-child {
+    width: 10%;
+}
+
+.table .table-lists .listBody {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    line-height: 180%;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 12px;
+    color: var(--text-low-dark);
+    padding: 20px 30px 20px 50px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+    border: 1px solid var(--stroke-color);
+    transition: background 0.4s ease;
+    cursor: pointer;
+}
+
+.table .table-lists .listBody:hover {
+    background: rgba(167, 209, 233, 45%);
+}
+
+.table .table-lists.fundTable .listBody .listItem {
+    width: 20%;
+}
+
+.table .table-lists.fundTable .listBody .listItem:first-child {
+    width: 25%;
+    padding-left: 30px;
+}
+
+.table .table-lists.fundTable .listBody .listItem:last-child {
+    width: 10%;
+    text-decoration: underline;
+    font-style: italic;
+}
+
+.table .table-lists.projectTable .listBody .listItem {
+    width: 20%;
+}
+
+.table .table-lists.projectTable .listBody .listItem:first-child {
+    width: 25%;
+    padding-left: 30px;
+}
+
+.table .table-lists.projectTable .listBody .listItem:last-child {
+    width: 10%;
+    text-decoration: none;
+    font-style: normal;
+}
+
+.table .pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination ul {
+    padding: 30px 10px;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.pagination .paginate-item {
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.08px;
+    cursor: pointer;
+    border-top: 1px solid #00ffff;
+    width: 10px;
+    margin: 0px 10px;
+    text-align: center;
+    background: #e5ffff;
+}
+
+.pagination .paginate-item.active {
+    border-bottom: 1px solid var(--text-low-dark);
+}
+
+.pagination .paginate-item.next {
+    width: 10%;
+    border-top: none;
+    background: none;
+    color: #000000;
+}
+
+.pagination .paginate-item.next.disable {
+    color: var(--text-hidden);
+}
+
+.pagination .paginate-item.back {
+    width: 10%;
+    border-top: none;
+    background: none;
+    color: #000000;
+}
+
+.pagination .paginate-item.back.disable {
+    color: var(--text-hidden);
+}
+
+@media screen and (max-width: 768px) {
+    .table .table-lists {
+        margin-left: 0px;
+        width: 300%;
+    }
+    .table .table-responsive {
+        width: 100%;
+        overflow-y: hidden;
+    }
+    .table .table-lists .listHeader .listHeaderItem {
+        margin-right: 10px;
+    }
+    .pagination ul {
+        width: 100%;
+        justify-content: center;
+    }
+}
