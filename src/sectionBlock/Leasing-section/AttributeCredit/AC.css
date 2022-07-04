@@ -1,0 +1,76 @@
+.AttributeCredit .financial-head {
+    border-bottom: 1px solid var(--border-secondary-color);
+}
+
+.tapes {
+    margin: 25px 5px;
+}
+
+.tapes .tapes-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--tartiary-color);
+}
+
+.tapes .tapes-form {
+    display: flex;
+    padding: 15px 0px;
+}
+
+.tapes .tapes-form .tapes-input {
+    display: flex;
+    flex-direction: column;
+    margin-right: 80px;
+}
+
+.tapes .tapes-form .tapes-input ul {
+    display: flex;
+}
+
+.tapes .tapes-form .tapes-input ul li {
+    margin-right: 15px;
+}
+
+.tapes .tapes-form .tapes-checkbox .tapes-checking {
+    height: 100%;
+    overflow-x: hidden;
+    padding: 5px;
+    background-color: var(--bg-secondary-color);
+    border: 1px solid var(--border-secondary-color);
+    border-radius: 13px;
+}
+
+.tapes .tapes-form .tapes-checkbox .tapes-checking-area {
+    display: flex;
+    flex-direction: column;
+    height: 200%;
+}
+
+.tapes .tapes-form .tapes-checkbox .tapes-checking-area li {
+    margin: 5px 3px;
+}
+
+.tapes .tapes-submit {
+    display: flex;
+    justify-content: flex-end;
+    margin: 25px 0px;
+}
+
+@media screen and (max-width:768px) {
+    .tapes .tapes-submit button {
+        width: 100%;
+    }
+    .tapes .tapes-form .tapes-input ul {
+        flex-direction: column;
+    }
+    .tapes .tapes-form {
+        flex-direction: column;
+    }
+    .tapes .tapes-form .tapes-input {
+        margin-right: 0px;
+    }
+    .tapes .tapes-form .tapes-input ul li {
+        margin-right: 0px;
+        width: 100%;
+    }
+}

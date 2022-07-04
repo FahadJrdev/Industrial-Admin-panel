@@ -1,0 +1,19 @@
+  .Esheet-submit {
+      display: flex;
+      justify-content: flex-start;
+  }
+  
+  .Contract-formalization .financial-head .header {
+      font-size: 20px;
+      line-height: 27px;
+      color: var(--text-dark);
+      font-weight: 400;
+      padding: 20px 5px 30px 5px;
+  }
+  
+  @media screen and (max-width: 768px) {
+      .Contract-formalization .Esheet-submit button {
+          width: 100%;
+          margin: 20px 2px;
+      }
+  }

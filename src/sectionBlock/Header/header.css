@@ -105,4 +105,10 @@ header .logo .bar svg:last-child {
     header .second-part {
         width: 100%;
     }
+    header .first-part .page-name .title {
+        font-size: 18px;
+    }
+    header .display.show button {
+        width: 36px;
+    }
 }

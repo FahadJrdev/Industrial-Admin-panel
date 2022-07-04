@@ -3,6 +3,7 @@ import { Button, ButtonWithArrow } from '../../component/buttons';
 import './createFund.css';
 import axios from "../../api/axios.js";
 import {toast} from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 const initialState = {
     Code: '',
     Name_of_fund: '',
@@ -23,6 +24,7 @@ const initialState = {
   }
 
 const CreateFund = ({title,language}) => {
+  const navigates=useNavigate()
 
   const CallRegisterApiFunds = ()=>{
     let valor={
@@ -45,13 +47,28 @@ const CreateFund = ({title,language}) => {
         if(response.data){
             const backButton = document.querySelector('.investor-add .header-add button');
             backButton.click()
+            window.location.reload()
         }
       }
     }).catch((err)=>{
       if(err.response){
         if(err.response.data){
-          if(err.response.data.message){
-            toast(err.response.data.message)
+          if(err.response.status===401){
+            navigates('/')
+          }else{
+            if(err.response.data.message){
+              toast(err.response.data.message)
+            }else{
+              let message="";
+              let valorKeys=Object.keys(err.response.data.error)
+              valorKeys.forEach(element => {
+                err.response.data.error[element].forEach((mensaje)=>{
+                  message+=mensaje+" ,"
+                })
+              });
+              
+              toast(message);
+            }
           }
         }
       }

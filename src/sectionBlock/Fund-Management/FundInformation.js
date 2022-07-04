@@ -27,6 +27,7 @@ function reducer(state, {field,value}) {
 const FundInfo = ({datInicial,id,language}) => {
   const [isEditing, setEditing] = useState('no');
   useEffect(()=>{
+    console.log(datInicial)
     const editElement = document.querySelector('.FundInfo ul li svg');
     if(editElement){
       editElement.addEventListener('click',()=>{

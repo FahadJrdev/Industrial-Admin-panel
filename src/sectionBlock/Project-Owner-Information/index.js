@@ -4,18 +4,22 @@ import { AiFillEdit } from "react-icons/ai";
 import { useReducer } from 'react';
 import { Button, ButtonWithArrow } from '../../component/buttons';
 import { VscChevronDown } from "react-icons/vsc";
+import { useNavigate } from 'react-router-dom';
+
+import axios from "../../api/axios.js";
+import {toast} from "react-toastify";
 
 const initialState = {
-  Names: 'Names',
-  Surnames:'Surnames',
-  Type_of_identification:'Type of identification',
-  Identification: 'Identification',
-  Department:'Department',
-  Country:'Country',
-  Address_main_office: 'Address main office',
-  City: 'City',
-  Telephone: 'Telephone',
-  Email: 'Email'
+  Names: '',
+  Surnames:'',
+  Type_of_identification:'',
+  Identification: '',
+  Department:'',
+  Country:'',
+  Address_main_office: '',
+  City: '',
+  Telephone: '',
+  Email: ''
 }
 
 function reducer(state, {field,value}) {
@@ -25,7 +29,8 @@ function reducer(state, {field,value}) {
   }
 }
 
-const ProjectOwnerInfo = ({title,language}) => {
+const ProjectOwnerInfo = ({title,language,datoRetorno,idproject,setOwner,idOwner,setIdOwner}) => {
+  const navigates = useNavigate();
   const [isEditing, setEditing] = useState('no');
   useEffect(()=>{
     const editElement = document.querySelector('.ProjectOwnerInfo ul li svg');
@@ -43,29 +48,202 @@ const ProjectOwnerInfo = ({title,language}) => {
     }
   },[])
   
-  const [state, dispatch] = useReducer(reducer,initialState);
+  const [ciudad,setCiudad] = useState([]);
+  
+  const [una,setOne] = useState('');
+  const [countrys,CountrySet] = useState([]);
+  const [state, dispatch] = useReducer(reducer,datoRetorno?datoRetorno:initialState);
   const onChange =(e)=>{
       dispatch({field: e.target.name, value: e.target.value})
   }
   const {Names, Surnames, Type_of_identification, Identification, Department, Country, Address_main_office, City, Telephone, Email} = state;
+
+  const callApiGetCountry = ()=>{
+    let bearerToken={
+      headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
+    }
+    axios.get("/countries", {},bearerToken)
+        .then((response) => {
+          
+          CountrySet( [])
+          if(response.status===200){
+            if(response.data){
+            CountrySet( response.data)
+            }
+          }
+        }).catch((err)=>{
+          CountrySet( [])
+        })
+      }
+
+      const callApiGetCitys = (id,funcon)=>{
+        let bearerToken={
+          headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
+        }
+        axios.get("/citys/"+id, {},bearerToken)
+            .then((response) => {
+              funcon( [])
+              if(response.status===200){
+                if(response.data){
+                  funcon( response.data)
+                }
+              }
+            }).catch((err)=>{
+              funcon( [])
+            })
+          }
+
+          useEffect(()=>{
+            callApiGetCountry()
+          },[una])
+
+          useEffect(()=>{
+            callApiGetCitys(Country,setCiudad)
+          },[Country])
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(state);
   }
+const Option =()=>{
+      if(idOwner){
+        callApiRegisterUpdate()
+      }else{
+        callApiRegister()
+      }
+}
+  const callApiRegister = ()=>{
+    let valor= {
+      NAMES:Names,
+      SURNAMES:Surnames,
+      TYPE_IDENTIFICATION:Type_of_identification,
+      IDENTIFICATION:Identification,
+      DEPARTAMENT:Department,
+      COUNTRY:Country,
+      ADDRESS:Address_main_office,
+      CITY:City,
+      TELEPHONE:Telephone,
+      EMAIL:Email
+      }
+  let bearerToken={
+    headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
+  }
+      axios.post("/projectowner/"+idproject, valor,bearerToken)
+      .then((response) => {
+        if(response.status===200){
+              setIdOwner(response.data.id)
+          setOwner({
+            Names: Names,
+            Surnames:Surnames,
+            Type_of_identification:Type_of_identification,
+            Identification: Identification,
+            Department:Department,
+            Country:Country,
+            Address_main_office: Address_main_office,
+            City: City,
+            Telephone: Telephone,
+            Email:Email
+          })
+        }
+      }).catch((err)=>{
+        if(err.response){
+        
+          if(err.response.data){
+            if(err.response.status===401){
+              navigates('/')
+            }else{
+              if(err.response.data.message){
+                toast(err.response.data.message)
+              }else{
+                let message="";
+                let valorKeys=Object.keys(err.response.data.error)
+                valorKeys.forEach(element => {
+                  err.response.data.error[element].forEach((mensaje)=>{
+                    message+=mensaje+" ,"
+                  })
+                });
+                
+                toast(message);
+              }
+            }
+          }
+        }
+      })
+    }
+    const callApiRegisterUpdate = ()=>{
+      let valor= {
+        NAMES:Names,
+        SURNAMES:Surnames,
+        TYPE_IDENTIFICATION:Type_of_identification,
+        IDENTIFICATION:Identification,
+        DEPARTAMENT:Department,
+        COUNTRY:Country,
+        ADDRESS:Address_main_office,
+        CITY:City,
+        TELEPHONE:Telephone,
+        EMAIL:Email
+        }
+    let bearerToken={
+      headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
+    }
+        axios.put("/projectowner/"+idOwner, valor,bearerToken)
+        .then((response) => {
+          if(response.status===200){
+            const backButton = document.querySelector('.adding-investor .header-add button');
+                backButton.click()
+            setOwner({
+              Names: Names,
+              Surnames:Surnames,
+              Type_of_identification:Type_of_identification,
+              Identification: Identification,
+              Department:Department,
+              Country:Country,
+              Address_main_office: Address_main_office,
+              City: City,
+              Telephone: Telephone,
+              Email:Email
+            })
+          }
+        }).catch((err)=>{
+          if(err.response){
+          
+            if(err.response.data){
+              if(err.response.status===401){
+                navigates('/')
+              }else{
+                if(err.response.data.message){
+                  toast(err.response.data.message)
+                }else{
+                  let message="";
+                  let valorKeys=Object.keys(err.response.data.error)
+                  valorKeys.forEach(element => {
+                    err.response.data.error[element].forEach((mensaje)=>{
+                      message+=mensaje+" ,"
+                    })
+                  });
+                  
+                  toast(message);
+                }
+              }
+            }
+          }
+        })
+      }
+
   return (
     <>
         <div className = "adding-investor-overlay"></div> 
         <div className = "adding-investor PI">
             <div className = "investor-add">
                 <div className = "header-add">
-                    <ButtonWithArrow text={`Back`} background={`var(--primary-color)`} /> 
+                    <ButtonWithArrow text={language.global.back} background={`var(--primary-color)`} /> 
                     <h1>{title}</h1>
                 </div> 
                 <form action="" method='POST' className='ProjectOwnerInfo information'  onSubmit={handleSubmit}>
-                    <p className='OwnerInfoTitle'>Basic information</p>
+                    <p className='OwnerInfoTitle'>{language.projectDetails.propetar_basicinfo}</p>
                     <ul>
                         <li style={{order: 2}}>
-                            <label htmlFor="Names">Names</label>
+                            <label htmlFor="Names">{language.projectDetails.propetar_names}</label>
                             {
                             isEditing==='no'
                             ?<p>{Names}</p>
@@ -73,7 +251,7 @@ const ProjectOwnerInfo = ({title,language}) => {
                             }
                         </li>
                         <li style={{order: 3}}>
-                            <label htmlFor="Surnames">Surnames</label>
+                            <label htmlFor="Surnames">{language.projectDetails.propetar_surname}</label>
                             {
                             isEditing ==='no'
                             ?<p>{Surnames}</p>
@@ -81,7 +259,7 @@ const ProjectOwnerInfo = ({title,language}) => {
                             }
                         </li>
                         <li style={{order: 4}}>
-                            <label htmlFor="Type_of_identification">Type of identification</label>
+                            <label htmlFor="Type_of_identification">{language.projectDetails.propetar_typeidentifica}</label>
                             {
                             isEditing ==='no'
                             ?<p>{Type_of_identification}  </p>
@@ -89,7 +267,7 @@ const ProjectOwnerInfo = ({title,language}) => {
                             }
                         </li>
                         <li style={{order: 5}}>
-                            <label htmlFor="Identification">Identification</label>
+                            <label htmlFor="Identification">{language.projectDetails.propetar_identifiaci}</label>
                             {
                             isEditing ==='no'
                             ?<p>{Identification}  </p>
@@ -100,10 +278,10 @@ const ProjectOwnerInfo = ({title,language}) => {
                             <AiFillEdit />
                         </li>
                     </ul>
-                    <p className='OwnerInfoTitle'>Sociodemographic information</p>
+                    <p className='OwnerInfoTitle'>{language.projectDetails.propetar_soscio}</p>
                     <ul>
                         <li>
-                            <label htmlFor="Department">Department</label>
+                            <label htmlFor="Department">{language.projectDetails.propetar_department}</label>
                             {
                             isEditing==='no'
                             ?<p>{Department}</p>
@@ -119,23 +297,26 @@ const ProjectOwnerInfo = ({title,language}) => {
                         }
                         </li>
                         <li>
-                            <label htmlFor="Country">Country</label>
+                            <label htmlFor="Country">{language.projectDetails.propetar_country}</label>
                             {
                             isEditing==='no'
                             ?<p>{Country}</p>
                             :<>
-                            <select className="input_201px" name='Country' value={Country} onChange={onChange} placeholder='Select'>
-                                <option value=""></option>
-                                <option value="Japan">Japan</option>
-                                <option value="USA">USA</option>
-                            </select> 
-                            <input className='selectInput' type="text" name='Country' placeholder='Select' value={Country} onChange={onChange} /> 
+                             <select className="input_201px" name='Country' value={countrys.length>0?Country:"Espere"} onChange={onChange} placeholder='Select'>
+                        { countrys.map((info,i)=>{                              return(
+                                     
+                                     <option value={info.I_CODIGO}>{info.C_NOMBRE}</option>
+                                           )
+                               })
+                        }
+                        </select> 
+                
                             <VscChevronDown />
                             </>
                         }
                         </li>
                         <li>
-                            <label htmlFor="Address_main_office">Address main office</label>
+                            <label htmlFor="Address_main_office">{language.projectDetails.propetar_addresmain}</label>
                             {
                             isEditing==='no'
                             ?<p>{Address_main_office}</p>
@@ -143,26 +324,28 @@ const ProjectOwnerInfo = ({title,language}) => {
                             }
                         </li>
                         <li>
-                            <label htmlFor="City">City</label>
+                            <label htmlFor="City">{language.projectDetails.propetar_city}</label>
                             {
                             isEditing==='no'
                             ?<p>{City}</p>
                             :<>
-                            <select className="input_201px" name='City' value={City} onChange={onChange} placeholder='Select'>
-                                <option value=""></option>
-                                <option value="Tokyo">Tokyo</option>
-                                <option value="NewYork">NewYork</option>
-                            </select> 
-                            <input className='selectInput' type="text" name='City' placeholder='Select' value={City} onChange={onChange} /> 
+                            <select className="input_201px" name='City' value={ciudad.length>0?City:"Espere"}onChange={onChange} placeholder='Select'>
+                            { ciudad.map((info,i)=>{                              return(
+                                         
+                                         <option value={info.I_CODIGO}>{info.C_NOMBRE}</option>
+                                               )
+                                   })
+                            }
+                            </select>  
                             <VscChevronDown />
                             </>
                             }
                         </li>
                     </ul>
-                    <p className='OwnerInfoTitle'>Contact information</p>
+                    <p className='OwnerInfoTitle'>{language.projectDetails.propetar_contactinfo}</p>
                     <ul>
                         <li>
-                            <label htmlFor="Telephone">Telephone</label>
+                            <label htmlFor="Telephone">{language.projectDetails.propetar_telepho}</label>
                             {
                             isEditing==='no'
                             ?<p>{Telephone}</p>
@@ -170,7 +353,7 @@ const ProjectOwnerInfo = ({title,language}) => {
                             }
                         </li>
                         <li>
-                            <label htmlFor="Projected_departure_date">Email</label>
+                            <label htmlFor="Projected_departure_date">{language.projectDetails.propetar_email}</label>
                             {
                             isEditing==='no'
                             ?<p>{Email}</p>
@@ -182,7 +365,7 @@ const ProjectOwnerInfo = ({title,language}) => {
                     {
                         isEditing==='no'
                         ?<></>
-                        :<Button text={`Accept`} background={`var(--primary-color)`} types={`submit`} />
+                        :<Button text={language.global.accept} background={`var(--primary-color)`} types={`button`} click={Option} />
                     }
                     </div>
                 </form>

@@ -46,3 +46,11 @@ export const Pill = () => {
     </>
   )
 }
+
+export const RatingBtn = ({text, bg, color, smallbg, border,click}) => {
+  return(
+    <>
+      <button className="ratingBtn" onClick={click} style={{color: color, background: bg, border: border}}><div style={{background: smallbg}}></div>{text}</button>
+    </>
+  )
+}

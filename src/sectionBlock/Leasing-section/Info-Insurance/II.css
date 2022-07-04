@@ -1,0 +1,67 @@
+.insurance-submit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Insurance-body p {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--tartiary-color);
+}
+
+.insurance-first {
+    display: flex;
+    border-bottom: 1px solid var(--border-secondary-color);
+}
+
+.insurance-first .I-f-first p {
+    text-align: center;
+}
+
+.insurance-first .I-f-first ul {
+    display: flex;
+}
+
+.insurance-second {
+    display: flex;
+}
+
+.insurance-second .insurance-input ul {
+    display: flex;
+}
+
+.insurance-first li {
+    margin-right: 15px;
+    margin-bottom: 40px;
+}
+
+.insurance-second li {
+    margin-right: 15px;
+    margin-bottom: 40px;
+}
+
+@media screen and (max-width: 768px) {
+    .insurance-submit button {
+        width: 100%;
+    }
+    .insurance-first {
+        flex-direction: column;
+    }
+    .insurance-first .I-f-first ul {
+        flex-direction: column;
+    }
+    .insurance-second {
+        flex-direction: column;
+    }
+    .insurance-second .insurance-input ul {
+        flex-direction: column;
+    }
+    .insurance-first li {
+        margin-right: 0px;
+        margin-bottom: 40px;
+    }
+    .insurance-second li {
+        margin-right: 0px;
+        margin-bottom: 40px;
+    }
+}

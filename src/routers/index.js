@@ -16,7 +16,15 @@ import ForgetPassword from '../authentication/Forget_Password';
 import ChangePassword from '../authentication/Password_change';
 import FundDetails from '../pages/FundDetails';
 import Profile from '../pages/Profile';
+import Leasing from '../pages/Leasing';
+import ManageProject from '../pages/ManageProject';
+import ManageInvestor from '../pages/ManageInvestor';
+import Billing from '../pages/Billing';
+import BillingDetail from '../pages/DetalleFacturasFondo';
+import BankFileConfiguration from '../pages/BankFileConfiguration';
+import BankAccountDetail from '../pages/BankAccountDetail';
 import {English, Spanish} from '../language/language';
+
 function Routers(){
   if(localStorage.lang === undefined) {
     localStorage.setItem('lang', 'us');
@@ -57,6 +65,13 @@ function Routers(){
           <Route path='/Projects' exact element = {<Projects lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/ProjectDetails' exact element = {<ProjectDetails lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/Profile' exact element = {<Profile lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/Leasing' exact element = {<Leasing lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/ManageProject' exact element = {<ManageProject lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/ManageInvestor' exact element = {<ManageInvestor lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/Billing' exact element = {<Billing lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/DetalleFacturasFondo' exact element = {<BillingDetail lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/BankFileConfiguration' exact element = {<BankFileConfiguration lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/AccountDetail' exact element = {<BankAccountDetail lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
         </Routes>
       </BrowserRouter>
     </>

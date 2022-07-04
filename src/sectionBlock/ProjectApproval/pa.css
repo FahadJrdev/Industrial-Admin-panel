@@ -244,7 +244,7 @@
 
 @media screen and (max-width: 768px) {
     .investor-add .approvalForm.information ul li select~svg {
-        left: 260px;
+        left: 218px;
     }
     .approval .approval-body .button {
         width: 50%;

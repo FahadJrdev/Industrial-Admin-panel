@@ -7,11 +7,12 @@ import { Exporting } from '../component/icon/icon';
 import { useLocation} from "react-router-dom";
 import FundInfo from '../sectionBlock/Fund-Management/FundInformation';
 import axios from "../api/axios.js";
+import {toast} from "react-toastify";
 import { FundTable, InvestorTable } from '../component/table';
 const FundDetails = ({lang, setLang, language, responsive}) => {
   const [currentPage1, setCurrentPage1] = useState(1);
-  const [listinvestors] = useState([]);
-  const [ListInvest] = useState([]);
+  const [ListInversores,setInversores] = useState([]);
+  const [ListProyectos,setProyectos] = useState([]);
 
   const navigate = useNavigate();
   let buscar = useLocation();
@@ -37,17 +38,19 @@ const FundDetails = ({lang, setLang, language, responsive}) => {
   axios.get("/funds/"+id, {},bearerToken)
   .then((response) => {
     if(response.status===200){
-      if(response.data){
+      setInversores(response.data.INVERSORES)
+      setProyectos(response.data.PROYECTOS)
+      if(response.data.FONDO){
         let valor={
           Code: '',
-          Name_of_fund:response.data[0]['C_NOMBRE'],
-        Description:response.data[0]['C_DESCRIPCION'],
-        Start_date:response.data[0]['F_FECHA_INICIO'],
-        Final_date:response.data[0]['F_FECHA_FINAL'],
-        Fund_value: response.data[0]['D_VALOR_FONDO'],
-        Investment_period:response.data[0]['I_PERIODO_INVERSION'],
-        Period_of_disinvestment:response.data[0]['I_PERIODO_DESINVERSION'],
-        Invested_value: response.data[0]['D_VALOR_INVERTIDO']
+          Name_of_fund:response.data.FONDO[0]['C_NOMBRE'],
+        Description:response.data.FONDO[0]['C_DESCRIPCION'],
+        Start_date:response.data.FONDO[0]['F_FECHA_INICIO'],
+        Final_date:response.data.FONDO[0]['F_FECHA_FINAL'],
+        Fund_value:response.data.FONDO[0]['D_VALOR_FONDO'],
+        Investment_period:response.data.FONDO[0]['I_PERIODO_INVERSION'],
+        Period_of_disinvestment:response.data.FONDO[0]['I_PERIODO_DESINVERSION'],
+        Invested_value: response.data.FONDO[0]['D_VALOR_INVERTIDO']
       }
       setValorEnvio(valor)
       }
@@ -56,7 +59,7 @@ const FundDetails = ({lang, setLang, language, responsive}) => {
     if(err.response){
       if(err.response.data){
         if(err.response.data.message){
-          alert(err.response.data.message)
+          toast(err.response.data.message)
         }
       }
     }
@@ -80,24 +83,7 @@ const FundDetails = ({lang, setLang, language, responsive}) => {
       }
     }
   },[buscar,isNavigate,navigate]);
-  useEffect(()=>{ 
-    const management1 = document.querySelector('.fundDetails .tab1');
-    management1.addEventListener('click',()=>{
-      setTabName('General parameter');
-    })
-    const management2 = document.querySelector('.fundDetails .tab2');
-    management2.addEventListener('click',()=>{
-      setTabName('Fund information');
-    })
-    const management3 = document.querySelector('.fundDetails .tab3');
-    management3.addEventListener('click',()=>{
-      setTabName('Investors');
-    })
-    const management4 = document.querySelector('.fundDetails .tab4');
-    management4.addEventListener('click',()=>{
-      setTabName('Projects');
-    })
-  },[]);
+
   
   const [responsiveTab, setResponsiveTab] = useState("");
   setTimeout(()=>{
@@ -116,15 +102,8 @@ const FundDetails = ({lang, setLang, language, responsive}) => {
         navigate('/Fondos');
       }
     }
-    const Li = Array.from(document.querySelectorAll('.tab ul li'));
-    if(Li){
-      Li.forEach((li)=>{
-        li.addEventListener('click',()=>{
-          setResponsiveTab(li.dataset.tab);
-        })
-    })
-    }
-  })
+
+  },100)
   return (
     <>
       {
@@ -138,7 +117,7 @@ const FundDetails = ({lang, setLang, language, responsive}) => {
             <Header responsive={responsive} lang={lang} setLang={setLang} displayArrowBtn={`show`} textArrowBtn={language.global.back} colorArrowBtn={`var(--primary-color)`} pageTitle={language.funds.title+' '+IdFunds} pageDesc ={language.funds.gestion_fondos+` `+IdFunds} displaySearch={`show`} specificClass={`emptyResponsiveTab`} extraClass={`backFundButton`} />
             <main className='main fundDetails'>
               <div className="fundDetail">
-                <Tab tab1={'General parameter'} tab2={'Fund information'} tab3={`Investors`} tab4={`Projects`} tabs1={language.fundsdetail.tab1} tabs2={language.fundsdetail.tab2} tabs3={language.fundsdetail.tab3} tabs4={language.fundsdetail.tab4} hideTab5={`dn`}  hideCustomizer={`dn`} />
+                <Tab action={setResponsiveTab} tab1={'General parameter'} tab2={'Fund information'} tab3={`Investors`} tab4={`Projects`} tabs1={language.fundsdetail.tab1} tabs2={language.fundsdetail.tab2} tabs3={language.fundsdetail.tab3} tabs4={language.fundsdetail.tab4} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`}  hideCustomizer={`dn`} />
               </div>
             </main>
           </>
@@ -183,7 +162,7 @@ const FundDetails = ({lang, setLang, language, responsive}) => {
             <Header responsive={responsive} lang={lang} setLang={setLang} displayArrowBtn={`show`} pageTitle={`Investors`}/>
             <main className='main fundDetails'>
               <div className="fundDetail">
-                <FundTable header1={language.investor.header1}  header2={language.investor.header2}  header3={language.investor.header3}  header4={language.investor.header4}  header5={language.investor.header5} data={listinvestors} currentPage={currentPage1} setCurrentPage={setCurrentPage1} />    
+                <FundTable header1={language.investor.header1}  header2={language.investor.header2}  header3={language.investor.header3}  header4={language.investor.header4}  header5={language.investor.header5} data={ListInversores} currentPage={currentPage1} setCurrentPage={setCurrentPage1} />    
               </div>
             </main>
           </>
@@ -196,7 +175,7 @@ const FundDetails = ({lang, setLang, language, responsive}) => {
           <Header responsive={responsive} lang={lang} setLang={setLang} displayArrowBtn={`show`} pageTitle={`Projects`}/>
           <main className='main fundDetails'>
             <div className="fundDetail">
-             <InvestorTable  language={language} header1={language.investordetail.header1}  header2={[language.investordetail.header2_1,<br key={1} />,language.investordetail.header2_2]}  header3={language.investordetail.header3}  header4={language.investordetail.header4} data={ListInvest} />     
+             <InvestorTable  language={language} header1={language.investordetail.header1}  header2={[language.investordetail.header2_1,<br key={1} />,language.investordetail.header2_2]}  header3={language.investordetail.header3}  header4={language.investordetail.header4} data={ListProyectos} />     
             </div>
           </main>
           </>
@@ -210,7 +189,7 @@ const FundDetails = ({lang, setLang, language, responsive}) => {
           <Header responsive={responsive} lang={lang} setLang={setLang} displayArrowBtn={`show`} textArrowBtn={language.global.back} colorArrowBtn={`var(--primary-color)`} pageTitle={language.funds.title+' '+IdFunds} pageDesc ={language.funds.gestion_fondos+` `+IdFunds} displaySearch={`show`} />
           <main className='main fundDetails'>
             <div className="fundDetail">
-              <Tab tab1={'General parameter'} tab2={'Fund information'} tab3={`Investors`} tab4={`Projects`} tabs1={language.fundsdetail.tab1} tabs2={language.fundsdetail.tab2} tabs3={language.fundsdetail.tab3} tabs4={language.fundsdetail.tab4} hideTab5={`dn`}  hideCustomizer={`dn`} />
+              <Tab action={setTabName}  tab1={'General parameter'} tab2={'Fund information'} tab3={`Investors`} tab4={`Projects`} tabs1={language.fundsdetail.tab1} tabs2={language.fundsdetail.tab2} tabs3={language.fundsdetail.tab3} tabs4={language.fundsdetail.tab4} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`}  hideCustomizer={`dn`} />
                 {
                   tabName === 'General parameter'
                   ?<div className="management">
@@ -229,12 +208,12 @@ const FundDetails = ({lang, setLang, language, responsive}) => {
                 }
                 {
                   tabName === 'Investors'
-                  ?<FundTable header1={language.investor.header1}  header2={language.investor.header2}  header3={language.investor.header3}  header4={language.investor.header4}  header5={language.investor.header5} data={listinvestors} currentPage={currentPage1} setCurrentPage={setCurrentPage1} />
+                  ?<FundTable header1={language.investor.header1}  header2={language.investor.header2}  header3={language.investor.header3}  header4={language.investor.header4}  header5={language.investor.header5} data={ListInversores} currentPage={currentPage1} setCurrentPage={setCurrentPage1} />
                   :<></>
                 }
                 {
                   tabName === 'Projects'
-                  ?<InvestorTable  language={language} header1={language.investordetail.header1}  header2={[language.investordetail.header2_1,<br key={1} />,language.investordetail.header2_2]}  header3={language.investordetail.header3}  header4={language.investordetail.header4} data={ListInvest} />
+                  ?<InvestorTable  language={language} header1={language.investordetail.header1}  header2={[language.investordetail.header2_1,<br key={1} />,language.investordetail.header2_2]}  header3={language.investordetail.header3}  header4={language.investordetail.header4} data={ListProyectos} />
                   :<></>
                 }
             </div>

@@ -1,0 +1,41 @@
+.liquidation-input {
+    padding: 10px 2px;
+    display: flex;
+}
+
+.liquidation-input .input-first {
+    padding: 10px 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+.liquidation-input .input-first ul {
+    padding: 10px 2px;
+    display: flex;
+}
+
+.liquidation-input .input-first ul li {
+    margin-bottom: 40px;
+    margin-right: 15px;
+}
+
+.liquidation-input .input-second ul li {
+    margin-bottom: 40px;
+}
+
+.liquidation-submit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media screen and (max-width: 768px) {
+    .liquidation-submit button {
+        width: 100%;
+    }
+    .liquidation-input {
+        flex-direction: column;
+    }
+    .liquidation-input .input-first ul {
+        flex-direction: column;
+    }
+}

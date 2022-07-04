@@ -70,13 +70,13 @@ function Navbar({lang, setLang, language}) {
                 <div className="sidebar-component">
                   <ul className="header-menu">
                     <Link className={`header-menu-item ${getActiveColor('/Dashboard')}`} to='/Dashboard'><MdOutlineDashboardCustomize /><p>Dashboard</p></Link>
-                    <Link className={`header-menu-item ${getActiveColor('/Fondos')} ${getActiveColor('/Fondos')}`} to='/Fondos'><FondosIcon /> <p>{language.navBar.Fondos}</p></Link>
+                    <Link className={`header-menu-item ${getActiveColor('/Fondos')} ${getActiveColor('/FundDetails')}`} to='/Fondos'><FondosIcon /> <p>{language.navBar.Fondos}</p></Link>
                     <Link className={`header-menu-item ${getActiveColor('/Investors')} ${getActiveColor('/InvestorsDetail')}`} to='/Investors'><HandShake /><p>{language.navBar.Investors}</p></Link>
                     <Link className={`header-menu-item ${getActiveColor('/Projects')} ${getActiveColor('/ProjectDetails')}`} to='/Projects'><Project /><p>{language.navBar.Projects}</p></Link>
-                    <Link className={`header-menu-item ${getActiveColor('/Revenues')}`} to='/Revenues'><Revenue /><p>{language.navBar.Revenues}</p></Link>
+                    <Link className={`header-menu-item ${getActiveColor('/Revenues')} ${getActiveColor('/Billing')} ${getActiveColor('/DetalleFacturasFondo')}`} to='/Revenues'><Revenue /><p>{language.navBar.Revenues}</p></Link>
                     <Link className={`header-menu-item ${getActiveColor('/Expenses')}`} to='/Expenses'><Expense /><p>{language.navBar.Expenses}</p></Link>
                     <Link className={`header-menu-item ${getActiveColor('/Reports')}`} to='/Reports'><Report /><p>{language.navBar.Reports}</p></Link>
-                    <Link className={`header-menu-item ${getActiveColor('/Configuration')} ${getActiveColor('/FundDetails')}`} to='/Configuration'><Configuration /><p>{language.navBar.Configuration}</p></Link>
+                    <Link className={`header-menu-item ${getActiveColor('/Configuration')} ${getActiveColor('/Leasing')} ${getActiveColor('/ManageProject')} ${getActiveColor('/ManageInvestor')} ${getActiveColor('/BankFileConfiguration')} ${getActiveColor('/AccountDetail')}`} to='/Configuration'><Configuration /><p>{language.navBar.Configuration}</p></Link>
                     <Link className={`header-menu-item ${getActiveColor('/Help')}`} to='/Help'><Help /><p>{language.navBar.Help}</p></Link>
                   </ul>
                 </div>

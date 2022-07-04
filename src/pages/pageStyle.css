@@ -62,6 +62,20 @@
     width: 25%;
 }
 
+.newConfig .table .table-lists.projectTable .listBody .listItem {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.newConfig .table .table-lists.projectTable .listBody .listItem:first-child {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    padding-left: 35px;
+}
+
 .fundDetails .management {
     padding: 10px 0px;
     height: 100vh;
@@ -167,7 +181,115 @@
     margin-top: 25px;
 }
 
+
+/* Leasing */
+
+.leasingConfig header .display.show {
+    display: inline-block;
+    width: 50%;
+}
+
+.leasingConfig header .first-part {
+    width: 40%;
+}
+
+.leasingConfig header .second-part {
+    width: 60%;
+}
+
+
+/* ManageProject */
+
+.ManageProject header .display.show {
+    display: inline-block;
+    width: 50%;
+}
+
+.ManageProject header .first-part {
+    width: 40%;
+}
+
+.ManageProject header .second-part {
+    width: 60%;
+}
+
+
+/* ManageInvestor */
+
+.ManageInvestor header .display.show {
+    display: inline-block;
+    width: 50%;
+}
+
+.ManageInvestor header .first-part {
+    width: 40%;
+}
+
+.ManageInvestor header .second-part {
+    width: 60%;
+}
+
+.Esheet-submit {
+    margin: 25px 0px;
+}
+
+.bill-title-body {
+    position: relative;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.bill-title {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22px;
+    color: var(--text-low-dark);
+    position: absolute;
+    top: 10px;
+    z-index: 10000;
+}
+
+.table .table-lists.billingTable .listBody .listItem:last-child {
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.table .table-lists.bankConfig .listBody .listItem:last-child {
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.table .table-lists.bankConfig .listBody .listItem {
+    width: 10%;
+    margin-left: 50px;
+}
+
+.table .table-lists.billingTable .listHeader {
+    padding: 5px 90px 0px 80px;
+}
+
+.Billing header .first-part {
+    width: 50%;
+}
+
+@media screen and (min-width: 1500px) {
+    .leasingConfig header .first-part .display.show {
+        display: inline-block;
+        width: 20%;
+    }
+    .leasingConfig header .second-part .display.show {
+        display: inline-block;
+        width: 35%;
+    }
+}
+
 @media screen and (max-width: 768px) {
+    .Esheet-submit a {
+        width: 100%;
+    }
+    .Esheet-submit a button {
+        width: 100%;
+    }
     .investor .add_investor button {
         width: 100%;
     }
@@ -190,9 +312,52 @@
         margin: 15px 0px 25px;
     }
     .fundDetails .management .fund-item {
-        width: 90%;
+        width: 80%;
     }
     .fundDetails .management .fund-item li {
         justify-content: space-between;
+    }
+    .leasingConfig header .display.show {
+        width: 10%;
+        margin-top: 9px;
+    }
+    .leasingConfig header .display.show button {
+        width: 36px;
+    }
+    .leasingConfig header .first-part {
+        width: 100%;
+    }
+    .leasingConfig header .second-part {
+        width: 100%;
+    }
+    .leasingConfig header .second-part .display.show {
+        width: 100%;
+    }
+    .responsiveConfigDetail header .first-part .buttonwitharrow {
+        margin-top: 16px;
+    }
+    .ManageProject header .first-part {
+        width: 100%;
+    }
+    .ManageInvestor header .first-part {
+        width: 100%;
+    }
+    .ManageProject header .display.show button {
+        width: 36px;
+    }
+    .ManageInvestor header .display.show button {
+        width: 36px;
+    }
+    .Billing header .first-part {
+        align-items: flex-start;
+    }
+    .bill-title {
+        position: static;
+    }
+    .BankFileConfiguration header .first-part {
+        align-items: flex-start;
+    }
+    header .first-part {
+        align-items: flex-start;
     }
 }

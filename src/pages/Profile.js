@@ -60,7 +60,7 @@ const Profile = ({lang, setLang, language, responsive}) => {
                         <Navbar responsive={responsive} lang={lang} setLang={setLang} language={language} />
                         <Header responsive={responsive} lang={lang} setLang={setLang} pageTitle={language.profile.title} pageDesc={language.profile.desc}  specificClass={`emptyResponsiveTab`}/>
                         <main className='main profile'>
-                            <Tab tab1={`My Basic Information`} tab2={`Change Password`} hideTab3={`dn`} hideTab4={`dn`} hideTab5={`dn`} tabs1={language.profile.tabs1} tabs2={language.profile.tabs2} hideCustomizer={`dn`} />
+                            <Tab tab1={`My Basic Information`} tab2={`Change Password`} hideTab3={`dn`} hideTab4={`dn`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} tabs1={language.profile.tabs1} tabs2={language.profile.tabs2} hideCustomizer={`dn`} />
                         </main>
                     </>
                     :<></>
@@ -93,7 +93,7 @@ const Profile = ({lang, setLang, language, responsive}) => {
                 <Navbar responsive={responsive} lang={lang} setLang={setLang} language={language} />
                 <Header responsive={responsive} lang={lang} setLang={setLang} pageTitle={language.profile.title} pageDesc={language.profile.desc} />
                 <main className='main profile'>
-                    <Tab tab1={`My Basic Information`} tab2={`Change Password`} hideTab3={`dn`} hideTab4={`dn`} hideTab5={`dn`} tabs1={language.profile.tabs1} tabs2={language.profile.tabs2} hideCustomizer={`dn`} />
+                    <Tab tab1={`My Basic Information`} tab2={`Change Password`} hideTab3={`dn`} hideTab4={`dn`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} tabs1={language.profile.tabs1} tabs2={language.profile.tabs2} hideCustomizer={`dn`} />
                     {
                         tab === `Basic Information`
                         ? <BasicInfo language={language}/>

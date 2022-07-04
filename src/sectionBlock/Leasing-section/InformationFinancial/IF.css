@@ -1,0 +1,111 @@
+.Information-financial form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Information-financial .first ul {
+    display: flex;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border-secondary-color);
+}
+
+.Information-financial .first ul li {
+    margin-right: 20px;
+    width: 20%;
+}
+
+.Information-financial .second {
+    display: flex;
+    flex-direction: column;
+}
+
+.Information-financial .second .second-first {
+    display: flex;
+}
+
+.Information-financial .second .second-first div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.Information-financial .second .second-first div:first-child {
+    padding-top: 20px;
+}
+
+.Information-financial .second .second-first div ul {
+    display: flex;
+    width: 100%;
+}
+
+.Information-financial .second .second-first div ul li {
+    width: 40%;
+    margin: 10px 10px;
+}
+
+.Information-financial .second .second-first div:last-child ul li {
+    width: 40%;
+    margin: 20px 10px 25px;
+}
+
+.Information-financial .second .second-second {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.Information-financial .second .second-second ul {
+    display: flex;
+}
+
+.Information-financial .second .second-second ul li {
+    width: 20%;
+    margin-right: 20px;
+    margin-bottom: 40px;
+}
+
+.Information-financial .third {
+    display: flex;
+    justify-content: flex-end;
+    margin: 30px 0px;
+}
+
+@media screen and (max-width:768px) {
+    .Information-financial .first ul {
+        flex-direction: column;
+    }
+    .Information-financial .first ul li {
+        margin-right: 0px;
+        width: 100%;
+    }
+    .Information-financial .second .second-first {
+        display: flex;
+        flex-direction: column;
+    }
+    .Information-financial .second .second-first div ul {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+    }
+    .Information-financial .second .second-first div ul li {
+        width: 100%;
+        margin: 10px 0px;
+    }
+    .Information-financial .second .second-first div:last-child ul li {
+        width: 100%;
+        margin: 20px 0px 25px;
+    }
+    .Information-financial .second .second-second ul {
+        display: flex;
+        flex-direction: column;
+    }
+    .Information-financial .second .second-second ul li {
+        width: 100%;
+        margin-right: 0px;
+        margin-bottom: 40px;
+    }
+    .Information-financial .third button {
+        width: 100%;
+    }
+}

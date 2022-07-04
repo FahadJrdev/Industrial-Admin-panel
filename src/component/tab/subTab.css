@@ -1,0 +1,118 @@
+.subtab {
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--stroke-color);
+}
+
+.subtab ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subtab ul li {
+    margin-right: 30px;
+    padding: 10px;
+    position: relative;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-low-dark);
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.subtab ul li.color1.active {
+    color: var(--primary-color);
+}
+
+.subtab ul li.color2.active {
+    color: var(--secondary-color);
+}
+
+.subtab ul li.color3.active {
+    color: var(--tartiary-color);
+}
+
+.subtab ul li::after {
+    content: '';
+    height: 5px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 92%;
+    transition: all 0.4s ease;
+}
+
+.subtab ul li.color1.active::after {
+    background-color: var(--primary-color);
+}
+
+.subtab ul li.color2.active::after {
+    background-color: var(--secondary-color);
+}
+
+.subtab ul li.color3.active::after {
+    background-color: var(--tartiary-color);
+}
+
+.subtab ul li.color1.active.inactive::after {
+    background: none;
+}
+
+.subtab ul li.color2.active.inactive::after {
+    background: none;
+}
+
+.subtab ul li.color3.active.inactive::after {
+    background: none;
+}
+
+.subtab .process-info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-right: 50px;
+}
+
+.subtab .process-info svg {
+    margin-left: 5px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.subtab .process-info .configuration {
+    width: 22px;
+}
+
+.subtab .configuration:hover path {
+    stroke: var(--color-hover);
+}
+
+.subtab .custom-icon:hover path {
+    fill: var(--color-hover);
+}
+
+@media screen and (max-width: 768px) {
+    .subtab ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .subtab ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        width: 100%;
+        color: var(--text-low-dark);
+    }
+    .subtab ul li:active {
+        color: black;
+    }
+    .subtab ul li svg {
+        color: var(--text-hidden);
+    }
+}

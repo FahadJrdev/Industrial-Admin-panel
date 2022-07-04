@@ -85,7 +85,7 @@
 
 .table .table-lists.projectTable .listBody .listItem:first-child {
     width: 25%;
-    padding-left: 30px;
+    padding-left: 0px;
 }
 
 .table .table-lists.projectTable .listBody .listItem:last-child {
@@ -145,6 +145,36 @@
 
 .pagination .paginate-item.back.disable {
     color: var(--text-hidden);
+}
+
+.table .table-lists.projectTable .listBody a {
+    width: 10%;
+    color: var(--secondary-color);
+}
+
+.table .table-lists.projectTable .listBody .statusItem2 {
+    color: var(--secondary-color);
+}
+
+.table .table-lists.projectTable .listBody .statusItem3 {
+    color: var(--tartiary-color);
+}
+
+.table .table-lists.projectTable .listBody .statusItem1 {
+    color: var(--primary-color);
+}
+
+.table .table-lists.projectTable .listBody .listItem:last-child {
+    width: 100%;
+}
+
+.Fondos .table .table-lists.projectTable .listBody .listItem:last-child {
+    width: 9%;
+}
+
+.table .table-lists.projectTable .listBody:hover a {
+    color: var(--primary-color);
+    text-decoration: underline;
 }
 
 @media screen and (max-width: 768px) {

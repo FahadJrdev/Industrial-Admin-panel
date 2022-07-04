@@ -1,0 +1,47 @@
+export const FTableInfo = [
+    {
+        header: 'Fiscal Year',
+        year1: '2019',
+        year2: '2020',
+        year3: '2021 (est)',
+        year4: '2022 (est)',
+        year5: '2023 (est)',
+        year6: '2024 (est)',
+    },
+    {
+        header: 'Gross Revenue (USD)',
+        year1: '-',
+        year2: '-',
+        year3: '42,324',
+        year4: '136,346',
+        year5: '149,842',
+        year6: '146,444',
+    },
+    {
+        header: 'EBITDA',
+        year1: '(59,703)',
+        year2: '(140,867)',
+        year3: '23,023',
+        year4: '122,254',
+        year5: '135,855',
+        year6: '132,855',
+    },
+    {
+        header: 'Free Cash Flow (USD)',
+        year1: '(944,183)',
+        year2: '(75,100)',
+        year3: '241,461',
+        year4: '122,254',
+        year5: '132,855',
+        year6: '132,855',
+    },
+    {
+        header: 'Distributions (USD)',
+        year1: '',
+        year2: '-',
+        year3: 'TBD',
+        year4: 'TBD',
+        year5: 'TBD',
+        year6: 'TBD',
+    }
+]

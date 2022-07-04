@@ -1,0 +1,50 @@
+.GIS {
+    margin-left: 10px;
+    height: 70vh;
+}
+
+.GIS .GIS-title {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--tartiary-color);
+    margin: 30px 0px;
+}
+
+.GIS ul {
+    display: flex;
+    margin: 30px 0 25px 0;
+}
+
+.GIS ul li {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 10%;
+    margin-right: 20px;
+}
+
+.GIS ul li label {
+    font-size: 12px;
+    color: #000000;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.GIS ul li p {
+    font-size: 14px;
+    color: var(--input-border);
+    padding-left: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .GIS ul {
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+    }
+    .GIS ul li {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

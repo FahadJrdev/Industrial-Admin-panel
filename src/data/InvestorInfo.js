@@ -220,3 +220,227 @@ export const ProjectsInfo = [{
         USD: '12,680,092.91'
     }
 ]
+
+export const BillingInfo = [{
+        Nombre: 'Fondo 1',
+        facturas: '1245',
+        totalFocturas: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Nombre: 'Fondo 2',
+        facturas: '1245',
+        totalFocturas: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Nombre: 'Fondo 3',
+        facturas: '1245',
+        totalFocturas: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Nombre: 'Fondo 4',
+        facturas: '1245',
+        totalFocturas: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Nombre: 'Fondo 5',
+        facturas: '1245',
+        totalFocturas: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Nombre: 'Fondo 6',
+        facturas: '1245',
+        totalFocturas: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Nombre: 'Fondo 7',
+        facturas: '1245',
+        totalFocturas: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Nombre: 'Fondo 8',
+        facturas: '1245',
+        totalFocturas: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Nombre: 'Fondo 9',
+        facturas: '1245',
+        totalFocturas: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Nombre: 'Fondo 10',
+        facturas: '1245',
+        totalFocturas: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Nombre: 'Fondo 11',
+        facturas: '1245',
+        totalFocturas: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Nombre: 'Fondo 12',
+        facturas: '1245',
+        totalFocturas: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Nombre: 'Fondo 13',
+        facturas: '1245',
+        totalFocturas: '$3,979.92',
+        Actions: 'see more'
+    },
+]
+export const BillingDetailInfo = [{
+        Invoicing_date: '12/31/2022',
+        Ndeg: '1245',
+        Amount: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Invoicing_date: '11/21/2022',
+        Ndeg: '1245',
+        Amount: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Invoicing_date: '10/11/2022',
+        Ndeg: '1245',
+        Amount: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Invoicing_date: '16/31/2022',
+        Ndeg: '1245',
+        Amount: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Invoicing_date: '15/31/2022',
+        Ndeg: '1245',
+        Amount: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Invoicing_date: '12/31/2022',
+        Ndeg: '1245',
+        Amount: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Invoicing_date: '13/31/2022',
+        Ndeg: '1245',
+        Amount: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Invoicing_date: '12/21/2022',
+        Ndeg: '1245',
+        Amount: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Invoicing_date: '14/31/2022',
+        Ndeg: '1245',
+        Amount: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Invoicing_date: '11/31/2022',
+        Ndeg: '1245',
+        Amount: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Invoicing_date: '2/31/2022',
+        Ndeg: '1245',
+        Amount: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Invoicing_date: '22/31/2022',
+        Ndeg: '1245',
+        Amount: '$3,979.92',
+        Actions: 'see more'
+    },
+    {
+        Invoicing_date: '12/31/2022',
+        Ndeg: '1245',
+        Amount: '$3,979.92',
+        Actions: 'see more'
+    },
+]
+
+export const BankConfigInfo = [{
+        Code: '123342353534',
+        Country: 'USA',
+        Names: 'Laura Medina',
+        Identity: '21,124,628.48',
+        Actions: 'See more',
+    },
+    {
+        Code: '123342353534',
+        Country: 'COLOMBIA',
+        Names: 'Elquin Forero',
+        Identity: '12,680,092.91',
+        Actions: 'See more',
+    },
+    {
+        Code: '123342353534',
+        Country: 'PERÚ',
+        Names: 'Sandra Roa',
+        Identity: '2,536,018.59',
+        Actions: 'See more',
+    },
+    {
+        Code: '123342353534',
+        Country: 'COLOMBIA',
+        Names: 'Elquin Forero',
+        Identity: '12,680,092.91',
+        Actions: 'See more',
+    },
+    {
+        Code: '123342353534',
+        Country: 'PERÚ',
+        Names: 'Sandra Roa',
+        Identity: '2,536,018.59',
+        Actions: 'See more',
+    },
+    {
+        Code: '123342353534',
+        Country: 'USA',
+        Names: 'Laura Medina',
+        Identity: '21,124,628.48',
+        Actions: 'See more',
+    },
+    {
+        Code: '123342353534',
+        Country: 'COLOMBIA',
+        Names: 'Elquin Forero',
+        Identity: '12,680,092.91',
+        Actions: 'See more',
+    },
+    {
+        Code: '123342353534',
+        Country: 'PERÚ',
+        Names: 'Sandra Roa',
+        Identity: '2,536,018.59',
+        Actions: 'See more',
+    },
+    {
+        Code: '123342353534',
+        Country: 'COLOMBIA',
+        Names: 'Elquin Forero',
+        Identity: '12,680,092.91',
+        Actions: 'See more',
+    }
+]

@@ -1,0 +1,82 @@
+.financial {
+    margin: 50px 0px;
+}
+
+.financial .financialDesc {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.financial .financialDesc ul {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.financial .financialDesc ul li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.financial .financialDesc ul:last-child li {
+    display: flex;
+    flex-direction: row;
+}
+
+.financial .financialDesc ul li p {
+    font-size: 18px;
+    line-height: 180%;
+    font-weight: 300;
+}
+
+.financial .financialDesc ul li p:first-child {
+    font-weight: 500;
+    margin-right: 20px;
+}
+
+.financial .financialTable {
+    background-color: var(--bg-secondary-color);
+    border: 1px solid var(--border-secondary-color);
+    border-radius: 5px;
+}
+
+.financial .financialTable ul {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.financial .financialTable ul:first-child {
+    border-bottom: 1px solid var(--border-secondary-color);
+}
+
+.financial .financialTable ul li {
+    font-size: 14px;
+    line-height: 180%;
+    font-weight: 500;
+    color: var(--text-low-dark);
+    width: 10%;
+}
+
+.financial .financialTable ul li:first-child {
+    font-size: 18px;
+    width: 25%;
+}
+
+.project.management {
+    height: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .financial .financialDesc ul {
+        flex-direction: column;
+    }
+    .financial .financialDesc ul li {
+        margin-bottom: 15px;
+    }
+    .financial {
+        margin-top: 10px;
+    }
+}

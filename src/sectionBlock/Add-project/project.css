@@ -264,6 +264,9 @@
         margin-bottom: 15px;
         width: 100%;
     }
+    .investor-add .information ul li:last-child {
+        order: 1 !important;
+    }
     .investor-add .header-add button svg {
         margin: 0;
     }
@@ -285,5 +288,8 @@
     }
     .investor-add .add-project ul li textarea {
         width: 100%;
+    }
+    .investor-add .information ul li select~svg {
+        left: 218px;
     }
 }

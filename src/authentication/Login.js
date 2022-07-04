@@ -36,7 +36,6 @@ const Login = () => {
           navigate('/Dashboard', {replace: true})
         }
       }
-      console.log(response)
     }).catch((err)=>{
       if(err.response){
         if(err.response.data){

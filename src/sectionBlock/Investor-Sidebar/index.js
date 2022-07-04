@@ -4,6 +4,7 @@ import { Button, ButtonWithArrow, Pill } from '../../component/buttons';
 import { VscChevronDown } from "react-icons/vsc";
 import axios from "../../api/axios.js";
 import {toast} from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 const initialState = {
   Nit: '',
   Company_name: '',
@@ -33,45 +34,58 @@ function reducer(state, {field,value}) {
 }
 
 const InvestorCustomizer = ({title,DataInicial,id,language}) => {
+  const navigates=useNavigate()
   const [ciudad,setCiudad] = useState([]);
-  const [cod_country,setCountry] = useState("");
+  const [ciudadSocio,setCiudadSocio] = useState([]);
+  
+  const [una] = useState('');
+  const [country,CountrySet] = useState([]);
   const [state, dispatch] = useReducer(reducer,DataInicial?DataInicial:initialState);
   const onChange =(e)=>{
     dispatch({field: e.target.name, value: e.target.value})
   }
-  const onChangeinfoReturnCountry =(e)=>{
-    dispatch({field: e.target.name, value: e.target.value})
-    setCountry(e.target.value)
-  }
-  useEffect(()=>{
-    if(cod_country){
-      setCountry(callApiGetCountry(cod_country))
+  const callApiGetCountry = ()=>{
+    let bearerToken={
+      headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
     }
-  },[cod_country]);
-
-
-  const callApiGetCountry = (cod_countrie)=>{
-     
-let bearerToken={
-  headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
-}
-axios.get("/countries/"+cod_countrie, {},bearerToken)
-    .then((response) => {
-      if(response.status===200){
-        if(response.data){
-            console.log(response)
-        }
-      }
-    }).catch((err)=>{
-      if(err.response){
-        if(err.response.data){
-          if(err.response.data.message){
-            toast(err.response.data.message)
+    axios.get("/countries", {},bearerToken)
+        .then((response) => {
+          
+          CountrySet( [])
+          if(response.status===200){
+            if(response.data){
+            CountrySet( response.data)
+            }
           }
-        }
+        }).catch((err)=>{
+          CountrySet( [])
+        })
       }
-    })
-  }
+
+      const callApiGetCitys = (id,funcon)=>{
+        let bearerToken={
+          headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
+        }
+        axios.get("/citys/"+id, {},bearerToken)
+            .then((response) => {
+              
+              funcon( [])
+              if(response.status===200){
+                if(response.data){
+                  funcon( response.data)
+                }
+              }
+            }).catch((err)=>{
+              funcon( [])
+            })
+          }
+
+  useEffect(()=>{
+    callApiGetCountry()
+  },[una])
+
+ 
+  
 const CallRegisterApiInvestor = ()=>{
   let valor={
     NIT:Nit,
@@ -102,13 +116,29 @@ let bearerToken={
         if(response.data){
             const backButton = document.querySelector('.adding-investor .header-add button');
             backButton.click()
+            
+            window.location.reload()
         }
       }
     }).catch((err)=>{
       if(err.response){
         if(err.response.data){
-          if(err.response.data.message){
-            toast(err.response.data.message)
+          if(err.response.status===401){
+            navigates('/')
+          }else{
+            if(err.response.data.message){
+              toast(err.response.data.message)
+            }else{
+              let message="";
+              let valorKeys=Object.keys(err.response.data.error)
+              valorKeys.forEach(element => {
+                err.response.data.error[element].forEach((mensaje)=>{
+                  message+=mensaje+" ,"
+                })
+              });
+              
+              toast(message);
+            }
           }
         }
       }
@@ -120,13 +150,28 @@ let bearerToken={
         if(response.data){
             const backButton = document.querySelector('.adding-investor .header-add button');
             backButton.click()
+            window.location.reload()
         }
       }
     }).catch((err)=>{
       if(err.response){
         if(err.response.data){
-          if(err.response.data.message){
-            toast(err.response.data.message)
+          if(err.response.status===401){
+            navigates('/')
+          }else{
+            if(err.response.data.message){
+              toast(err.response.data.message)
+            }else{
+              let message="";
+              let valorKeys=Object.keys(err.response.data.error)
+              valorKeys.forEach(element => {
+                err.response.data.error[element].forEach((mensaje)=>{
+                  message+=mensaje+" ,"
+                })
+              });
+              
+              toast(message);
+            }
           }
         }
       }
@@ -134,7 +179,13 @@ let bearerToken={
   }
   }
   const {Nit, Company_name, Date_of_constitution, City_of_constitution, Constitution_Department, Country_of_Constitution, Economic_activity, Company_object, Sociodemographic_Department, Sociodemographic_Country, Address_main_office, Sociodemographic_City, Telephone, Email, Permit_description_1, Permit_description_2, Permit_description_3} = state;
-  
+  useEffect(()=>{
+    callApiGetCitys(Country_of_Constitution,setCiudad)
+  },[Country_of_Constitution])
+  useEffect(()=>{
+    callApiGetCitys(Sociodemographic_Country,setCiudadSocio)
+  },[Sociodemographic_Country])
+
   const [switchPill,setSwitchPill] = useState(DataInicial?DataInicial.add_special_permits:initialState.add_special_permits);
   setTimeout(()=>{
       const pill = document.querySelector('.switch input');
@@ -188,55 +239,29 @@ let bearerToken={
                       
                         <li>
                         <label htmlFor="Country_of_Constitution">{language.investorform.countryconst}</label>
-                        <select id="input_170px" name='Country_of_Constitution' value={Country_of_Constitution} onChange={onChange} placeholder='Country'>
-                            <option value=""></option>
-                            <option value="Colombia">Colombia</option>
+                        <select id="input_170px" name='Country_of_Constitution' value={country.length>0?Country_of_Constitution:"Espere"}  onChange={onChange} placeholder='Country'>
+                            { country.map((info,i)=>{                              return(
+                                     
+                                <option value={info.I_CODIGO}>{info.C_NOMBRE}</option>
+                                      )
+                          })
+                            }
                         </select> 
-                        <input className='selectInput' type="text" name='Country_of_Constitution' placeholder='Country' value={Country_of_Constitution} onChange={onChange} required/> 
+                       
                         <VscChevronDown />
                         </li>
                         <li>
                         <label htmlFor="City_of_constitution">{language.investorform.cityconst}</label>
-                        <select id="input_146px" name='City_of_constitution' value={City_of_constitution} onChange={onChange} placeholder='City'>
-                            <option value=""></option>
-                            <option value="Amazonas">Amazonas</option>
- <option value="Antioquia">Antioquia</option>
- <option value="Arauca">Arauca</option>
- <option value="Atlántico">Atlántico</option>
- <option value="Bogotá">Bogotá</option>
- <option value="Bolívar">Bolívar</option>
- <option value="Boyacá">Boyacá</option>
- <option value="Caldas">Caldas</option>
- <option value="Caquetá">Caquetá</option>
- <option value="Casanare">Casanare</option>
- <option value="Cauca">Cauca</option>
- <option value="Cesar">Cesar</option>
- <option value="Chocó">Chocó</option>
- <option value="Córdoba">Córdoba</option>
- <option value="Cundinamarca">Cundinamarca</option>
- <option value="Guainía">Guainía</option>
- <option value="Guaviare">Guaviare</option>
- <option value="Huila">Huila</option>
- <option value="La Guajira">La Guajira</option>
- <option value="Magdalena">Magdalena</option>
- <option value="Meta">Meta</option>
- <option value="Nariño">Nariño</option>
- <option value="Norte de Santander">Norte de Santander</option>
- <option value="Putumayo">Putumayo</option>
- <option value="Quindío">Quindío</option>
- <option value="Risaralda">Risaralda</option>
- <option value="San Andrés y Providencia">San Andrés y Providencia</option>
- <option value="Santander">Santander</option>
- <option value="Sucre">Sucre</option>
- <option value="Tolima">Tolima</option>
- <option value="Valle del Cauca">Valle del Cauca</option>
- <option value="Vaupés">Vaupés</option>
- <option value="Vichada">Vichada</option>
- <option value="Colombia">Colombia</option>
-
+                        <select id="input_146px" name='City_of_constitution' value={ciudad.length>0?City_of_constitution:"Espere"} onChange={onChange} placeholder='City'>
+                        { ciudad.map((info,i)=>{                              return(
+                                     
+                                     <option value={info.I_CODIGO}>{info.C_NOMBRE}</option>
+                                           )
+                               })
+                                 }
+                        
                         </select> 
-                        <input className='selectInput' name='City_of_constitution' type="text" placeholder='City' value={City_of_constitution} onChange={onChange} required/> 
-                        <VscChevronDown />
+                         <VscChevronDown />
                         </li>
                         <li>
                         <label htmlFor="Economic_activity">{language.investorform.economicactivi}</label>
@@ -275,12 +300,15 @@ let bearerToken={
                         </li>
                         <li>
                         <label htmlFor="Sociodemographic_Country">{language.investorform.country}</label>
-                        <select id="input_170px" name='Sociodemographic_Country' value={Sociodemographic_Country} onChange={onChange} placeholder='Country'>
-                            <option value=""></option>
-                            <option value="Colombia">Colombia</option>
-                        </select> 
-                        <input className='selectInput' type="text" name='Sociodemographic_Country' placeholder='Country' value={Sociodemographic_Country} onChange={onChange} required/> 
-                        <VscChevronDown />
+                        <select id="input_170px" name='Sociodemographic_Country' value={country.length>0?Sociodemographic_Country:"Espere"} onChange={onChange} placeholder='Country'>
+                        { country.map((info,i)=>{                              return(
+                                     
+                                     <option value={info.I_CODIGO}>{info.C_NOMBRE}</option>
+                                           )
+                               })
+                                 }
+                        </select>
+                         <VscChevronDown />
                         </li>
                         <li>
                         <label htmlFor="Address_main_office">{language.investorform.addresmain}</label>
@@ -288,45 +316,15 @@ let bearerToken={
                         </li>
                         <li>
                         <label htmlFor="Sociodemographic_City">{language.investorform.city}</label>
-                        <select id="input_146px" name='Sociodemographic_City' value={Sociodemographic_City} onChange={onChange} placeholder='City'>
-                            <option value=""></option>
-                            <option value="Amazonas">Amazonas</option>
- <option value="Antioquia">Antioquia</option>
- <option value="Arauca">Arauca</option>
- <option value="Atlántico">Atlántico</option>
- <option value="Bogotá">Bogotá</option>
- <option value="Bolívar">Bolívar</option>
- <option value="Boyacá">Boyacá</option>
- <option value="Caldas">Caldas</option>
- <option value="Caquetá">Caquetá</option>
- <option value="Casanare">Casanare</option>
- <option value="Cauca">Cauca</option>
- <option value="Cesar">Cesar</option>
- <option value="Chocó">Chocó</option>
- <option value="Córdoba">Córdoba</option>
- <option value="Cundinamarca">Cundinamarca</option>
- <option value="Guainía">Guainía</option>
- <option value="Guaviare">Guaviare</option>
- <option value="Huila">Huila</option>
- <option value="La Guajira">La Guajira</option>
- <option value="Magdalena">Magdalena</option>
- <option value="Meta">Meta</option>
- <option value="Nariño">Nariño</option>
- <option value="Norte de Santander">Norte de Santander</option>
- <option value="Putumayo">Putumayo</option>
- <option value="Quindío">Quindío</option>
- <option value="Risaralda">Risaralda</option>
- <option value="San Andrés y Providencia">San Andrés y Providencia</option>
- <option value="Santander">Santander</option>
- <option value="Sucre">Sucre</option>
- <option value="Tolima">Tolima</option>
- <option value="Valle del Cauca">Valle del Cauca</option>
- <option value="Vaupés">Vaupés</option>
- <option value="Vichada">Vichada</option>
- <option value="Colombia">Colombia</option>
+                        <select id="input_146px" name='Sociodemographic_City' value={ciudadSocio.length>0?Sociodemographic_City:"Espere"} onChange={onChange} placeholder='City'>
+                        { ciudadSocio.map((info,i)=>{                              return(
+                                     
+                                     <option value={info.I_CODIGO}>{info.C_NOMBRE}</option>
+                                           )
+                               })
+                                 }
 
                         </select> 
-                        <input className='selectInput' name='Sociodemographic_City' type="text" placeholder='City' value={Sociodemographic_City} onChange={onChange} required/> 
                         <VscChevronDown />
                         </li>
                     </ul>

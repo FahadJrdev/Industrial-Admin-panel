@@ -1,0 +1,67 @@
+.valuation {
+    background-color: var(--bg-secondary-color);
+    border: 1px solid var(--border-secondary-color);
+    border-radius: 5px;
+    padding: 40px 20px 120px;
+    margin: 50px auto;
+}
+
+.valuation .action {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 20px;
+}
+
+.valuation .action span {
+    display: inline-block;
+    width: 3%;
+    cursor: pointer;
+}
+
+.valuation .action svg {
+    width: 100%;
+}
+
+.valuation .valuation-body p {
+    color: var(--text-low-dark);
+    font-size: 18px;
+    line-height: 180%;
+}
+
+.valuation .valuation-body textarea {
+    width: 100%;
+    resize: none;
+    border: 1px solid var(--border-secondary-color);
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 180%;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.valuation .valuation-body textarea:focus {
+    outline: none;
+}
+
+.valuation .valuation-body textarea::placeholder {
+    padding-left: 20px;
+    padding-top: 20px;
+    font-family: "popins" sans-serif;
+    font-size: 18px;
+    color: var(--text-hidden);
+}
+
+.valuation .valuation-body .submit {
+    display: flex;
+    justify-content: flex-end;
+    margin: 50px 0px 0px;
+}
+
+@media screen and (max-width: 768px) {
+    .valuation .valuation-body .submit button {
+        width: 100%;
+    }
+    .valuation .action span {
+        width: 15%;
+    }
+}

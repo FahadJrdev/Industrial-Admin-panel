@@ -1,0 +1,335 @@
+/* Input */
+
+.input {
+    width: 100%;
+    position: relative;
+    height: 30px;
+    margin-bottom: 40px;
+}
+
+.input label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.input input {
+    border: 1px solid var(--input-border);
+    height: 30px;
+    padding-left: 10px;
+    z-index: 298;
+    width: 100%;
+}
+
+.input input::-webkit-input-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.input input::-moz-input-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.input input::-ms-input-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.input input:focus {
+    outline: none;
+    box-shadow: var(--box-shadow-inset);
+}
+
+.input input~svg {
+    position: absolute;
+    top: 27px;
+    right: 20px;
+    width: 30px;
+    color: var(--input-border);
+}
+
+
+/* select */
+
+.select {
+    width: 100%;
+    position: relative;
+    margin-bottom: 40px;
+    height: 30px;
+}
+
+.select label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.select select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    height: 30px;
+    padding-left: 10px;
+    z-index: 300;
+    background: transparent;
+    width: 100%;
+    position: absolute;
+    top: 27px;
+    left: 0;
+}
+
+.select .selectInput {
+    position: absolute;
+    top: 27px;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    padding-left: 10px;
+    z-index: 299;
+}
+
+.select select option:first-child {
+    font-size: 14px;
+    color: var(--input-border);
+}
+
+.select select:focus {
+    outline: none;
+    box-shadow: var(--box-shadow-inset);
+}
+
+.select select~svg {
+    position: absolute;
+    top: 27px;
+    right: 20px;
+    width: 30px;
+    color: var(--text-dark);
+    z-index: 299;
+}
+
+
+/* checkbox radio*/
+
+.checkbox {
+    position: relative;
+}
+
+.checkbox label {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-low-dark);
+}
+
+.checkbox input {
+    margin-right: 5px;
+}
+
+
+/* textarea */
+
+.textarea {
+    position: relative;
+}
+
+.textarea label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.textarea textarea {
+    border: 1px solid var(--input-border);
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 10px;
+    resize: none;
+    z-index: 298;
+}
+
+.textarea textarea::-webkit-input-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.textarea textarea::-moz-input-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.textarea textarea::-ms-input-placeholder {
+    font-size: 14px;
+    color: var(--input-border);
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.textarea textarea:focus {
+    outline: none;
+    box-shadow: var(--box-shadow-inset);
+}
+
+
+/* financial_head */
+
+.financial-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.financial-head .header {
+    font-size: 20px;
+    color: var(--text-low-dark);
+    font-weight: 500;
+    padding: 20px 5px 30px 5px;
+}
+
+.leasing-table {
+    margin: 25px 5px 50px 0px;
+}
+
+.leasing-item input {
+    width: 100%;
+    padding-left: 10px;
+    height: 100%;
+}
+
+.leasing-item input:focus {
+    outline: none;
+}
+
+.leasing-submit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.leasing-table .tableTitle p {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--tartiary-color);
+    margin: 10px 2px;
+}
+
+.leasing-table .tableBody ul {
+    display: flex;
+    width: 100%;
+}
+
+.leasing-table .tableBody ul li {
+    font-size: 12px;
+    line-height: 18px;
+    padding-left: 10px;
+    font-weight: 600;
+    color: var(--tartiary-color);
+    border-right: 1px solid var(--border-secondary-color);
+    border-left: 1px solid var(--border-secondary-color);
+    border-top: 2px solid var(--border-secondary-color);
+    padding: 10px 10px 10px;
+}
+
+.leasing-table .tableBody ul li:first-child {
+    border-left: 2px solid var(--border-secondary-color);
+}
+
+.leasing-table .tableBody ul li:last-child {
+    border-right: 2px solid var(--border-secondary-color);
+    display: flex;
+    justify-content: center;
+}
+
+.tableBody button {
+    width: 100%;
+}
+
+.leasing-table .tableBody ul:last-child li {
+    border-bottom: 2px solid var(--border-secondary-color);
+}
+
+.leasing-table .edit {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+    padding-right: 100px;
+    cursor: pointer;
+}
+
+.leasing-table .edit svg {
+    width: 20px;
+}
+
+
+/* ManageProject */
+
+.manage-project-table {
+    margin: 25px 0px;
+}
+
+.manage-project-table .tableBody ul {
+    display: flex;
+    padding: 10px;
+}
+
+.manage-project-table .tableBody ul .item {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: var(--text-dark);
+    padding: 10px;
+    width: 20%;
+    border-bottom: 1px solid var(--border-secondary-color);
+}
+
+.manage-project-table .tableBody ul .itemHeader {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 18px;
+    color: var(--tartiary-color);
+}
+
+.manage-project-table .tableBody ul .item2 {
+    color: var(--tartiary-color);
+}
+
+@media screen and (max-width: 768px) {
+    .financial-head {
+        flex-direction: column;
+    }
+    .financial-head button {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+    .financial-head div {
+        width: 100%;
+    }
+    .leasing-table .edit {
+        padding-right: 20px;
+    }
+    .leasing-table .edit svg {
+        padding-bottom: 15px;
+    }
+    .leasing-submit button {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

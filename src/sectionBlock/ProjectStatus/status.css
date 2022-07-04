@@ -1,0 +1,131 @@
+.adding-investor.status {
+    width: 61%;
+}
+
+.adding-investor-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 19.58%);
+    z-index: 100;
+    top: 0;
+    left: 0;
+    position: fixed;
+}
+
+.adding-investor.generate {
+    background-color: var(--bg-primary-color);
+    -webkit-transition: width .4s ease, background-color .4s ease, border-color .4s;
+    transition: width .4s ease, background-color .4s ease, border-color .4s;
+    height: 100%;
+    box-shadow: var(--drop-box-shadow);
+    width: 48.6%;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    border-radius: 20px 0px 0px 20px;
+    position: fixed;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.investor-add {
+    width: 100%;
+    -webkit-transition: border-color .4s;
+    transition: border-color .4s;
+    scrollbar-width: none;
+    overflow-x: hidden;
+    padding: 20px 40px;
+}
+
+.investor-add .header-add {
+    display: flex;
+    align-items: center;
+}
+
+.investor-add .header-add button {
+    padding: 10px 25px;
+}
+
+.investor-add .header-add h1 {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-low-dark);
+    line-height: 180%;
+    margin-left: 20px;
+}
+
+.project-status {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 95%;
+}
+
+.project-status .submit {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.project-status .status {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-left: 4px solid var(--text-hidden);
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
+.project-status .status li {
+    position: relative;
+}
+
+.project-status .status .pin {
+    position: absolute;
+    top: 18px;
+    left: -27px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--text-hidden);
+}
+
+.project-status .status .pin.active {
+    background: var(--primary-color);
+}
+
+.project-status .status .stat {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.project-status .status .stat p:first-child {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+}
+
+.project-status .status .stat p:last-child {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text-dark);
+}
+
+@media screen and (max-width: 768px) {
+    .investor-add .header-add h1 {
+        font-size: 18px !important;
+    }
+    .project-status .submit button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,48 @@
+.search {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+
+.Scoring-contract .search-container .search-icon {
+    top: 0px;
+}
+
+.Scoring-contract .Esheet {
+    display: flex;
+    margin-top: 25px;
+}
+
+.Scoring-contract .Esheet li {
+    width: 20%;
+    margin-right: 15px;
+}
+
+.Scoring-contract .Esheet-submit {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 150px;
+    margin-top: 10px;
+}
+
+@media screen and (min-width: 1500px) {
+    .Scoring-contract .Esheet-submit {
+        margin-right: 250px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Scoring-contract .Esheet {
+        flex-direction: column;
+    }
+    .Scoring-contract .Esheet li {
+        width: 100%;
+    }
+    .Scoring-contract .Esheet-submit button {
+        width: 100%;
+        margin: 20px 2px;
+    }
+    .Scoring-contract .Esheet-submit {
+        margin-right: 0px;
+    }
+}

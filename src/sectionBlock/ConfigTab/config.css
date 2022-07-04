@@ -1,0 +1,52 @@
+.config-management {
+    padding: 10px 0px;
+    height: 100vh;
+}
+
+.config-management.Gfundtab {
+    height: 30vh;
+}
+
+.config-management.Gfundtab .config-item {
+    width: 100%;
+}
+
+.config-management.Gfundtab .config-item li {
+    width: 100%;
+}
+
+.config-item {
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+    margin-top: 25px;
+    width: 40%;
+}
+
+.config-item li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.config-item a p {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.config-item svg {
+    width: 16px;
+    padding-left: 2px;
+}
+
+@media screen and (max-width:768px) {
+    .config-item {
+        width: 100%;
+    }
+    .config-management.Gfundtab {
+        height: 25vh;
+    }
+}

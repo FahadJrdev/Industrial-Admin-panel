@@ -1,20 +1,25 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import Navbar from '../sectionBlock/Navigation/Navbar';
 import Header from '../sectionBlock/Header';
 import {InvestorCard, ProjectCard} from '../component/cards';
 import AddProjects from '../sectionBlock/Add-project';
 import ProjectManagement from '../sectionBlock/Project-Management';
 import Due from '../sectionBlock/Due-diligence';
+import ProjectStatus from '../sectionBlock/ProjectStatus';
 
 const Projects = ({lang, setLang, language, responsive}) => {
   const [attemptToAddProject, setAttemptToAddProject] = useState('close');
   const [due, setDue] = useState('off');
+  const [projectStatus, setProjectStatus] = useState({open:'close',valor:''});
+  const [status, setStatus] = useState('');
+
   setTimeout(()=>{
     const backButton = document.querySelector('.adding-investor .header-add button');
     if(backButton){
       backButton.addEventListener('click',()=>{
         setAttemptToAddProject('close');
         setDue('off');
+        setProjectStatus({open:'close',valor:''});
       })
     }
     const addingInvestorOverlay = document.querySelector('.adding-investor-overlay');
@@ -22,6 +27,7 @@ const Projects = ({lang, setLang, language, responsive}) => {
       addingInvestorOverlay.addEventListener('click',()=>{
         setAttemptToAddProject('close');
         setDue('off');
+        setProjectStatus({open:'close',valor:''});
       })
     }
     const addInvestor = document.querySelectorAll('.project .management button');
@@ -36,6 +42,12 @@ const Projects = ({lang, setLang, language, responsive}) => {
       })
     }
   })
+  useEffect(()=>{
+    if(projectStatus.valor!==''){
+      
+        setStatus(projectStatus.valor)
+    }
+  },[projectStatus])
   return (
     <>
       {
@@ -45,7 +57,12 @@ const Projects = ({lang, setLang, language, responsive}) => {
       }
       {
         due === 'on'
-        ?<Due language={language} title={`Due diligence`} />
+        ?<Due language={language} title={language.deligence.title} />
+        :<></>
+      }
+      {
+        projectStatus.open === 'open'
+        ?<ProjectStatus language={language} title={language.projects.status} status={status} status1={`Start`} status2={`Implementation`} status3={`Monitoring`} status4={`Disinvestment`} />
         :<></>
       }
       <Navbar responsive={responsive} lang={lang} setLang={setLang} language={language} />
@@ -58,7 +75,7 @@ const Projects = ({lang, setLang, language, responsive}) => {
           <ProjectCard language={language} />
         </div>
         <div className="project">
-          <ProjectManagement lang={lang} setLang={setLang} language={language} />
+          <ProjectManagement lang={lang} setLang={setLang} language={language} setProjectStatus={setProjectStatus} />
         </div>
       </main>
     </>

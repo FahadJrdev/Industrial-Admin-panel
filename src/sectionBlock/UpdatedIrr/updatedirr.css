@@ -1,0 +1,21 @@
+.irr {
+    padding: 50px 0px;
+    height: 70vh;
+}
+
+.irr p {
+    font-size: 18px;
+    line-height: 180%;
+    color: var(--text-low-dark);
+    width: 85%;
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .irr {
+        padding-top: 0px;
+    }
+    .irr p {
+        margin: 0 auto;
+    }
+}

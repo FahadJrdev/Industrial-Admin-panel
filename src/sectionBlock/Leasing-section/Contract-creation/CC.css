@@ -1,0 +1,136 @@
+.search {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+
+.Contract-creation .search-container .search-icon {
+    top: 0px;
+}
+
+.Contract-creation .Esheet {
+    display: flex;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.Contract-creation .Esheet li {
+    width: 20%;
+    margin-right: 15px;
+}
+
+.Contract-creation .Esheet-submit {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 150px;
+    margin: 25px 0px;
+}
+
+.inputsTitle {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    color: var(--text-primary);
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.graceParam {
+    display: flex;
+    align-items: center;
+}
+
+.small-text {
+    font-size: 14px;
+    margin: 0px 5px;
+    font-weight: 400;
+    line-height: 21px;
+    color: var(--input-border);
+}
+
+.leasing-info-table {
+    margin: 15px 2px;
+}
+
+.leasing-info-table .title {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    color: var(--text-primary);
+    margin: 10px 0px;
+}
+
+.leasing-info-table ul {
+    border-bottom: 1px solid var(--border-secondary-color);
+    display: flex;
+}
+
+.leasing-info-table ul:last-child {
+    border-bottom: none;
+}
+
+.leasing-info-table ul .list-item {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: var(--text-primary);
+    width: 25%;
+    height: 45px;
+    padding: 10px 5px;
+}
+
+.leasing-info-table ul .list-item select,
+.leasing-info-table ul .list-item input,
+.leasing-info-table ul .list-item svg {
+    top: 0;
+}
+
+.leasing-info-table ul .list-item.list-color-item {
+    color: var(--tartiary-color);
+}
+
+.leasing-info-table ul .list-header.list-item {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 18px;
+    color: var(--tartiary-color);
+    padding: 15px 5px;
+}
+
+.leasing-info-table ul .list-item input {
+    border: none;
+}
+
+.leasing-info-table ul .list-item select {
+    border: none;
+}
+
+.leasing-info-table ul .list-item input:focus {
+    outline: none;
+}
+
+.leasing-info-table ul .list-item select:focus {
+    outline: none;
+}
+
+@media screen and (min-width: 1500px) {
+    .Contract-creation .Esheet-submit {
+        margin-right: 250px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Contract-creation .Esheet {
+        flex-direction: column;
+    }
+    .Contract-creation .Esheet li {
+        width: 100%;
+    }
+    .Contract-creation .Esheet-submit button {
+        width: 100%;
+        margin: 20px 2px;
+    }
+    .Contract-creation .Esheet-submit {
+        margin-right: 0px;
+    }
+}

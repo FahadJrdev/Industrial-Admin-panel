@@ -1,0 +1,29 @@
+.project-submit {
+    display: flex;
+    margin: 25px 0px;
+}
+
+.ContractFormalization {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70vh;
+}
+
+.inputs-part {
+    margin: 30px 0px;
+}
+
+.ContractFormalization>.Esheet-submit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media screen and (max-width: 768px) {
+    .project-submit button {
+        width: 100%;
+    }
+    .ContractFormalization>.Esheet-submit button {
+        width: 100%;
+    }
+}

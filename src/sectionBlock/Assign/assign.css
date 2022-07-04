@@ -74,8 +74,8 @@
 }
 
 .investor-add .assignment ul {
-    width: 95%;
-    height: 30px;
+    width: 100%;
+    height: 38px;
     font-size: 14px;
     font-weight: 100;
     padding-top: 35px;
@@ -97,8 +97,8 @@
 }
 
 .investor-add .assignment input {
-    width: 95%;
-    height: 30px;
+    width: 100%;
+    height: 38px;
     position: absolute;
     z-index: 290;
     top: 28px;
@@ -106,6 +106,7 @@
     color: var(--text-dark);
     padding-left: 15px;
     font-weight: 100;
+    border: 1px solid var(--text-hidden);
 }
 
 .investor-add .assignment-input {
@@ -134,11 +135,12 @@
 
 .investor-add .assignment-input input {
     width: 100%;
-    padding-left: 5px;
-    height: 30px;
+    padding-left: 25px;
+    height: 38px;
     font-size: 14px;
     color: var(--text-dark);
     font-weight: 100;
+    border: 1px solid var(--text-hidden);
 }
 
 .investor-add .assignment-input input:focus {
@@ -188,12 +190,12 @@
 .investor-add .project-data input {
     width: 100%;
     padding-left: 5px;
-    height: 30px;
+    height: 40px;
     font-size: 14px;
     color: var(--text-dark);
     font-weight: 100;
     position: absolute;
-    z-index: 290;
+    z-index: -5;
     top: 23px;
     left: 0;
 }
@@ -214,12 +216,11 @@
 
 .investor-add .project-data select {
     width: 100%;
-    height: 30px;
+    height: 40px;
     -moz-appearance: none;
     -webkit-appearance: none;
     -ms-appearance: none;
     appearance: none;
-    height: 30px;
     padding-left: 10px;
     z-index: 300;
     background: transparent;
@@ -227,15 +228,6 @@
     color: var(--text-dark);
     padding-left: 15px;
     font-weight: 100;
-}
-
-.investor-add .project-data svg {
-    position: absolute;
-    right: 10px;
-    top: 23px;
-    width: 30px;
-    color: var(--text-dark);
-    z-index: 299;
 }
 
 .investor-add .project-data select option {
@@ -262,11 +254,15 @@
 
 .investor-add .assignment svg {
     position: absolute;
-    right: 60px;
-    top: 27px;
-    width: 30px;
+    right: 11px;
+    top: 37px;
+    width: 18px;
     color: var(--text-dark);
     z-index: 299;
+}
+
+.investor-add .assignment ul:hover svg {
+    color: var(--text-dark);
 }
 
 .investor-add .assignment select option {
@@ -294,12 +290,59 @@
 .css-b62m3t-container {
     position: relative;
     box-sizing: border-box;
-    width: 95%;
+    width: 100%;
+}
+
+.css-1pahdxg-control {
+    border-color: 1px solid var(--input-border) !important;
+    box-shadow: 0 0 0 1px var(--drop-box-shadow) !important;
+}
+
+.css-1pahdxg-control:hover {
+    border-color: var(--input-border) !important;
+    outline: none !important;
+}
+
+.css-6j8wv5-Input {
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+}
+
+.css-14el2xx-placeholder {
+    color: var(--input-border) !important;
+    font-size: 14px !important;
+    padding-left: 15px !important;
+    font-weight: 400 !important;
+}
+
+.css-6j8wv5-Input {
+    color: var(--input-border) !important;
+    font-size: 14px !important;
+    padding-left: 15px !important;
+    font-weight: 400 !important;
+}
+
+.css-6j8wv5-Input input::placeholder {
+    color: var(--input-border) !important;
+    font-size: 14px !important;
+    padding-left: 15px !important;
+    font-weight: 400 !important;
+}
+
+.css-6j8wv5-Input {
+    margin: 0 !important;
+}
+
+.css-319lph-ValueContainer {
+    padding: 0px 8px !important;
 }
 
 @media screen and (max-width: 768px) {
     .investor-add .assignment input {
         width: 85%;
+    }
+    .investor-add .assignment svg {
+        right: 60px;
     }
     .investor-add .assignment-input ul {
         flex-direction: column;
@@ -333,7 +376,10 @@
     .investor-add .project-data .investor-data li:first-child {
         margin-bottom: 15px;
     }
-    .css-b62m3t-container {
+    .css-b62m3t-container:first-child {
         width: 85%;
+    }
+    .css-b62m3t-container {
+        width: 100%;
     }
 }

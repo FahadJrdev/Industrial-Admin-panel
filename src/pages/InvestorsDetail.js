@@ -59,14 +59,14 @@ const InvestorsDetail = ({lang, setLang, language, responsive}) => {
       if(response.data){
        if(response.data.length>0){
           if(response.data[0]['FONDOS'].length>0){
-            setTotalInvest(response.data[1]['TOTAL DE FONDOS ASIGNADOS'])
+            setTotalInvest(response.data[0]['TOTAL DE FONDOS ASIGNADOS'])
             setFondos(response.data[0]['FONDOS'])
           }else{
-            setTotalInvest(response.data[1]['TOTAL DE FONDOS ASIGNADOS'])
+            setTotalInvest(response.data[0]['TOTAL DE FONDOS ASIGNADOS'])
             setFondos([])
           }
-          if(response.data[0]['INVERSION'].length>0){
-            setListInvest(response.data[0]['INVERSION'])
+          if(response.data[0]['PROYECTOS'].length>0){
+            setListInvest(response.data[0]['PROYECTOS'])
 
           }else{
             setListInvest([])
@@ -78,7 +78,7 @@ const InvestorsDetail = ({lang, setLang, language, responsive}) => {
             var valorJsonPermission=response.data[0]['DATOS'][0]['INFORMACION_PERMISION']
             var valorJsonSociodemo=response.data[0]['DATOS'][0]['INFORMACION_SOCIODEMOGRAFICA']
             setNameInvestor(JSON.parse(valorJsonCorporativa).COMPANY_NAME)
-            setTotalPRoject(response.data[0]['INVERSION'].length)
+            setTotalPRoject(response.data[0]['PROYECTOS'].length)
             setUpdateValor({
               Nit: JSON.parse(valorJsonCorporativa).NIT,
               Company_name: JSON.parse(valorJsonCorporativa).COMPANY_NAME,
@@ -195,12 +195,8 @@ const [assign, setAssign] = useState('off');
         navigate(-1);
       }
     }
-    const Li = Array.from(document.querySelectorAll('.tab ul li'));
-    Li.forEach((li)=>{
-        li.addEventListener('click',()=>{
-          setTab(li.dataset.tab);
-        })
-    })
+   
+   
   },[buscar,isNavigate,navigate]);
   const [responsiveTab, setResponsiveTab] = useState("");
   setTimeout(()=>{
@@ -225,12 +221,7 @@ const [assign, setAssign] = useState('off');
         navigate(-1);
       }
     }
-    const Li = Array.from(document.querySelectorAll('.tab ul li'));
-    Li.forEach((li)=>{
-        li.addEventListener('click',()=>{
-          setResponsiveTab(li.dataset.tab);
-        })
-    })
+  
   })
 return (
     <>
@@ -270,7 +261,7 @@ return (
                   <InvestorDetailCard color={`primary-color`} title={language.investordetail.detailcard} text={totalInvest.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} Ltd ={listFondos} />
                 </div>
                 <div className="investor-detail-info">
-                  <Tab tab1={`General information`} tab2={`Projects`} tab3={`Reports`} hideCustomizer={`dn`} tab4={`Funds`} hideTab5={`dn`} tabs1={language.investordetail.generaltab} tabs2={language.investordetail.prjecttab}  tabs3={language.investordetail.reportstab}  tabs4={language.investordetail.fundtab} />
+                  <Tab action={setResponsiveTab} tab1={`General information`} tab2={`Projects`} tab3={`Reports`} hideCustomizer={`dn`} tab4={`Funds`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} tabs1={language.investordetail.generaltab} tabs2={language.investordetail.prjecttab}  tabs3={language.investordetail.reportstab}  tabs4={language.investordetail.fundtab} />
                 </div>
               </main>
             </>
@@ -322,7 +313,7 @@ return (
               <Header responsive={responsive} lang={lang} setLang={setLang} pageTitle={"Funds"} displayArrowBtn={`show`} specificClass={`fundsBackTab`} />
               <main className='main investor-detail'>
                 <div className="investor-detail-info">
-                  <FundManagement  language={language} />
+                  <FundManagement  language={language} dataFondos={listFondos} />
                 </div>
               </main>
             </>
@@ -339,14 +330,14 @@ return (
           <InvestorDetailCard color={`primary-color`} title={language.investordetail.detailcard} text={totalInvest.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} Ltd ={listFondos} />
         </div>
         <div className="investor-detail-info">
-          <Tab tab1={`General information`} tab2={`Projects`} tab3={`Reports`} hideCustomizer={`dn`} tab4={`Funds`} hideTab5={`dn`} tabs1={language.investordetail.generaltab} tabs2={language.investordetail.prjecttab}  tabs3={language.investordetail.reportstab}  tabs4={language.investordetail.fundtab} />
+          <Tab action={setTab} tab1={`General information`} tab2={`Projects`} tab3={`Reports`} hideCustomizer={`dn`} tab4={`Funds`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} tabs1={language.investordetail.generaltab} tabs2={language.investordetail.prjecttab}  tabs3={language.investordetail.reportstab}  tabs4={language.investordetail.fundtab} />
           { tab === 'General information'
             ? <GeneralInformation  language={language} Name={NameInvestor}id={IDInvestor}totalInvestment={totalInvest.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} totalProject={totalProject}/>
             :( tab === 'Projects'
             ? <InvestorTable  language={language} header1={language.investordetail.header1}  header2={[language.investordetail.header2_1,<br key={1} />,language.investordetail.header2_2]}  header3={language.investordetail.header3}  header4={language.investordetail.header4} data={ListInvest} />
             : ( tab === 'Reports'
               ?<Reports  language={language} />
-              :<FundManagement  language={language} />
+              :<FundManagement  language={language} dataFondos={listFondos} />
               )
             )
           }
