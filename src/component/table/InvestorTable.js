@@ -255,3 +255,16 @@ export const BankConfigItem = ({info}) => {
       </Link>
   )
 }
+export const ContractManagementItem = ({info, link}) => {
+  return(
+      <Link to={link}>
+          <ul className="listBody">
+              <li className='listItem'>{info.item1}</li>
+              <li className='listItem'>{info.item2}</li>
+              <li className='listItem'>{info.item3}</li>
+              <li className='listItem' style={{color: `${info.color}`, fontWeight: 700}}>{info.item4}</li>
+              <li className='listItem'>{info.item5}</li>
+          </ul>
+      </Link>
+  )
+}

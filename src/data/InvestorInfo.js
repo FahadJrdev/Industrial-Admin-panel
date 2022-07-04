@@ -444,3 +444,298 @@ export const BankConfigInfo = [{
         Actions: 'See more',
     }
 ]
+
+export const ContractManagementLeasingInfo = [
+    {
+        item1: '1132242',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'NEGATED',
+        item5: 'See more',
+        color: '#f1abab'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'NEGATED',
+        item5: 'See more',
+        color: '#f1abab'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'POSTPONED',
+        item5: 'See more',
+        color: '#ffd47f'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'POSTPONED',
+        item5: 'See more',
+        color: '#ffd47f'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'POSTPONED',
+        item5: 'See more',
+        color: '#ffd47f'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'NEGATED',
+        item5: 'See more',
+        color: '#f1abab'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'NEGATED',
+        item5: 'See more',
+        color: '#f1abab'
+    }
+]
+export const ContractManagementProjectInfo = [
+    {
+        item1: '1132242',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'NEGATED',
+        item5: 'See more',
+        color: '#f1abab'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'NEGATED',
+        item5: 'See more',
+        color: '#f1abab'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'POSTPONED',
+        item5: 'See more',
+        color: '#ffd47f'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'POSTPONED',
+        item5: 'See more',
+        color: '#ffd47f'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'POSTPONED',
+        item5: 'See more',
+        color: '#ffd47f'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'NEGATED',
+        item5: 'See more',
+        color: '#f1abab'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'NEGATED',
+        item5: 'See more',
+        color: '#f1abab'
+    }
+]
+export const ContractManagementInvestorInfo = [
+    {
+        item1: '1132242',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'NEGATED',
+        item5: 'See more',
+        color: '#f1abab'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'NEGATED',
+        item5: 'See more',
+        color: '#f1abab'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'POSTPONED',
+        item5: 'See more',
+        color: '#ffd47f'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'POSTPONED',
+        item5: 'See more',
+        color: '#ffd47f'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'POSTPONED',
+        item5: 'See more',
+        color: '#ffd47f'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'NEGATED',
+        item5: 'See more',
+        color: '#f1abab'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'APPROVED',
+        item5: 'See more',
+        color: '#a3cb40'
+    },
+    {
+        item1: '1232342',
+        item2: '05/03/2021',
+        item3: 'LUIS EDUARDO RIAÑO SALAS',
+        item4: 'NEGATED',
+        item5: 'See more',
+        color: '#f1abab'
+    }
+]

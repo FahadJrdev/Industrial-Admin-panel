@@ -27,7 +27,7 @@ const ManageInvestor = ({lang, setLang, language, responsive}) => {
     <>
         <div className="ManageInvestor">
             <Navbar responsive={responsive} lang={lang} setLang={setLang} language={language} />
-            <Header responsive={responsive} lang={lang} setLang={setLang} displayArrowBtn={`show`} colorArrowBtn={`var(--primary-color)`} textArrowBtn={language.global.back}  pageTitle={`Management of investment contracts to investors`} displaySearch={`show`} />
+            <Header responsive={responsive} lang={lang} setLang={setLang} displayArrowBtn={`show`} colorArrowBtn={`var(--primary-color)`} textArrowBtn={language.global.back}  pageTitle={language.contract_inver_invest.title} displaySearch={`show`} />
             <main className='main configuration'>
                 <Tab action={setTab} tab1={`Contract creation`} tab2={`Approval/ Denial`} tab3={`Contract formalization`} hideTab4={`dn`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} hideCustomizer={`dn`} tabs1={language.deuda_leasing.tab1} tabs2={language.deuda_leasing.tab2} tabs3={language.deuda_leasing.tab3} />
                 {

@@ -168,7 +168,7 @@ const Configuration = ({lang, setLang, language, responsive}) => {
               <Header responsive={responsive} lang={lang} setLang={setLang} pageTitle={`Contract management`} displayArrowBtn={`show`} />
               <main className='main configuration'>
                 <div className="configure">
-                  <GeneralTab itemClass={`gtab3`} item1={language.configurate.tab3_ContractManagament} item2={language.configurate.tab3_managementdebt}  item3={language.configurate.tab3_contratproject} item4={language.configurate.tab3_investmentcontract} item5={language.configurate.tab3_debtcontractcollection} link1={`#`} link2={`/Leasing`} link3={`/ManageProject`} link4={`/ManageInvestor`} link5={`#`} />    
+                  <GeneralTab itemClass={`gtab3`} item1={language.configurate.tab3_ContractManagament} item2={language.configurate.tab3_managementdebt}  item3={language.configurate.tab3_contratproject} item4={language.configurate.tab3_investmentcontract} item5={language.configurate.tab3_debtcontractcollection} link1={`/ContractManagement`} link2={`/Leasing`} link3={`/ManageProject`} link4={`/ManageInvestor`} link5={`#`} />    
                 </div>
               </main>
             </>
@@ -212,7 +212,7 @@ const Configuration = ({lang, setLang, language, responsive}) => {
               }
               {
                 tabName === 'Contract management'
-                ?<GeneralTab itemClass={`gtab3`} item1={language.configurate.tab3_ContractManagament} item2={language.configurate.tab3_managementdebt}  item3={language.configurate.tab3_contratproject} item4={language.configurate.tab3_investmentcontract} item5={language.configurate.tab3_debtcontractcollection} link1={`#`} link2={`/Leasing`} link3={`/ManageProject`} link4={`/ManageInvestor`} link5={`#`} />
+                ?<GeneralTab itemClass={`gtab3`} item1={language.configurate.tab3_ContractManagament} item2={language.configurate.tab3_managementdebt}  item3={language.configurate.tab3_contratproject} item4={language.configurate.tab3_investmentcontract} item5={language.configurate.tab3_debtcontractcollection} link1={`/ContractManagement`} link2={`/Leasing`} link3={`/ManageProject`} link4={`/ManageInvestor`} link5={`#`} />
                 :<></>
               }
               {

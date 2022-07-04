@@ -197,36 +197,12 @@
     width: 60%;
 }
 
-
-/* ManageProject */
-
-.ManageProject header .display.show {
-    display: inline-block;
-    width: 50%;
+.ManageInvestor header .first-part .page-name .title {
+    font-size: 20px;
 }
 
-.ManageProject header .first-part {
-    width: 40%;
-}
-
-.ManageProject header .second-part {
-    width: 60%;
-}
-
-
-/* ManageInvestor */
-
-.ManageInvestor header .display.show {
-    display: inline-block;
-    width: 50%;
-}
-
-.ManageInvestor header .first-part {
-    width: 40%;
-}
-
-.ManageInvestor header .second-part {
-    width: 60%;
+.ManageProject header .first-part .page-name .title {
+    font-size: 20px;
 }
 
 .Esheet-submit {
@@ -270,6 +246,47 @@
 
 .Billing header .first-part {
     width: 50%;
+}
+
+.ContractManagement .table .table-lists.ContractManagement {
+    box-sizing: border-box;
+    display: flex;
+    padding: 15px 20px 10px;
+    border-radius: 13px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-secondary-color);
+    border: 1px solid var(--border-secondary-color);
+    margin: 30px 0px;
+}
+
+.ContractManagement .table .table-lists.ContractManagement .listBody {
+    background: #ffffff;
+}
+
+.ContractManagement .table .table-lists.ContractManagement .listBody:hover {
+    background: #ecf6ff;
+}
+
+.ContractManagement .table .table-lists .listHeader .listHeaderItem {
+    width: 20%;
+}
+
+.ContractManagement .table .table-lists .listItem {
+    width: 20%;
+}
+
+.ContractManagement .table .table-lists .listHeader .listHeaderItem:nth-child(3) {
+    width: 35%;
+}
+
+.ContractManagement .table .table-lists .listItem:nth-child(3) {
+    width: 35%;
+}
+
+.ContractManagement .table .table-lists .listItem:last-child {
+    text-decoration: underline;
+    font-weight: 500;
 }
 
 @media screen and (min-width: 1500px) {
@@ -336,12 +353,6 @@
     .responsiveConfigDetail header .first-part .buttonwitharrow {
         margin-top: 16px;
     }
-    .ManageProject header .first-part {
-        width: 100%;
-    }
-    .ManageInvestor header .first-part {
-        width: 100%;
-    }
     .ManageProject header .display.show button {
         width: 36px;
     }
@@ -359,5 +370,13 @@
     }
     header .first-part {
         align-items: flex-start;
+    }
+    .ContractManagement .table .table-lists.ContractManagement {
+        margin-left: 0px;
+        width: 300%;
+    }
+    .ContractManagement .table .table-responsive {
+        width: 100%;
+        overflow-y: hidden;
     }
 }

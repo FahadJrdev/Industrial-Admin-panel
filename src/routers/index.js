@@ -16,6 +16,7 @@ import ForgetPassword from '../authentication/Forget_Password';
 import ChangePassword from '../authentication/Password_change';
 import FundDetails from '../pages/FundDetails';
 import Profile from '../pages/Profile';
+import ContractManagement from '../pages/ContractManagement';
 import Leasing from '../pages/Leasing';
 import ManageProject from '../pages/ManageProject';
 import ManageInvestor from '../pages/ManageInvestor';
@@ -65,6 +66,7 @@ function Routers(){
           <Route path='/Projects' exact element = {<Projects lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/ProjectDetails' exact element = {<ProjectDetails lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/Profile' exact element = {<Profile lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/ContractManagement' exact element = {<ContractManagement lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/Leasing' exact element = {<Leasing lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/ManageProject' exact element = {<ManageProject lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/ManageInvestor' exact element = {<ManageInvestor lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
