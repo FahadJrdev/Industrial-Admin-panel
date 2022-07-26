@@ -3,7 +3,6 @@ import { Button } from '../../component/buttons';
 import './Fm.css';
 import axios from "../../api/axios.js";
 import { FundManagementTable } from '../../component/table';
-import GeneralTab from '../ConfigTab';
 
 const FundManagement = ({language, extraClass,dataFondos}) => {
   

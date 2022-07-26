@@ -8,7 +8,7 @@ import Select from 'react-select' ;
 import { useNavigate} from 'react-router-dom';
 import axios from "../../../api/axios.js";
 import {toast} from "react-toastify";
-const ContractCreation = ({language}) => {
+const ContractCreation = ({language,valorData,valorIDProyecto,valorIDOwner,isUpdates,funcion,Deuda}) => {
   const navigates = useNavigate();
   const initialState = {
     Date_Of_Reques: '',
@@ -73,14 +73,14 @@ const ContractCreation = ({language}) => {
   
 
   const [projects,SetAllProject] = useState([]);
+  const [selected,setSelected] = useState({});
   const [openExtraConcept, setOpenExtraConcept] = useState(false);
-  const [one]=useState('')
   const [id_proyecto,setIdProyecto]=useState('')
   const [document_type_array]=useState([{name:'Cedula',value:1},{name:'NIT',value:2}])
   const [line_cre]=useState([{name:'Credio 1',value:1},{name:'Credio 2',value:2}])
   const [max_perio]=useState([{name:'Max 1',value:1},{name:'Max 2',value:2}])
-  const [perio]=useState([{name:'Perio 1',value:1},{name:'Perio2',value:2}])
-  const [periooci]=useState([{name:'Periocidad 1',value:1},{name:'Periocidad 2',value:2}])
+  const [perio]=useState([{name:'Mensual',value:1}])
+  const [periooci]=useState([{name:'Mensual',value:1}])
   const [formpay]=useState([{name:'Pago Efectivo',value:1},{name:'Transfer',value:2}])
   const [typgra]=useState([{name:'Gracia 1',value:1},{name:'Gracia 2',value:2}])
   const [format]=useState([{name:'Formato 1',value:1},{name:'Formato 2',value:2}])
@@ -92,7 +92,7 @@ const ContractCreation = ({language}) => {
   const [tasaintehist]=useState([{name:'Historico 1',value:1},{name:'Historico 2',value:2}])
   const [tipodegrada]=useState([{name:'Tipo Degra 1',value:1},{name:'Tipo Degra 2',value:2}])
   const [id_Owner,setIdOwner]=useState('')
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, valorData?valorData:initialState);
   const onChange = (e) => {
       dispatch({ field: e.target.name, value: e.target.value })
   }
@@ -147,6 +147,7 @@ const ContractCreation = ({language}) => {
     PERIODO:Period2,
     FORMATO:Format,
     INTEREST_TYPE:openExtraConcept?Interest_type:'',
+    DATE_CON:Date_Of_Reques,
 
     INTEREST_RATE_TYPE:openExtraConcept?Interest_rate_type:'',
     INTEREST_RATE_HISTORIC:openExtraConcept?Interest_rate_historic:'',
@@ -162,8 +163,12 @@ const ContractCreation = ({language}) => {
   }
         axios.post("/contractmanagement/"+id_Owner+"/"+id_proyecto,valor,bearerToken)
         .then((response) => {
-          toast("Created Succes");
-          navigates(-1)
+          funcion({
+            ownerid:response.data.DATA.OWNER_I_CODIGO,
+            codigo:response.data.DATA.id,
+            projectid:response.data.DATA.PROYECTO_I_CODIGO
+          })
+          toast("Created Succes")
         }).catch((err)=>{
           if(err.response){
             if(err.response.data){
@@ -190,14 +195,98 @@ const ContractCreation = ({language}) => {
         })
       }
 
-      const callListProjects = ()=>{
+      const opcionBoton=()=>{
+        if(Deuda){
+          callApiUpdateDeudaContrac()
+        }else{
+          callApiCreationDeb()
+        }
+      }
+      const callApiUpdateDeudaContrac = ()=>{  
+        let bearerToken={
+        headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
+      }
+    let valor={
+      LINEA_CREDITO:Credit_line,
+      CUPO_CREDITO:Credit_quota,
+      PLAZO_MAXIMO:Maximum_period,
+      MONTO_SOLICITADO:Requested_amount,
+      PLAZO:Period1,
+      PERIOCIDAD:Perioricidad,
+      FORMA_PAGO:Forma_de_pago,
+      TIPO_GRACIA:Type_grace,
+      PERIODO:Period2,
+      FORMATO:Format,
+      INTEREST_TYPE:openExtraConcept?Interest_type:'',
+      DATE_CON:Date_Of_Reques,
+  
+      INTEREST_RATE_TYPE:openExtraConcept?Interest_rate_type:'',
+      INTEREST_RATE_HISTORIC:openExtraConcept?Interest_rate_historic:'',
+      DEVIATION:openExtraConcept?Deviation:'',
+      PERIOD:openExtraConcept?Period3:'',
+      GRADIENT_TYPE:openExtraConcept?Gradient_type:'',
+      GRADIENT_VALUE:openExtraConcept?Gradient_value:'',
+      ATTRIBUTE_TYPE:openExtraConcept?'':Type1,
+      ATTRIBUTE_VALUE:openExtraConcept?'':Value,
+      ATTRIBUTE_VALUE_DOS:openExtraConcept?'':Type2,
+      ATTRIBUTE_SHAPE:openExtraConcept?'':Shape,
+      ATTRIBUTE_FEES:openExtraConcept?'':Fees,
+    }
+          axios.put("/contractmanagement/"+Deuda+"/"+id_Owner+"/"+id_proyecto,valor,bearerToken)
+          .then((response) => {
+            funcion({
+              ownerid:id_Owner,
+              codigo:Deuda,
+              projectid:id_proyecto
+            })
+            toast("Created Succes")
+          }).catch((err)=>{
+            if(err.response){
+              if(err.response.data){
+                if(err.response.status===401){
+                  navigates('/')
+                }else{
+                  if(err.response.data.message){
+                    toast(err.response.data.message)
+                  }else{
+                    let message="";
+                    let valorKeys=Object.keys(err.response.data.error)
+                    valorKeys.forEach(element => {
+                      err.response.data.error[element].forEach((mensaje)=>{
+                        message+=mensaje+" ,"
+                      })
+                    });
+                    
+                    toast(message);
+                  }
+                }
+                
+              }
+            }
+          })
+          }
+
+
+
+      const callListProjects = (valorIDProyectos)=>{
         let bearerToken={
           headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` }
         }
             axios.get("/project", {},bearerToken)
             .then((response) => {
               if(response.status===200){
+
+              
                 SetAllProject(response.data.map((valor)=>{
+                  if(valorIDProyectos){
+                    if(valorIDProyectos===valor.I_CODIGO){
+                      setSelected({
+                        value:valor.I_CODIGO,
+                        label:valor.C_NOMBRE_PROYECTO,
+                        data:valor
+                      })
+                    }
+                  }
                   return {
                     value:valor.I_CODIGO,
                     label:valor.C_NOMBRE_PROYECTO,
@@ -260,13 +349,42 @@ const ContractCreation = ({language}) => {
 
     const SelecProject = (event) => {
       if(event){
+        setSelected(event)
        setIdProyecto(event.data.I_CODIGO)
        callProjectOwner(event.data.I_CODIGO)
       }
     }
-      useEffect(()=>{
-        callListProjects()
-      },[one]);
+    useEffect(()=>{
+      if(valorData){
+        Object.keys(valorData).forEach((valor)=>{
+          dispatch({ field: valor, value: valorData[valor]?valorData[valor]:''})
+        })
+        if(valorData['INTEREST_RATE_TYPE']){
+          setOpenExtraConcept(true)
+        }
+      }
+     
+  
+    },[valorData]);
+
+    useEffect(()=>{
+      if(valorIDProyecto){
+        
+      setTimeout(()=>{
+        
+        callProjectOwner(valorIDProyecto)
+        setIdProyecto(valorIDProyecto)
+        callListProjects(valorIDProyecto)
+      })
+      }
+      callListProjects(valorIDProyecto)
+    },[valorIDProyecto]);
+
+    useEffect(()=>{
+      if(valorIDOwner){
+
+      }
+    },[valorIDOwner]);
   return (
     <>
       {
@@ -281,15 +399,15 @@ const ContractCreation = ({language}) => {
             <ul className="Esheet">
                     <li>
                       <label htmlFor="Code">{language.deuda_leasing.project_id}</label>  
-                      <Select options={projects} onChange={SelecProject} />
+                      <Select isDisabled={isUpdates} value={selected} options={projects} onChange={SelecProject} />
                     </li>
-                <Input label={language.deuda_leasing.date_reques} type={`date`} name={`Date_Of_Reques`} value={Date_Of_Reques} placeholder={`DD/MM/YYYY`} onChange={onChange} />
+                <Input label={language.deuda_leasing.date_reques} disa={ isUpdates}  type={`date`} name={`Date_Of_Reques`} value={Date_Of_Reques} placeholder={`DD/MM/YYYY`} onChange={onChange} />
                                </ul>
             <ul className="Esheet"> 
             <Input label={language.deuda_leasing.debtor_name_surname} disa={true} type={`text`} name={`Debtors_Name_And_Surname`} value={Debtors_Name_And_Surname} placeholder={`Enter Name`} onChange={onChange} />
             <SelectVal label={language.deuda_leasing.debtor_document_type} disa={true}  name={`Document_type`} value={Document_type} placeholder={`Select`} onChange={onChange} value1={`Document_type-1`} array={document_type_array}/>
             <Input label={language.deuda_leasing.debtor_document_} disa={true} type={`text`} name={`Document`} value={Document } placeholder={`Enter`} onChange={onChange} />
-      
+           
 
                      </ul>
            {false?<>
@@ -394,25 +512,25 @@ const ContractCreation = ({language}) => {
            </>:<></>} 
             <p className="inputsTitle">{language.deuda_leasing.credit_Information}</p>
             <ul className="Esheet">
-                <SelectVal label={language.deuda_leasing.credit_line} name={`Credit_line`} value={Credit_line} placeholder={`Select`} onChange={onChange} array={line_cre}/>
-                <Input label={language.deuda_leasing.credit_quota} type={`number`} name={`Credit_quota`} value={Credit_quota} placeholder={`Enter`} onChange={onChange} />
-                <SelectVal label={language.deuda_leasing.credit_maximum_period} name={`Maximum_period`} value={Maximum_period} placeholder={`Select`} onChange={onChange} array={max_perio}/>
-                <Input label={language.deuda_leasing.credit_requesamount} type={`number`} name={`Requested_amount`} value={Requested_amount} placeholder={`Enter`} onChange={onChange} />
-                <SelectVal label={language.deuda_leasing.credit_period} name={`Period1`} value={Period1} placeholder={`Select`} onChange={onChange} array={perio}/>
+                <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_line} name={`Credit_line`} value={Credit_line} placeholder={`Select`} onChange={onChange} array={line_cre}/>
+                <Input disa={ isUpdates} label={language.deuda_leasing.credit_quota} type={`number`} name={`Credit_quota`} value={Credit_quota} placeholder={`Enter`} onChange={onChange} />
+                <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_maximum_period} name={`Maximum_period`} value={Maximum_period} placeholder={`Select`} onChange={onChange} array={max_perio}/>
+                <Input disa={ isUpdates} label={language.deuda_leasing.credit_requesamount} type={`number`} name={`Requested_amount`} value={Requested_amount} placeholder={`Enter`} onChange={onChange} />
+                <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_period} name={`Period1`} value={Period1} placeholder={`Select`} onChange={onChange} array={perio}/>
             </ul>
             <ul className="Esheet">
-                <SelectVal label={language.deuda_leasing.credit_periodicity} name={`Perioricidad`} value={Perioricidad} placeholder={`Select`} onChange={onChange} array={periooci}/>
-                <SelectVal label={language.deuda_leasing.credit_waypay} name={`Forma_de_pago`} value={Forma_de_pago} placeholder={`Select`} onChange={onChange} array={formpay}/>
+                <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_periodicity} name={`Perioricidad`} value={Perioricidad} placeholder={`Select`} onChange={onChange} array={periooci}/>
+                <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_waypay} name={`Forma_de_pago`} value={Forma_de_pago} placeholder={`Select`} onChange={onChange} array={formpay}/>
             </ul>
             <p className="inputsTitle">{language.deuda_leasing.grace_parameters}</p>
             <ul className="Esheet">
-                <SelectVal label={language.deuda_leasing.grace_typegrace} name={`Type_grace`} value={Type_grace} placeholder={`Select`} onChange={onChange} array={typgra}/>
-                <SelectVal label={language.deuda_leasing.grace_Period} name={`Period2`} value={Period2} placeholder={`Select`} onChange={onChange} array={perio}/>
-                <SelectVal label={language.deuda_leasing.grace_Format} name={`Format`} value={Format} placeholder={`Select`} onChange={onChange} array={format}/>
+                <SelectVal disa={ isUpdates} label={language.deuda_leasing.grace_typegrace} name={`Type_grace`} value={Type_grace} placeholder={`Select`} onChange={onChange} array={typgra}/>
+                <SelectVal disa={ isUpdates} label={language.deuda_leasing.grace_Period} name={`Period2`} value={Period2} placeholder={`Select`} onChange={onChange} array={perio}/>
+                <SelectVal disa={ isUpdates} label={language.deuda_leasing.grace_Format} name={`Format`} value={Format} placeholder={`Select`} onChange={onChange} array={format}/>
             </ul>
             <ul className="Esheet">
-                <SelectVal label={language.deuda_leasing.grace_document_type} name={`Document_type2`} value={Document_type2} placeholder={`Select`} onChange={onChange} array={document_type_array}/>
-                <Input label={language.deuda_leasing.grace_document} type={`text`} name={`Document2`} value={Document2} placeholder={`Enter`} onChange={onChange} />
+                <SelectVal disa={ isUpdates} label={language.deuda_leasing.grace_document_type} name={`Document_type2`} value={Document_type2} placeholder={`Select`} onChange={onChange} array={document_type_array}/>
+                <Input disa={ isUpdates} label={language.deuda_leasing.grace_document} type={`text`} name={`Document2`} value={Document2} placeholder={`Enter`} onChange={onChange} />
             </ul>
             <div className="graceParam">
                 <p className="inputsTitle">{language.deuda_leasing.concept}</p>
@@ -425,28 +543,28 @@ const ContractCreation = ({language}) => {
                <div className={`extraConcept`}>
                 <p className="small-text">{language.deuda_leasing.financed_atribute}</p>
                 <ul className="Esheet">
-                    <SelectVal label={language.deuda_leasing.financed_type_interested} name={`Interest_type`} value={Interest_type} placeholder={`Select`} onChange={onChange} array={tipointer}/>
-                    <SelectVal label={language.deuda_leasing.financed_Interested_rate} name={`Interest_rate_type`} value={Interest_rate_type} placeholder={`Select`} onChange={onChange} array={tipotasainter}/>
-                    <SelectVal label={language.deuda_leasing.financed_rate_historic} name={`Interest_rate_historic`} value={Interest_rate_historic} placeholder={`Select`} onChange={onChange} array={tasaintehist}/>
-                    <Input type={`number`} label={language.deuda_leasing.financed_deviation} name={`Deviation`} value={Deviation} placeholder={`Select`} onChange={onChange} />
-                    <Input type={`number`} label={language.deuda_leasing.financed_period} name={`Period3`} value={Period3} placeholder={`Select`} onChange={onChange} />
-                    <SelectVal label={language.deuda_leasing.financed_gradient} name={`Gradient_type`} value={Gradient_type} placeholder={`Select`} onChange={onChange} array={tipodegrada}/>
+                    <SelectVal disa={ isUpdates} label={language.deuda_leasing.financed_type_interested} name={`Interest_type`} value={Interest_type} placeholder={`Select`} onChange={onChange} array={tipointer}/>
+                    <SelectVal disa={ isUpdates} label={language.deuda_leasing.financed_Interested_rate} name={`Interest_rate_type`} value={Interest_rate_type} placeholder={`Select`} onChange={onChange} array={tipotasainter}/>
+                    <SelectVal disa={ isUpdates} label={language.deuda_leasing.financed_rate_historic} name={`Interest_rate_historic`} value={Interest_rate_historic} placeholder={`Select`} onChange={onChange} array={tasaintehist}/>
+                    <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.financed_deviation} name={`Deviation`} value={Deviation} placeholder={`Select`} onChange={onChange} />
+                    <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.financed_period} name={`Period3`} value={Period3} placeholder={`Select`} onChange={onChange} />
+                    <SelectVal disa={ isUpdates} label={language.deuda_leasing.financed_gradient} name={`Gradient_type`} value={Gradient_type} placeholder={`Select`} onChange={onChange} array={tipodegrada}/>
                 </ul>
                 <ul className="Esheet">
-                    <Input type={`number`} label={language.deuda_leasing.financed_gradientvalue} name={`Gradient_value`} value={Gradient_value} placeholder={`Enter`} onChange={onChange} />
+                    <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.financed_gradientvalue} name={`Gradient_value`} value={Gradient_value} placeholder={`Enter`} onChange={onChange} />
                 </ul>
              </div>
               </>:<>
               <div className={`extraConcept `}>
                 <p className="small-text">{language.deuda_leasing.disconted_attribute}</p>
                 <ul className="Esheet">
-                    <SelectVal label={language.deuda_leasing.disconted_type} name={`Type1`} value={Type1} placeholder={`Select`} onChange={onChange} array={tip1}/>
-                    <Input type={`number`} label={language.deuda_leasing.disconted_value} name={`Value`} value={Value} placeholder={`Enter`} onChange={onChange} />
+                    <SelectVal disa={ isUpdates}  label={language.deuda_leasing.disconted_type} name={`Type1`} value={Type1} placeholder={`Select`} onChange={onChange} array={tip1}/>
+                    <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.disconted_value} name={`Value`} value={Value} placeholder={`Enter`} onChange={onChange} />
                 </ul>
                 <ul className="Esheet">
-                    <SelectVal label={language.deuda_leasing.disconted_type} name={`Type2`} value={Type2} placeholder={`Select`} onChange={onChange} array={tip2}/>
-                    <SelectVal label={language.deuda_leasing.disconted_shape} name={`Shape`} value={Shape} placeholder={`Select`} onChange={onChange} array={tip2forma}/>
-                    <Input type={`number`} label={language.deuda_leasing.disconted_fees} name={`Fees`} value={Fees} placeholder={`Enter`} onChange={onChange} />
+                    <SelectVal disa={ isUpdates} label={language.deuda_leasing.disconted_type} name={`Type2`} value={Type2} placeholder={`Select`} onChange={onChange} array={tip2}/>
+                    <SelectVal disa={ isUpdates} label={language.deuda_leasing.disconted_shape} name={`Shape`} value={Shape} placeholder={`Select`} onChange={onChange} array={tip2forma}/>
+                    <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.disconted_fees} name={`Fees`} value={Fees} placeholder={`Enter`} onChange={onChange} />
                 </ul>
            
                 </div>
@@ -456,7 +574,8 @@ const ContractCreation = ({language}) => {
            
            
             <div className="Esheet-submit">
-                <Button text={language.global.save} background={`var(--primary-color)`} types={`button`} click={callApiCreationDeb} />
+              {isUpdates?<></>:<><Button disa={ isUpdates} text={language.global.save} background={`var(--primary-color)`} types={`button`} click={opcionBoton} /></>}
+                
             </div>
         </form>
       </div>

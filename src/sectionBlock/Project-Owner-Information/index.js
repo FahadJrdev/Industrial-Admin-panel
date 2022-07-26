@@ -50,7 +50,8 @@ const ProjectOwnerInfo = ({title,language,datoRetorno,idproject,setOwner,idOwner
   
   const [ciudad,setCiudad] = useState([]);
   
-  const [una,setOne] = useState('');
+  const [idOwners,setIdOwners] = useState('');
+  const [una] = useState('');
   const [countrys,CountrySet] = useState([]);
   const [state, dispatch] = useReducer(reducer,datoRetorno?datoRetorno:initialState);
   const onChange =(e)=>{
@@ -107,12 +108,14 @@ const ProjectOwnerInfo = ({title,language,datoRetorno,idproject,setOwner,idOwner
   }
 const Option =()=>{
       if(idOwner){
+        setIdOwners(idOwner)
         callApiRegisterUpdate()
       }else{
         callApiRegister()
       }
 }
   const callApiRegister = ()=>{
+    console.log(idOwners)
     let valor= {
       NAMES:Names,
       SURNAMES:Surnames,
@@ -128,10 +131,10 @@ const Option =()=>{
   let bearerToken={
     headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
   }
-      axios.post("/projectowner/"+idproject, valor,bearerToken)
+      axios.post("/projectowner/"+idOwners, valor,bearerToken)
       .then((response) => {
         if(response.status===200){
-              setIdOwner(response.data.id)
+            setIdOwner(response.data.id)
           setOwner({
             Names: Names,
             Surnames:Surnames,

@@ -17,35 +17,41 @@ const initialState = {
       }
   }
 
-const BankAccountInput = ({language, setSearch}) => {
+const BankAccountInput = ({language, setSearch,array,funcion}) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const onChange = (e) => {
         dispatch({ field: e.target.name, value: e.target.value })
     }
-    const { Customer_code, Identity,  Names, Surname} = state;
+    const { Customer_code, Identity,  Names,surname} = state;
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(state);
     }
     const consult = () => {
-        if(setSearch){
-            setSearch("yes");
-        }
+        var search = new RegExp(Customer_code , 'i');
+        var search2 = new RegExp(Identity , 'i');
+        var search3 = new RegExp(Names , 'i');
+        var search4 = new RegExp(surname , 'i');
+        let searchEnd = array.filter(item => search.test(item.CODE_BANK_FILE) && search2.test(item.I_CODIGO) && search3.test(item.NAME_BANK_FILE) && search4.test(item.APELLIDO_BANK_FILE) )
+            if(searchEnd.length>0){
+                setSearch("yes")
+                funcion(searchEnd[0]['I_CODIGO'])
+            }
     }
   return (
     <div className="BankAccountInput">
         <form action="" method="post" onSubmit={handleSubmit}>
             <div className="inputs-part">
                 <ul className="Esheet">
-                    <Input label={`Customer code`} type={`text`} name={`Customer_code`} value={Customer_code} placeholder={`Enter`} onChange={onChange} />
-                    <Input label={`Identity`} type={`text`} name={`Identity`} value={Identity} placeholder={`Enter`} onChange={onChange} />
-                    <Input label={`Names`} type={`text`} name={`Names`} value={Names} placeholder={`Enter`} onChange={onChange} />
-                    <Input label={`Surname`} type={`text`} name={`Surname`} value={Surname} placeholder={`Enter`} onChange={onChange} />
+                    <Input label={language.bankfile_config.customcode} type={`text`} name={`Customer_code`} value={Customer_code} placeholder={`Enter`} onChange={onChange} />
+                    <Input label={language.bankfile_config.identity} type={`text`} name={`Identity`} value={Identity} placeholder={`Enter`} onChange={onChange} />
+                    <Input label={language.bankfile_config.name} type={`text`} name={`Names`} value={Names} placeholder={`Enter`} onChange={onChange} />
+                    <Input label={language.bankfile_config.surname} type={`text`} name={`surname`} value={surname} placeholder={`Enter`} onChange={onChange} />
                 </ul>
             </div>
             <div className="bank-submit">
                 <span onClick={consult}>
-                    <Button text={`Consult`} background={`var(--primary-color)`} types={`submit`} />
+                    <Button text={language.global.consult} background={`var(--primary-color)`} types={`button`} click={consult} />
                 </span>
             </div>
         </form>

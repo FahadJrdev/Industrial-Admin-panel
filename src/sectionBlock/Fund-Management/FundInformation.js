@@ -53,6 +53,7 @@ const FundInfo = ({datInicial,id,language}) => {
       headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` }
     }
     let valor={
+      CODE_FONDO:Code,
       C_NOMBRE:Name_of_fund,
       C_DESCRIPCION:Description,
       D_VALOR_FONDO:Fund_value,

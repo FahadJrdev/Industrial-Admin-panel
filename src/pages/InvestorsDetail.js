@@ -79,6 +79,7 @@ const InvestorsDetail = ({lang, setLang, language, responsive}) => {
             var valorJsonSociodemo=response.data[0]['DATOS'][0]['INFORMACION_SOCIODEMOGRAFICA']
             setNameInvestor(JSON.parse(valorJsonCorporativa).COMPANY_NAME)
             setTotalPRoject(response.data[0]['PROYECTOS'].length)
+            console.log(response.data)
             setUpdateValor({
               Nit: JSON.parse(valorJsonCorporativa).NIT,
               Company_name: JSON.parse(valorJsonCorporativa).COMPANY_NAME,

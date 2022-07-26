@@ -1,9 +1,13 @@
-import React, {useReducer,useState} from 'react'
-import { Input, Select,Textarea } from '../Leasing-section/Leasing-Component';
+import React, {useReducer,useState,useEffect} from 'react'
+import { Input, SelectVal,Textarea } from '../Leasing-section/Leasing-Component';
 import {Button, RatingBtn} from '../../component/buttons';
+import Select from 'react-select' ;
+import { useNavigate} from 'react-router-dom';
+import axios from "../../api/axios.js";
+import {toast} from "react-toastify";
 
 const initialState = {
-  Fund_to_invest: '',
+  
   Investment_objective: '',
   Country1: '',
   City1: '',
@@ -27,17 +31,167 @@ function reducer(state, { field, value }) {
   }
 }
 
-const ApprovalDenalInvestor = ({language}) => {
+const ApprovalDenalInvestor = ({language,AprovalInf,idFondos,Deuda,idInversors}) => {
+  const navigates = useNavigate();
   const [opcionbutton,SetOption]=useState('opcion1')
+  const [disabled,setDisable]=useState(false)
+  const [id_fondo,setFondoID]=useState('')
+  const [id_deuda,setDeuda]=useState('')
+  const [IdInversor,setInversorID]=useState('')
   const [state, dispatch] = useReducer(reducer, initialState);
   const onChange = (e) => {
       dispatch({ field: e.target.name, value: e.target.value })
   }
-  const { Fund_to_invest, Investment_objective,  Country1, City1, Investment_amount, Date_of_request, Investors_first_and_last_names, Type_of_document, Document, Country2 , City2, Approval_date, Number_of_certificate, Number_agreement, Total_amount, Remarks} = state;
+  const {  Investment_objective,  Country1, City1, Investment_amount, Date_of_request, Investors_first_and_last_names, Type_of_document, Document, Country2 , City2, Approval_date, Number_of_certificate, Number_agreement, Total_amount, Remarks} = state;
   const handleSubmit = (event) => {
       event.preventDefault();
-      console.log(state);
   }
+
+  const callFundInfo = (id)=>{
+    let bearerToken={
+      headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` }
+    }
+        axios.get("/funds/"+id, {},bearerToken)
+        .then((response) => {
+          if(response.status===200){
+            dispatch({ field: "Investment_objective", value: response.data.FONDO[0].D_VALOR_FONDO })
+            dispatch({ field: "Investment_amount", value: response.data.FONDO[0].D_VALOR_INVERTIDO })
+          }else{
+          }
+        }).catch((err)=>{
+        })
+
+}
+
+const callInvestor = (idInvestor)=>{
+  let bearerToken={
+    headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` }
+  }
+    axios.get("/investors/"+idInvestor, {},bearerToken)
+      .then((response) => {
+        if(response.status===200){
+         if(response.data.length>0){
+          var valorJsonCorporativa=response.data[0]['DATOS'][0]['INFORMACION_COORPORATIVA']
+          dispatch({ field: "Investors_first_and_last_names", value: JSON.parse(valorJsonCorporativa)['COMPANY_NAME'] })
+          dispatch({ field: "Document", value:  JSON.parse(valorJsonCorporativa)['NIT'] })
+          dispatch({ field: "Country2", value:  response.data[0].LUGAR[0].COUNTRY })
+          dispatch({ field: "City2", value:  response.data[0].LUGAR[0].CITY })
+          dispatch({ field: "Country1", value:  response.data[0].LUGAR[0].COUNTRY })
+          dispatch({ field: "City1", value:  response.data[0].LUGAR[0].CITY })
+          }
+       
+        }
+        
+      }).catch((err)=>{
+          if(err.response){
+              if(err.response.data){
+                if(err.response.status===401){
+                  navigates('/')
+                }else{
+                  if(err.response.data.message){
+                    toast(err.response.data.message)
+                  }else{
+                    let message="";
+                    let valorKeys=Object.keys(err.response.data.error)
+                    valorKeys.forEach(element => {
+                      err.response.data.error[element].forEach((mensaje)=>{
+                        message+=mensaje+" ,"
+                      })
+                    });
+                    
+                    toast(message);
+                  }
+                }
+                
+              }
+            }
+      })
+
+}
+
+const selectFund = (event) => {
+  if(event){
+    setFondoID(event.data.I_CODIGO)
+      dispatch({ field: "Investment_objective", value: event.data.D_VALOR_FONDO })
+      dispatch({ field: "Investment_amount", value: event.data.D_VALOR_INVERTIDO })
+  }
+}
+const SelecDeud = (event) => {
+  if(event){
+    setDeuda(event.data.I_CODIGO)
+    callInvestor(event.data.INVERSIONISTA_I_CODIGO)
+    setInversorID(event.data.INVERSIONISTA_I_CODIGO)
+  }
+}
+const callApiAproval = ()=>{
+  let bearerToken={
+    headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
+  }
+let valor={
+  APPROVAL_DATE_INV_INVERSIONISTA:Approval_date,
+  NUMBER_CERTIFICATE_INV_INVERSIONISTA:Number_of_certificate,
+  NUMBER_AGREEMENT_INV_INVERSIONISTA:Number_agreement,
+  TOTAL_AMOUNT_INV_INVERSIONISTA:Total_amount,
+  REMARKS_INV_INVERSIONISTA:Remarks,
+  SCORE_INV_INVERSIONISTA:0,
+  STATUS_INV_INVERSIONISTA:opcionbutton==='opcion1'?'aproved':opcionbutton==='opcion2'?'postpone':'rejected'
+
+}
+      axios.post("/contractinvInversorAprob/"+id_deuda+"/"+IdInversor+"/"+id_fondo,valor,bearerToken)
+      .then((response) => {
+        toast("Created Succes");
+        navigates(-1)
+      }).catch((err)=>{
+        if(err.response){
+          if(err.response.data){
+            if(err.response.status===401){
+              navigates('/')
+            }else{
+              if(err.response.data.message){
+                toast(err.response.data.message)
+              }else{
+                let message="";
+                let valorKeys=Object.keys(err.response.data.error)
+                valorKeys.forEach(element => {
+                  err.response.data.error[element].forEach((mensaje)=>{
+                    message+=mensaje+" ,"
+                  })
+                });
+                
+                toast(message);
+              }
+            }
+            
+          }
+        }
+      })
+    }
+    useEffect(()=>{
+      if(AprovalInf){
+        if(AprovalInf.APPROVAL_DATE_INV_INVERSIONISTA){
+          setDeuda(AprovalInf.CONTRATO_INV_INVERSIONISTA_I_CODIGO)
+          setFondoID(AprovalInf.FONDO_I_CODIGO)
+          dispatch({ field: "Approval_date", value:AprovalInf.APPROVAL_DATE_INV_INVERSIONISTA})
+          dispatch({ field: "Number_of_certificate", value:AprovalInf.NUMBER_CERTIFICATE_INV_INVERSIONISTA})
+          dispatch({ field: "Number_agreement", value:AprovalInf.NUMBER_AGREEMENT_INV_INVERSIONISTA})
+          dispatch({ field: "Total_amount", value:AprovalInf.TOTAL_AMOUNT_INV_INVERSIONISTA})
+          dispatch({ field: "Remarks", value:AprovalInf.REMARKS_INV_INVERSIONISTA})
+          setDisable(true)
+          if(AprovalInf.STATUS_INV_INVERSIONISTA==="aproved")SetOption("opcion1")
+          if(AprovalInf.STATUS_INV_INVERSIONISTA==="postpone")SetOption("opcion2")
+          if(AprovalInf.STATUS_INV_INVERSIONISTA==="rejected")SetOption("opcion3")
+        }
+      }
+    },[AprovalInf]);
+    useEffect(()=>{
+      if(idFondos){
+        setDeuda(Deuda)
+        setFondoID(idFondos)
+        callFundInfo(idFondos)
+        callInvestor(idInversors)
+        setInversorID(idInversors)
+      }
+    },[idFondos,idInversors,Deuda]);
   return (
     <>
       <div className="Approval-denal">
@@ -45,27 +199,30 @@ const ApprovalDenalInvestor = ({language}) => {
             <div className="inputs-part">
                 <p className="inputsTitle">{language.contract_inver_invest.aproval_info}</p>
                 <ul className="Esheet">
-                    <Select label={language.contract_inver_invest.funt_invest} name={`Fund_to_invest`} value={Fund_to_invest} placeholder={`select`} value1={`Fund_to_invest-1`} value2={`Fund_to_invest-2`} value3={`Fund_to_invest-3`} value4={`Fund_to_invest-4`} hideValue5={`dn`} onChange={onChange} />
-                    <Input label={language.contract_inver_invest.inverment_object} type={`text`} name={`Investment_objective`} value={Investment_objective} placeholder={`Enter`} onChange={onChange} />
-                    <Select label={language.contract_inver_invest.country} name={`Country1`} value={Country1} placeholder={`select`} value1={`Country-1`} value2={`Country-2`} value3={`Country-3`} value4={`Country-4`} hideValue5={`dn`} onChange={onChange} />
-                    <Select label={language.contract_inver_invest.city} name={`City1`} value={City1} placeholder={`select`} value1={`City-1`} value2={`City-2`} value3={`City-3`} value4={`City-4`} hideValue5={`dn`} onChange={onChange} />
-                </ul>
-                <ul className="Esheet"> 
-                    <Input label={language.contract_inver_invest.investment_amount} type={`text`} name={`Investment_amount`} value={Investment_amount} placeholder={`$`} onChange={onChange} />
-                  </ul>
+             
+                     <Input disa={true}   label={language.contract_inver_invest.inverment_object} type={`text`} name={`Investment_objective`} value={Investment_objective} placeholder={`Enter`} onChange={onChange} />
+                     <Input disa={true} label={language.contract_inver_invest.country} type={`text`} name={`Country1`} value={Country1} placeholder={`Enter`} onChange={onChange} />
+                    
+                <Input disa={true} label={language.contract_inver_invest.city} type={`text`} name={`City1`} value={City1} placeholder={`Enter`} onChange={onChange} />
+               
+                    <Input disa={true} label={language.contract_inver_invest.investment_amount} type={`text`} name={`Investment_amount`} value={Investment_amount} placeholder={`$`} onChange={onChange} />
+            
+                                </ul>
+
             </div>
             <div className="inputs-part">
                 <p className="inputsTitle">{language.contract_inver_invest.investorinfo}</p>
                 <ul className="Esheet">
-                    <Input label={language.contract_inver_invest.datereque} type={`date`} name={`Date_of_request`} value={Date_of_request}  onChange={onChange} />
-                    <Input label={language.contract_inver_invest.invertorfirstlast} type={`text`} name={`Investors_first_and_last_names`} value={Investors_first_and_last_names} placeholder={`Enter`} onChange={onChange} />
-                    <Select label={language.contract_inver_invest.document_type} name={`Type_of_document`} value={Type_of_document} placeholder={`select`} value1={`Document_type-1`} value2={`Document_type-2`} value3={`Document_type-3`} value4={`Document_type-4`} hideValue5={`dn`} onChange={onChange} />
-                    <Input label={language.contract_inver_invest.document} type={`text`} name={`Document`} value={Document} placeholder={`Enter`} onChange={onChange} />
+                    <Input disa={true} label={language.contract_inver_invest.datereque} type={`date`} name={`Date_of_request`} value={Date_of_request}  onChange={onChange} />
+                    <Input disa={true} label={language.contract_inver_invest.invertorfirstlast} type={`text`} name={`Investors_first_and_last_names`} value={Investors_first_and_last_names} placeholder={`Enter`} onChange={onChange} />
+                    <SelectVal disa={true} label={language.contract_inver_invest.document_type} name={`Type_of_document`} value={Type_of_document} placeholder={`select`} value1={`Document_type-1`} value2={`Document_type-2`} value3={`Document_type-3`} value4={`Document_type-4`} hideValue5={`dn`} onChange={onChange} />
+                    <Input disa={true} label={language.contract_inver_invest.document} type={`text`} name={`Document`} value={Document} placeholder={`Enter`} onChange={onChange} />
                 </ul>
                 <ul className="Esheet"> 
-                    <Select label={language.contract_inver_invest.country} name={`Country2`} value={Country2} placeholder={`select`} value1={`Country-1`} value2={`Country-2`} value3={`Country-3`} value4={`Country-4`} hideValue5={`dn`} onChange={onChange} />
-                    <Select label={language.contract_inver_invest.city} name={`City2`} value={City2} placeholder={`select`} value1={`City-1`} value2={`City-2`} value3={`City-3`} value4={`City-4`} hideValue5={`dn`} onChange={onChange} />
-                </ul>
+                <Input disa={true} label={language.contract_inver_invest.country} type={`text`} name={`Country2`} value={Country2} placeholder={`Enter`} onChange={onChange} />
+                    
+                <Input disa={true} label={language.contract_inver_invest.city} type={`text`} name={`City2`} value={City2} placeholder={`Enter`} onChange={onChange} />
+                 </ul>
             </div>
             <div className="inputs-part">
               <p className="inputsTitle">{language.contract_global.contract_cualifi}</p>
@@ -75,18 +232,19 @@ const ApprovalDenalInvestor = ({language}) => {
                 <RatingBtn text={language.deuda_leasing.aproval_reject} bg={opcionbutton==='opcion3'?`var(--secondary-color)`:'#ffffff'} smallbg={opcionbutton==='opcion3'?'#ffffff':`var(--secondary-color)`} color={opcionbutton==='opcion3'?'#ffffff':`var(--secondary-color)`} border={`1px solid var(--secondary-color)`} click={()=>{SetOption("opcion3")}}  />
  </div>
               <ul className="Esheet">
-                  <Input label={language.deuda_leasing.aproval_date} type={`date`} name={`Approval_date`} value={Approval_date} placeholder={`MM/DD/YYYY`} onChange={onChange} />
-                  <Input label={language.deuda_leasing.aproval_numbercertifi} type={`number`} name={`Number_of_certificate`} value={Number_of_certificate} placeholder={`Enter`} onChange={onChange} />
-                  <Input label={language.deuda_leasing.aproval_numberagree} type={`number`} name={`Number_agreement`} value={Number_agreement} placeholder={`Enter`} onChange={onChange} />
-                  <Input label={language.deuda_leasing.aproval_totalamount} type={`number`} name={`Total_amount`} value={Total_amount} placeholder={`Enter`} onChange={onChange} />
+                  <Input disa={disabled} label={language.deuda_leasing.aproval_date} type={`date`} name={`Approval_date`} value={Approval_date} placeholder={`MM/DD/YYYY`} onChange={onChange} />
+                  <Input disa={disabled} label={language.deuda_leasing.aproval_numbercertifi} type={`number`} name={`Number_of_certificate`} value={Number_of_certificate} placeholder={`Enter`} onChange={onChange} />
+                  <Input disa={disabled} label={language.deuda_leasing.aproval_numberagree} type={`number`} name={`Number_agreement`} value={Number_agreement} placeholder={`Enter`} onChange={onChange} />
+                  <Input disa={disabled} label={language.deuda_leasing.aproval_totalamount} type={`number`} name={`Total_amount`} value={Total_amount} placeholder={`Enter`} onChange={onChange} />
               </ul>
               <ul className="Esheet">
-                  <Textarea label={language.deuda_leasing.aproval_remark} name={`Remarks`} value={Remarks} cols={20} rows={6} placeholder={`Enter`} onChange={onChange} />
+                  <Textarea disa={disabled} label={language.deuda_leasing.aproval_remark} name={`Remarks`} value={Remarks} cols={20} rows={6} placeholder={`Enter`} onChange={onChange} />
               </ul>
             </div>
             <div className="Esheet-submit">
-                <Button text={language.deuda_leasing.aproval_comunicate}  background={`var(--primary-color)`} types={`submit`}/>
-            </div>
+              {disabled?<></>:<> <Button text={language.deuda_leasing.aproval_comunicate}  background={`var(--primary-color)`} types={`button`} click={callApiAproval}/>
+           </>}
+                </div>
         </form>
       </div>
     </>

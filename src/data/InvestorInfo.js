@@ -302,82 +302,121 @@ export const BillingInfo = [{
 ]
 export const BillingDetailInfo = [{
         Invoicing_date: '12/31/2022',
+        Tipo_de_contrato: 'Deuda leasing',
         Ndeg: '1245',
         Amount: '$3,979.92',
+        state: 'Pagado',
+        color: '#85B900',
         Actions: 'see more'
     },
     {
-        Invoicing_date: '11/21/2022',
+        Invoicing_date: '13/21/2022',
+        Tipo_de_contrato: 'Inversión a proyectos',
         Ndeg: '1245',
         Amount: '$3,979.92',
+        state: 'Sin pagar',
+        color: '#DE5753',
         Actions: 'see more'
     },
     {
-        Invoicing_date: '10/11/2022',
+        Invoicing_date: '02/11/2022',
+        Tipo_de_contrato: 'Inversión a proyectos',
         Ndeg: '1245',
         Amount: '$3,979.92',
+        state: 'Pagado',
+        color: '#85B900',
         Actions: 'see more'
     },
     {
-        Invoicing_date: '16/31/2022',
+        Invoicing_date: '02/11/2022',
+        Tipo_de_contrato: 'Inversión a proyectos',
         Ndeg: '1245',
         Amount: '$3,979.92',
+        state: 'Pagado',
+        color: '#85B900',
         Actions: 'see more'
     },
     {
-        Invoicing_date: '15/31/2022',
+        Invoicing_date: '02/11/2022',
+        Tipo_de_contrato: 'Deuda leasing',
         Ndeg: '1245',
         Amount: '$3,979.92',
+        state: 'Pagado',
+        color: '#85B900',
         Actions: 'see more'
     },
     {
-        Invoicing_date: '12/31/2022',
+        Invoicing_date: '13/21/2022',
+        Tipo_de_contrato: 'Inversión a proyectos',
         Ndeg: '1245',
         Amount: '$3,979.92',
+        state: 'Sin pagar',
+        color: '#DE5753',
         Actions: 'see more'
     },
     {
-        Invoicing_date: '13/31/2022',
+        Invoicing_date: '02/11/2022',
+        Tipo_de_contrato: 'Inversión a proyectos',
         Ndeg: '1245',
         Amount: '$3,979.92',
+        state: 'Pagado',
+        color: '#85B900',
         Actions: 'see more'
     },
     {
-        Invoicing_date: '12/21/2022',
+        Invoicing_date: '02/11/2022',
+        Tipo_de_contrato: 'Inversión a proyectos',
         Ndeg: '1245',
         Amount: '$3,979.92',
+        state: 'Pagado',
+        color: '#85B900',
         Actions: 'see more'
     },
     {
-        Invoicing_date: '14/31/2022',
+        Invoicing_date: '02/11/2022',
+        Tipo_de_contrato: 'Deuda leasing',
         Ndeg: '1245',
         Amount: '$3,979.92',
+        state: 'Pagado',
+        color: '#85B900',
         Actions: 'see more'
     },
     {
-        Invoicing_date: '11/31/2022',
+        Invoicing_date: '13/21/2022',
+        Tipo_de_contrato: 'Inversión a proyectos',
         Ndeg: '1245',
         Amount: '$3,979.92',
+        state: 'Sin pagar',
+        color: '#DE5753',
         Actions: 'see more'
     },
     {
-        Invoicing_date: '2/31/2022',
+        Invoicing_date: '02/11/2022',
+        Tipo_de_contrato: 'Inversión a proyectos',
         Ndeg: '1245',
         Amount: '$3,979.92',
+        state: 'Pagado',
+        color: '#85B900',
         Actions: 'see more'
     },
     {
-        Invoicing_date: '22/31/2022',
+        Invoicing_date: '02/11/2022',
+        Tipo_de_contrato: 'Inversión a proyectos',
         Ndeg: '1245',
         Amount: '$3,979.92',
+        state: 'Pagado',
+        color: '#85B900',
         Actions: 'see more'
     },
     {
-        Invoicing_date: '12/31/2022',
+        Invoicing_date: '02/11/2022',
+        Tipo_de_contrato: 'Deuda leasing',
         Ndeg: '1245',
         Amount: '$3,979.92',
+        state: 'Pagado',
+        color: '#85B900',
         Actions: 'see more'
-    },
+    }
 ]
 
 export const BankConfigInfo = [{
@@ -445,8 +484,7 @@ export const BankConfigInfo = [{
     }
 ]
 
-export const ContractManagementLeasingInfo = [
-    {
+export const ContractManagementLeasingInfo = [{
         item1: '1132242',
         item2: '05/03/2021',
         item3: 'LUIS EDUARDO RIAÑO SALAS',
@@ -543,8 +581,7 @@ export const ContractManagementLeasingInfo = [
         color: '#f1abab'
     }
 ]
-export const ContractManagementProjectInfo = [
-    {
+export const ContractManagementProjectInfo = [{
         item1: '1132242',
         item2: '05/03/2021',
         item3: 'LUIS EDUARDO RIAÑO SALAS',
@@ -641,8 +678,7 @@ export const ContractManagementProjectInfo = [
         color: '#f1abab'
     }
 ]
-export const ContractManagementInvestorInfo = [
-    {
+export const ContractManagementInvestorInfo = [{
         item1: '1132242',
         item2: '05/03/2021',
         item3: 'LUIS EDUARDO RIAÑO SALAS',
@@ -738,4 +774,160 @@ export const ContractManagementInvestorInfo = [
         item5: 'See more',
         color: '#f1abab'
     }
+]
+
+export const InvoiceInfo = [{
+        item1: '12324',
+        item2: '$ 200.000',
+        item3: 'Generate invoice'
+    },
+    {
+        item1: '12324',
+        item2: '$ 200.000',
+        item3: 'Generate invoice'
+    },
+    {
+        item1: '12324',
+        item2: '$ 200.000',
+        item3: 'Generate invoice'
+    },
+    {
+        item1: '12324',
+        item2: '$ 200.000',
+        item3: 'Generate invoice'
+    }
+]
+
+export const RevenueInfo1 = [{
+        item1: '1010345654',
+        item2: '121324',
+        item3: '$60000'
+    },
+    {
+        item1: '1010345654',
+        item2: '23243',
+        item3: '$60000'
+    },
+    {
+        item1: '1010345654',
+        item2: '24353',
+        item3: '$60000'
+    },
+    {
+        item1: '1010345654',
+        item2: '123420',
+        item3: '$60000'
+    },
+    {
+        item1: '1010345654',
+        item2: '23243',
+        item3: '$60000'
+    },
+    {
+        item1: '1010345654',
+        item2: '24353',
+        item3: '$60000'
+    },
+    {
+        item1: '1010345654',
+        item2: '123420',
+        item3: '$60000'
+    },
+    {
+        item1: '1010345654',
+        item2: '23243',
+        item3: '$60000'
+    },
+    {
+        item1: '1010345654',
+        item2: '24353',
+        item3: '$60000'
+    },
+    {
+        item1: '1010345654',
+        item2: '123420',
+        item3: '$60000'
+    },
+]
+
+export const RevenueInfo2 = [{
+        item1: '1010345654',
+        item2: '121324',
+        item3: '$60000',
+        item4: 'PAGADO',
+        color: '#85B900',
+        decoration: 'none'
+    },
+    {
+        item1: '1010345654',
+        item2: '23243',
+        item3: '$60000',
+        item4: 'NO PAGO',
+        color: '#DE5753',
+        decoration: 'underline'
+    },
+    {
+        item1: '1010345654',
+        item2: '24353',
+        item3: '$60000',
+        item4: 'PAGADO',
+        color: '#85B900',
+        decoration: 'none'
+    },
+    {
+        item1: '1010345654',
+        item2: '123420',
+        item3: '$60000',
+        item4: 'PAGADO',
+        color: '#85B900',
+        decoration: 'none'
+    },
+    {
+        item1: '1010345654',
+        item2: '23243',
+        item3: '$60000',
+        item4: 'NO PAGO',
+        color: '#DE5753',
+        decoration: 'underline'
+    },
+    {
+        item1: '1010345654',
+        item2: '24353',
+        item3: '$60000',
+        item4: 'PAGADO',
+        color: '#85B900',
+        decoration: 'none'
+    },
+    {
+        item1: '1010345654',
+        item2: '123420',
+        item3: '$60000',
+        item4: 'PAGADO',
+        color: '#85B900',
+        decoration: 'none'
+    },
+    {
+        item1: '1010345654',
+        item2: '23243',
+        item3: '$60000',
+        item4: 'NO PAGO',
+        color: '#DE5753',
+        decoration: 'underline'
+    },
+    {
+        item1: '1010345654',
+        item2: '24353',
+        item3: '$60000',
+        item4: 'PAGADO',
+        color: '#85B900',
+        decoration: 'none'
+    },
+    {
+        item1: '1010345654',
+        item2: '123420',
+        item3: '$60000',
+        item4: 'PAGADO',
+        color: '#85B900',
+        decoration: 'none'
+    },
 ]

@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,useLocation} from 'react-router-dom';
 import Navbar from '../sectionBlock/Navigation/Navbar';
 import Header from '../sectionBlock/Header';
 import Tab from '../component/tab';
@@ -7,11 +7,57 @@ import ContractCreationProject from '../sectionBlock/ManageProject/ContractCreat
 import ApprovalDenalProject from '../sectionBlock/ManageProject/ApprovalDenalProject';
 import ContractFormalizationProject from '../sectionBlock/ManageProject/ContractFormalizationProject';
 import './pageStyle.css';
+import axios from "../api/axios.js";
+import {toast} from "react-toastify";
 
 const ManageProject = ({lang, setLang, language, responsive}) => {
     const navigate = useNavigate();
     const [isNavigate, setNavigate]=useState(false);
+    const [isUpdate, setUpdate]=useState(false);
+    const [AprovalInfo, setAprovalInfo]=useState({});
+    const [info,funcioGloal]=useState({})
+    const [deud,setDeuda]=useState('');
+    const [idProjectDeu,setID]=useState('');
+    const [idFondo,setIdFondo]=useState('');
+    const [idOwner,setIdOwner]=useState('');
+    const [valores,setValor]=useState({})
+    const [buscar]=useState(useLocation().search);
     const [tab,setTab] = useState('Contract creation');
+    const callIndividualValue= (id)=>{
+        let bearerToken={
+          headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
+        }
+      axios.get("/contractinvproject/"+id, {},bearerToken)
+      .then((response) => {
+        if(response.data.APPROVAL){
+          let retorno2=response.data.APPROVAL
+          setAprovalInfo(retorno2)
+          setUpdate(true)
+        }else{
+          setUpdate(false)
+        }
+        let retorno=response.data.CONTRATO
+        setDeuda(retorno.I_CODIGO)
+        setIdFondo(retorno.FONDO_I_CODIGO)
+        setIdOwner(retorno.OWNER_I_CODIGO)
+        setID(retorno.PROYECTO_I_CODIGO)
+        let cambios={
+          Perioricity: retorno.PERIORICITY_INV_PROJECT,
+          Start_date:  retorno.START_DATE_INV_PROJECT,
+          Form_of_payment: retorno.FORM_PAYMENT_INV_PROJECT,
+          Number_of_fees:retorno.NUMBER_FEES_INV_PROJECT
+        }
+        setValor(cambios)
+      }).catch((err)=>{
+        if(err.response){
+          if(err.response.data){
+            if(err.response.data.message){
+              toast(err.response.data.message)
+            }
+          }
+        }
+      })
+    }
     useEffect(()=>{
         const backButton = document.querySelector('.ManageProject .first-part .buttonwitharrow');
         if(backButton){
@@ -23,6 +69,23 @@ const ManageProject = ({lang, setLang, language, responsive}) => {
         }
         }
     },[navigate,isNavigate,setNavigate])
+    useEffect(()=>{
+        if(buscar){
+            var valorBusqueda=buscar.replace("?","")
+            setID(valorBusqueda)
+            callIndividualValue(valorBusqueda)
+            
+        }
+    },[buscar])
+    useEffect(()=>{
+      if(info.fondoid){
+       setDeuda(info.codigo)
+       setIdFondo(info.fondoid)
+       setIdOwner(info.ownerid)
+       setID(info.proyectoid)
+       callIndividualValue(info.codigo)
+      }
+   },[info,funcioGloal])
   return (
     <>
         <div className="ManageProject">
@@ -32,12 +95,12 @@ const ManageProject = ({lang, setLang, language, responsive}) => {
                 <Tab action={setTab} tab1={`Contract creation`} tab2={`Approval/ Denial`} tab3={`Contract formalization`} hideTab4={`dn`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} hideCustomizer={`dn`} tabs1={language.deuda_leasing.tab1} tabs2={language.deuda_leasing.tab2} tabs3={language.deuda_leasing.tab3} />
                 {
                     tab === 'Contract creation'
-                    ?<ContractCreationProject language={language} />
+                    ?<ContractCreationProject language={language} valorExtraido={valores} valorIdProyecto={idProjectDeu} valorIdFondo={idFondo} valorIdOwner={idOwner} Deuda={deud}  isUpdates={isUpdate} funcion={funcioGloal} />
                     :<></>
                 }
                 {
                     tab === 'Approval/ Denial'
-                    ?<ApprovalDenalProject language={language} />
+                    ?<ApprovalDenalProject language={language} AprovalInf={AprovalInfo} idFondos={idFondo} idproyecto={idProjectDeu} valoridOwner={idOwner} Deuda={deud} />
                     :<></>
                 }
                 {

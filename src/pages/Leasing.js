@@ -6,12 +6,84 @@ import Tab from '../component/tab';
 import ContractCreation from '../sectionBlock/Leasing-section/Contract-creation';
 import ApprovalDenal from '../sectionBlock/Leasing-section/ApprovalDenal';
 import ContractFormalization from '../sectionBlock/Leasing-section/Contract-formalization';
+import GenerationOfInvoices from '../sectionBlock/Leasing-section/Generation-of-invoices';
 import './pageStyle.css';
+import { useLocation} from "react-router-dom";
+import axios from "../api/axios.js";
+import {toast} from "react-toastify";
 
 const Leasing = ({lang, setLang, language, responsive}) => {
     const navigate = useNavigate();
     const [isNavigate, setNavigate]=useState(false);
+    const [isUpdate, setUpdate]=useState(false);
+    const [AprovalInfo, setAprovalInfo]=useState({});
+    const [buscar]=useState(useLocation().search);
+    const [idLeasig,setID]=useState('')
+    const [idOwner,setOwner]=useState('')
+    const [info,funcioGloal]=useState({})
+    const [idDeuda,setDeuda]=useState('')
+    const [idProject,setProject]=useState('')
+    const [valor,setValor]=useState({})
     const [tab,setTab] = useState('Contract creation');
+    const callIndividualValue= (id)=>{
+        let bearerToken={
+          headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
+        }
+      axios.get("/contractmanagement/"+id, {},bearerToken)
+      .then((response) => {
+        if(response.data.APPROVAL){
+          let retorno2=response.data.APPROVAL
+          setAprovalInfo(retorno2)
+          setUpdate(true)
+        }else{
+          setUpdate(false)
+        }
+        let retorno=response.data.CONTRATO
+        let idproyecto=retorno.PROYECTO_I_CODIGO
+        setProject(idproyecto)
+        let id_Owner=retorno.OWNER_I_CODIGO
+        setOwner(id_Owner)
+        setDeuda(retorno.I_CODIGO)
+        let valor={
+            Date_Of_Reques: retorno.created_at.split("T")[0],
+            Debtors_Name_And_Surname: '',
+            Document_type: '',
+            Document_type2: '',
+            Document: '',
+            Credit_line:retorno.LINEA_CREDITO,
+            Credit_quota: retorno.CUPO_CREDITO,
+            Maximum_period: retorno.PLAZO_MAXIMO,
+            Requested_amount: retorno.MONTO_SOLICITADO,
+            Period1: retorno.PLAZO,
+            Perioricidad: retorno.PERIOCIDAD,
+            Forma_de_pago: retorno.FORMA_PAGO,
+            Type_grace: retorno.TIPO_GRACIA,
+            Period2: retorno.PERIODO,
+            Format: retorno.FORMATO,
+            Interest_type: retorno.INTEREST_TYPE,
+            Interest_rate_type: retorno.INTEREST_RATE_TYPE,
+            Interest_rate_historic: retorno.INTEREST_RATE_HISTORIC,
+            Deviation: retorno.DEVIATION,
+            Period3: retorno.PERIOD,
+            Gradient_type: retorno.GRADIENT_TYPE,
+            Gradient_value: retorno.GRADIENT_VALUE,
+            Type1: retorno.ATTRIBUTE_TYPE,
+            Value: retorno.ATTRIBUTE_VALUE,
+            Type2: retorno.ATTRIBUTE_VALUE_DOS,
+            Shape: retorno.ATTRIBUTE_SHAPE,
+            Fees: retorno.ATTRIBUTE_FEES
+          }
+          setValor(valor)
+      }).catch((err)=>{
+        if(err.response){
+          if(err.response.data){
+            if(err.response.data.message){
+              toast(err.response.data.message)
+            }
+          }
+        }
+      })
+    }
     useEffect(()=>{
         const backButton = document.querySelector('.leasingConfig .first-part .buttonwitharrow');
         if(backButton){
@@ -23,26 +95,47 @@ const Leasing = ({lang, setLang, language, responsive}) => {
         }
         }
     },[navigate,isNavigate,setNavigate])
+    useEffect(()=>{
+     if(info.projectid){
+      setOwner(info.ownerid)
+      setDeuda(info.codigo)
+      setProject(info.projectid)
+      callIndividualValue(info.codigo)
+     }
+  },[info,funcioGloal])
+    useEffect(()=>{
+        if(buscar){
+            var valorBusqueda=buscar.replace("?","")
+            setID(valorBusqueda)
+            callIndividualValue(valorBusqueda)
+            
+        }
+    },[buscar])
   return (
     <>
         <div className="leasingConfig">
             <Navbar responsive={responsive} lang={lang} setLang={setLang} language={language} />
             <Header responsive={responsive} lang={lang} setLang={setLang} displayArrowBtn={`show`} colorArrowBtn={`var(--primary-color)`} textArrowBtn={language.global.back}  pageTitle={language.deuda_leasing.title} pageDesc ={language.deuda_leasing.descrip} displaySearch={`show`} />
             <main className='main configuration'>
-                <Tab action={setTab} tab1={`Contract creation`} tab2={`Approval/ Denial`} tab3={`Contract formalization`} hideTab4={`dn`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} hideCustomizer={`dn`} tabs1={language.deuda_leasing.tab1} tabs2={language.deuda_leasing.tab2} tabs3={language.deuda_leasing.tab3} />
+                <Tab action={setTab} tab1={`Contract creation`} tab2={`Approval/ Denial`} tab3={`Contract formalization`} tab4={`Generation of invoices`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} hideCustomizer={`dn`} tabs1={language.deuda_leasing.tab1} tabs2={language.deuda_leasing.tab2} tabs3={language.deuda_leasing.tab3} tabs4={`Generation of invoices`}/>
                 {
                     tab === 'Contract creation'
-                    ?<ContractCreation language={language} />
+                    ?<ContractCreation language={language} valorData={valor} valorIDProyecto={idProject} valorIDOwner={idOwner} isUpdates={isUpdate} Deuda={idDeuda}  funcion={funcioGloal}/>
                     :<></>
                 }
                 {
                     tab === 'Approval/ Denial'
-                    ?<ApprovalDenal language={language} />
+                    ?<ApprovalDenal language={language} Deuda={idDeuda}AprovalInfo={AprovalInfo} id_proyectos={idProject} id_owners={idOwner} />
                     :<></>
                 }
                 {
                     tab === 'Contract formalization'
                     ?<ContractFormalization language={language} />
+                    :<></>
+                }
+                {
+                    tab === 'Generation of invoices'
+                    ?<GenerationOfInvoices language={language} />
                     :<></>
                 }
             </main>

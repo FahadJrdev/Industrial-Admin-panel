@@ -1,10 +1,12 @@
 import React, {useReducer, useState,useEffect} from 'react';
 import './investorCustomizer.css';
 import { Button, ButtonWithArrow, Pill } from '../../component/buttons';
+import { TablePermision } from '../../component/table';
 import { VscChevronDown } from "react-icons/vsc";
 import axios from "../../api/axios.js";
 import {toast} from "react-toastify";
 import { useNavigate } from 'react-router-dom';
+import { AiFillCheckCircle } from "react-icons/ai";
 const initialState = {
   Nit: '',
   Company_name: '',
@@ -37,12 +39,18 @@ const InvestorCustomizer = ({title,DataInicial,id,language}) => {
   const navigates=useNavigate()
   const [ciudad,setCiudad] = useState([]);
   const [ciudadSocio,setCiudadSocio] = useState([]);
-  
+  const [countryPerm,setCountryPerm] = useState([]);
+  const [selecprem,selecCoun] = useState({});
+  const [keydelete,borrado] = useState({});
+  const [permi,setAddPermision] = useState([]);
   const [una] = useState('');
   const [country,CountrySet] = useState([]);
   const [state, dispatch] = useReducer(reducer,DataInicial?DataInicial:initialState);
   const onChange =(e)=>{
     dispatch({field: e.target.name, value: e.target.value})
+  }
+  const onChangs =(e)=>{
+   selecCoun({name:countryPerm[e.target.selectedIndex-1].C_NOMBRE,id:e.target.value,index:(e.target.selectedIndex-1)} )
   }
   const callApiGetCountry = ()=>{
     let bearerToken={
@@ -54,6 +62,7 @@ const InvestorCustomizer = ({title,DataInicial,id,language}) => {
           CountrySet( [])
           if(response.status===200){
             if(response.data){
+              setCountryPerm(response.data)
             CountrySet( response.data)
             }
           }
@@ -104,7 +113,10 @@ const CallRegisterApiInvestor = ()=>{
     EMAIL:Email,
     PERMISION_1:Permit_description_1,
     PERMISION_2:Permit_description_2,
-    PERMISION_3:Permit_description_3
+    PERMISION_3:Permit_description_3,
+    PAISES_REST:JSON.stringify(permi.map((valor)=>{
+      return valor.id
+    }))
 } 
 let bearerToken={
   headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
@@ -180,10 +192,16 @@ let bearerToken={
   }
   const {Nit, Company_name, Date_of_constitution, City_of_constitution, Constitution_Department, Country_of_Constitution, Economic_activity, Company_object, Sociodemographic_Department, Sociodemographic_Country, Address_main_office, Sociodemographic_City, Telephone, Email, Permit_description_1, Permit_description_2, Permit_description_3} = state;
   useEffect(()=>{
-    callApiGetCitys(Country_of_Constitution,setCiudad)
+    if(Country_of_Constitution){
+      callApiGetCitys(Country_of_Constitution,setCiudad)
+
+    }
   },[Country_of_Constitution])
   useEffect(()=>{
-    callApiGetCitys(Sociodemographic_Country,setCiudadSocio)
+    if(Sociodemographic_Country){
+      callApiGetCitys(Sociodemographic_Country,setCiudadSocio)
+
+    }
   },[Sociodemographic_Country])
 
   const [switchPill,setSwitchPill] = useState(DataInicial?DataInicial.add_special_permits:initialState.add_special_permits);
@@ -198,7 +216,33 @@ let bearerToken={
             pill.removeAttribute(`checked`,``);
         }
   })
-  
+  const agregarCountry=()=>{
+    let count =countryPerm
+    let Permissions=permi
+    let valor=count.splice(selecprem.index,1)
+    let valor2=Permissions.push(selecprem)
+    setCountryPerm(count)
+    setAddPermision(Permissions)
+    selecCoun({})
+  }
+  useEffect(()=>{
+    if(permi.length>0){
+      let count =countryPerm
+      let Permissions=permi
+      console.log(Permissions[keydelete.numero])
+      let valor=count.push({I_CODIGO:Permissions[keydelete.numero].id,C_NOMBRE:Permissions[keydelete.numero].name})
+      let valor2=Permissions.splice(keydelete.numero,1)
+      setCountryPerm(count)
+      if(Permissions.length>0){
+        setAddPermision(Permissions)
+      }else{
+      setAddPermision([])
+      }
+      selecCoun({})
+    }
+
+  },[keydelete])
+ 
   return (
       <>
         <div className="adding-investor-overlay"></div>
@@ -352,29 +396,28 @@ let bearerToken={
                     {
                         switchPill === true
                         ?<>
-                            <ul>
-                                <li>
-                                <label htmlFor="Permit_description_1">{language.investorform.permit1}</label>
-                                <input type="text" name='Permit_description_1' id='input_295px' placeholder='enter permission' value={Permit_description_1} onChange={onChange} />
-                                </li>
-                                <li>
-                                <label htmlFor="Permit_description_2">{language.investorform.permit2}</label>
-                                <input type="text" name='Permit_description_2' id='input_295px' placeholder='enter permission' value={Permit_description_2} onChange={onChange} />
-                                </li>
-                                <li>
-                                <label htmlFor="Permit_description_3">{language.investorform.permit3}</label>
-                                <input type="text" name='Permit_description_3' id='input_295px' placeholder='enter permission' value={Permit_description_3} onChange={onChange} />
-                                </li>
-                            </ul>
-                         
+                    <ul>
+                        <li class="listItem">
+                        <label htmlFor="selecperm">{language.investorform.country}</label>
+                        <select id="input_170px" name='selecperm'  onChange={onChangs} placeholder='Country'>
+                                     <option value={""}>{""}</option>
+                        { countryPerm.map((info,i)=>{   
+                          return(
+                                     
+                                     <option value={info.I_CODIGO}>{info.C_NOMBRE}</option>
+                                           )
+                               })
+                                 }
+                        </select>
+                         <VscChevronDown />
+                        </li>
+                        <span onClick={agregarCountry} ><AiFillCheckCircle size={50} 
+                              color="blue"/></span>
+                    </ul>
+                         <TablePermision data={permi} language={language} deletes={borrado} />                        
                         </>
                         :<>
-                        <ul>
-                                <li>
-                                <label htmlFor="Permit_description_1">{language.investorform.permitesp}</label>
-                                <input type="text" name='Permit_description_1' id='input_295px' placeholder='enter permission' value={Permit_description_1} onChange={onChange} />
-                                </li>
-                                </ul>
+
                         </>
                     }
                     </div>

@@ -73,7 +73,7 @@ function Routers(){
           <Route path='/Billing' exact element = {<Billing lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/DetalleFacturasFondo' exact element = {<BillingDetail lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/BankFileConfiguration' exact element = {<BankFileConfiguration lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
-          <Route path='/AccountDetail' exact element = {<BankAccountDetail lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/BankDetail' exact element = {<BankAccountDetail lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
         </Routes>
       </BrowserRouter>
     </>

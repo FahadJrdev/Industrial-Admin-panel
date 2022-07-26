@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ButtonWithArrow } from '../../component/buttons';
+import {  ButtonWithArrow } from '../../component/buttons';
 import './status.css';
 const ProjectStatus = ({ title ,language, status, status1, status2, status3, status4}) => {
     return ( <>

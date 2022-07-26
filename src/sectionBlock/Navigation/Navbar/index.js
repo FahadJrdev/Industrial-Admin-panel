@@ -31,12 +31,14 @@ function Navbar({lang, setLang, language}) {
         }
       }
     }).catch((err)=>{
-        console.log(err)
       if(err.response){
         if(err.response.data){
-          if(err.response.data.message){
-            alert(err.response.data.message)
+          if(err.response.status===401){
+            navigate('/',{replace: true})
+          }else{
+            navigate('/',{replace: true})
           }
+          
         }
       }
     })

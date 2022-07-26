@@ -3,7 +3,7 @@ import { VscChevronDown } from "react-icons/vsc";
 import { Button } from  '../../../component/buttons';
 import './component.css';
 import LeasingItem from './LeasingItem';
-import {ProjectItem} from './ProjectItem';
+import {ProjectItem,ProjectItem2} from './ProjectItem';
 export const Input = ({label,type,name,value,placeholder,onChange,disa}) => {
     
     return(
@@ -140,6 +140,34 @@ export const ManageProjectTable = ({header1, header2, header3, ProjectInfo}) => 
                             ProjectInfo.map((Info, i) => {
                                 return(
                                     <ProjectItem key={i} Info={Info} />
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export const ManageProjectInvestorTable = ({header1, header2, header3,header4, header5, header6, investorInfo}) => {
+    return(
+        <div className="manage-project-table">
+            <div className="tableBody">
+                <div className="responsiveFix">
+                    <div className="responsiveAuto">
+                        <ul>
+                            <li className="item itemHeader">{header1}</li>
+                            <li className="item itemHeader">{header2}</li>
+                            <li className="item itemHeader">{header3}</li>
+                            <li className="item itemHeader">{header4}</li>
+                            <li className="item itemHeader">{header5}</li>
+                            <li className="item itemHeader">{header6}</li>
+                        </ul>
+                        {
+                            investorInfo.map((Info, i) => {
+                                return(
+                                    <ProjectItem2 key={i} Info={Info} />
                                 )
                             })
                         }

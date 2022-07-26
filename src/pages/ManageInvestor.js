@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,useLocation} from 'react-router-dom';
 import Navbar from '../sectionBlock/Navigation/Navbar';
 import Header from '../sectionBlock/Header';
 import Tab from '../component/tab';
@@ -7,11 +7,56 @@ import ContractCreationInvestor from '../sectionBlock/ManageInvestor/ContractCre
 import ApprovalDenalInvestor from '../sectionBlock/ManageInvestor/ApprovalDenalInvestor';
 import ContractFormalizationInvestor from '../sectionBlock/ManageInvestor/ContractFormalizationInvestor';
 import './pageStyle.css';
+import axios from "../api/axios.js";
+import {toast} from "react-toastify";
 
 const ManageInvestor = ({lang, setLang, language, responsive}) => {
     const navigate = useNavigate();
+    const [isUpdate, setUpdate]=useState(false);
+    const [AprovalInfo, setAprovalInfo]=useState({});
+    const [info,funcioGloal]=useState({})
+    const [deud,setDeuda]=useState('');
     const [isNavigate, setNavigate]=useState(false);
+    const [IDFondo,setFondo]=useState('');
+    const [IdInversor,setInversor]=useState('');
+    const [ID,setID]=useState('');
+    const [valores,setValor]=useState({})
+    const [buscar]=useState(useLocation().search);
     const [tab,setTab] = useState('Contract creation');
+    const callIndividualValue= (id)=>{
+        let bearerToken={
+          headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
+        }
+      axios.get("/contractinvInversor/"+id, {},bearerToken)
+      .then((response) => {
+        if(response.data.APPROVAL){
+          let retorno2=response.data.APPROVAL
+          setAprovalInfo(retorno2)
+          setUpdate(true)
+        }else{
+          setUpdate(false)
+        }
+        let retorno=response.data.CONTRATO
+        setDeuda(retorno.I_CODIGO)
+        setFondo(retorno.FONDO_I_CODIGO)
+        setInversor(retorno.INVERSIONISTA_I_CODIGO)
+        let cambios={
+          Perioricity: retorno.PERIORICITY_INV_INVERSIONISTA,
+          Start_date:  retorno.START_DATE_INV_INVERSIONISTA,
+          Form_of_payment: retorno.FORM_PAYMENT_INV_INVERSIONISTA,
+          Number_of_quotas:retorno.NUMBER_FEES_INV_INVERSIONISTA
+        }
+        setValor(cambios)
+      }).catch((err)=>{
+        if(err.response){
+          if(err.response.data){
+            if(err.response.data.message){
+              toast(err.response.data.message)
+            }
+          }
+        }
+      })
+    }
     useEffect(()=>{
         const backButton = document.querySelector('.ManageInvestor .first-part .buttonwitharrow');
         if(backButton){
@@ -23,6 +68,22 @@ const ManageInvestor = ({lang, setLang, language, responsive}) => {
         }
         }
     },[navigate,isNavigate,setNavigate])
+    useEffect(()=>{
+        if(buscar){
+            var valorBusqueda=buscar.replace("?","")
+            setID(valorBusqueda)
+            callIndividualValue(valorBusqueda)
+            
+        }
+    },[buscar])
+    useEffect(()=>{
+      if(info.fondoid){        
+       setInversor(info.inverid)
+       setDeuda(info.codigo)
+       setFondo(info.fondoid)
+       callIndividualValue(info.codigo)
+      }
+   },[info,funcioGloal])
   return (
     <>
         <div className="ManageInvestor">
@@ -32,12 +93,12 @@ const ManageInvestor = ({lang, setLang, language, responsive}) => {
                 <Tab action={setTab} tab1={`Contract creation`} tab2={`Approval/ Denial`} tab3={`Contract formalization`} hideTab4={`dn`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} hideCustomizer={`dn`} tabs1={language.deuda_leasing.tab1} tabs2={language.deuda_leasing.tab2} tabs3={language.deuda_leasing.tab3} />
                 {
                     tab === 'Contract creation'
-                    ?<ContractCreationInvestor language={language} />
+                    ?<ContractCreationInvestor  valorExtraido={valores} valorIdFondo={IDFondo} valorIDInversor={IdInversor}  language={language} Deuda={deud}  isUpdates={isUpdate} funcion={funcioGloal}/>
                     :<></>
                 }
                 {
                     tab === 'Approval/ Denial'
-                    ?<ApprovalDenalInvestor language={language} />
+                    ?<ApprovalDenalInvestor language={language} AprovalInf={AprovalInfo}  idFondos={IDFondo} idInversors={IdInversor} Deuda={deud}/>
                     :<></>
                 }
                 {

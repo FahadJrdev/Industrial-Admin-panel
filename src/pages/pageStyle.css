@@ -226,7 +226,6 @@
 }
 
 .table .table-lists.billingTable .listBody .listItem:last-child {
-    text-decoration: underline;
     font-weight: 500;
 }
 
@@ -287,6 +286,173 @@
 .ContractManagement .table .table-lists .listItem:last-child {
     text-decoration: underline;
     font-weight: 500;
+}
+
+
+/* Revenue */
+
+.cargar {
+    padding: 10px 0px;
+    flex-direction: column;
+}
+
+.cargar h2 {
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 38px;
+    color: var(--secondary-color);
+    padding: 5px 0px 10px;
+}
+
+.cargar p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--text-dark);
+    padding: 5px 0px 10px;
+}
+
+.cargar button {
+    width: 16%;
+    padding: 10px 0px;
+}
+
+.revenues .tables {
+    display: flex;
+}
+
+.revenues .tables hr {
+    width: 11px;
+    border-radius: 5px;
+    background: var(--text-low-dark);
+    border: none;
+}
+
+.revenues .table {
+    margin: 15px 0px 15px 45px;
+    width: 50%;
+}
+
+.revenues .table:first-child {
+    margin: 15px 45px 15px 0px;
+    direction: rtl;
+}
+
+.revenues .table:first-child p {
+    direction: ltr;
+}
+
+.revenues .table:first-child ul {
+    direction: ltr;
+}
+
+.revenues .table:first-child .Esheet-submit {
+    direction: ltr;
+}
+
+.revenues .table .listHeader {
+    display: flex;
+}
+
+.revenues .table .listBody {
+    display: flex;
+}
+
+.revenues .table .revenueTableTitle {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #85B900;
+    padding: 10px 5px;
+}
+
+.revenues .table .listItem {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.08px;
+    color: var(--text-dark);
+    padding: 10px 5px;
+    width: 100%;
+    border-bottom: 1px solid var(--border-secondary-color);
+}
+
+.revenues .table .listItem.listHeaderItem {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.24px;
+    color: var(--tartiary-color);
+}
+
+.revenues .table .listBody .listItem:first-child {
+    color: var(--tartiary-color);
+}
+
+.revenues .table:last-child .listBody .listItem:last-child {
+    font-weight: 600;
+}
+
+.revenues .table .Esheet-submit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.responsiveFixBoth {
+    height: 200px;
+    overflow-x: hidden;
+}
+
+.responsiveAutoBoth {
+    height: 150%;
+}
+
+.billing-deatil .billingTable .listItem {
+    width: 15%;
+    text-align: justify;
+}
+
+.billing-deatil .billingTable .listItem:last-child {
+    width: 17%;
+}
+
+.billing-deatil .table .table-lists.billingTable .listHeader {
+    padding: 5px 106px 0px 45px;
+}
+
+.billing-deatil .billingTable .listHeader .listHeaderItem {
+    width: 15%;
+    text-align: justify;
+}
+
+.billing-deatil .billingTable .listHeader .listHeaderItem:last-child {
+    text-align: right;
+}
+
+
+/* .billing-deatil .billingTable .listHeader .listHeaderItem:nth-child(4) {
+    margin-right: 20px;
+} */
+
+.billing-deatil .billingTable .listHeader .listHeaderItem:first-child {
+    width: 15%;
+    text-align: justify;
+}
+
+.billing-deatil .billingTable .listItem:last-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.billing-deatil .billingTable .listItem:last-child p {
+    padding: 10px 10px;
+    text-decoration: underline;
+}
+
+.billing-deatil .billingTable .listItem:last-child button {
+    padding: 5px 10px;
+    text-decoration: none;
 }
 
 @media screen and (min-width: 1500px) {
@@ -378,5 +544,39 @@
     .ContractManagement .table .table-responsive {
         width: 100%;
         overflow-y: hidden;
+    }
+    .cargar button {
+        width: 100%;
+    }
+    .revenues .table .Esheet-submit button {
+        width: 100%;
+    }
+    .revenues .tables {
+        flex-direction: column;
+    }
+    .revenues .table {
+        margin-left: 0px;
+        width: 100%;
+    }
+    .revenues .tables hr {
+        width: auto;
+        height: 11px;
+    }
+    .responsiveFixBoth {
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+    .responsiveAutoBoth {
+        width: 200%;
+    }
+    .revenues .table:first-child {
+        direction: ltr;
+    }
+    .cargar h2 {
+        font-size: 20px;
+    }
+    .cargar p {
+        margin-bottom: 25px;
     }
 }

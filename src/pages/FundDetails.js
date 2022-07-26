@@ -8,7 +8,7 @@ import { useLocation} from "react-router-dom";
 import FundInfo from '../sectionBlock/Fund-Management/FundInformation';
 import axios from "../api/axios.js";
 import {toast} from "react-toastify";
-import { FundTable, InvestorTable } from '../component/table';
+import { FundTable, InvestorTable ,FundTable2} from '../component/table';
 const FundDetails = ({lang, setLang, language, responsive}) => {
   const [currentPage1, setCurrentPage1] = useState(1);
   const [ListInversores,setInversores] = useState([]);
@@ -38,11 +38,11 @@ const FundDetails = ({lang, setLang, language, responsive}) => {
   axios.get("/funds/"+id, {},bearerToken)
   .then((response) => {
     if(response.status===200){
-      setInversores(response.data.INVERSORES)
+      setInversores(response.data.INVERSIONISTA_EN_EL_FONDO)
       setProyectos(response.data.PROYECTOS)
       if(response.data.FONDO){
         let valor={
-          Code: '',
+          Code: response.data.FONDO[0]['CODE_FONDO'],
           Name_of_fund:response.data.FONDO[0]['C_NOMBRE'],
         Description:response.data.FONDO[0]['C_DESCRIPCION'],
         Start_date:response.data.FONDO[0]['F_FECHA_INICIO'],
@@ -208,7 +208,7 @@ const FundDetails = ({lang, setLang, language, responsive}) => {
                 }
                 {
                   tabName === 'Investors'
-                  ?<FundTable header1={language.investor.header1}  header2={language.investor.header2}  header3={language.investor.header3}  header4={language.investor.header4}  header5={language.investor.header5} data={ListInversores} currentPage={currentPage1} setCurrentPage={setCurrentPage1} />
+                  ?<FundTable2 header1={language.investor.header1}  header2={language.investor.header2}  header3={language.investor.header3}  header4={language.investor.header4}  header5={language.investor.header5} data={ListInversores} currentPage={currentPage1} setCurrentPage={setCurrentPage1} opcion={"1"} />
                   :<></>
                 }
                 {

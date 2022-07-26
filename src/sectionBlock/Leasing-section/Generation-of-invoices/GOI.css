@@ -1,0 +1,53 @@
+.GenerationOfInvoices {
+    padding: 10px 15px;
+}
+
+.GenerationOfInvoices .inputsTitle {
+    margin: 20px 5px 10px 0px;
+    font-size: 20px;
+}
+
+.GenerationOfInvoices .table {
+    padding-top: 20px;
+}
+
+.GenerationOfInvoices .table .listHeader {
+    display: flex;
+}
+
+.GenerationOfInvoices .table .listBody {
+    display: flex;
+}
+
+.GenerationOfInvoices .table .listItem {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.08px;
+    color: var(--text-dark);
+    width: 20%;
+    padding: 10px 5px;
+    border-bottom: 1px solid var(--border-secondary-color);
+}
+
+.GenerationOfInvoices .table .listHeader .listItem.listHeaderItem {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.24px;
+    color: var(--tartiary-color);
+    width: 20%;
+    padding: 10px 5px;
+}
+
+.GenerationOfInvoices .table .listBody .listItem:nth-child(1) {
+    color: var(--tartiary-color);
+}
+
+.GenerationOfInvoices .table .listBody .listItem:nth-child(3) {
+    color: var(--primary-color);
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 12px;
+}

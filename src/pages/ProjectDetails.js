@@ -316,7 +316,7 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
         :<></>
       }
       {
-        ProjectOwnerInfoDisplay === 'open'
+        (ProjectOwnerInfoDisplay === 'open' && idProjectOwner)
         ?<ProjectOwnerInfo setIdOwner={setIdProjectOwner} idOwner={idProjectOwner} language={language} title={language.projectDetails.projectowener}  idproject={IdProject}  datoRetorno={projecOwnerData} setOwner={setProjectowner}/>
         :<></>
       }

@@ -8,7 +8,7 @@ import { useNavigate} from 'react-router-dom';
 import axios from "../../../api/axios.js";
 import {toast} from "react-toastify";
 
-const ApprovalDenal = ({language}) => {
+const ApprovalDenal = ({language,AprovalInfo,id_proyectos,Deuda,id_owners}) => {
     const navigates = useNavigate();
   const initialState = {
     Date_Of_Reques: '',
@@ -32,10 +32,8 @@ const ApprovalDenal = ({language}) => {
   
   const [id_proyecto,setIdProyecto]=useState('')
   const [id_owner,SetOwner]=useState('')
+  const [disabled,setDisable]=useState(false)
   const [id_deuda,setDeuda]=useState('')
-  const [projects,SetAllProject] = useState([]);
-  const [alldeuda,SetAllDeuda] = useState([]);
-  const [one]=useState('');
   const [state, dispatch] = useReducer(reducer, initialState);
   const onChange = (e) => {
       dispatch({ field: e.target.name, value: e.target.value })
@@ -43,78 +41,7 @@ const ApprovalDenal = ({language}) => {
   const {  Date_Of_Reques, Debtors_Name_And_Surname, Document_type, Document, Approval_date, Number_of_certificate, Number_agreement, Total_amount, Remarks} = state;
   const handleSubmit = (event) => {
       event.preventDefault();
-      console.log(state);
   }
-  const callListProjects = ()=>{
-    let bearerToken={
-      headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` }
-    }
-        axios.get("/project", {},bearerToken)
-        .then((response) => {
-          if(response.status===200){
-            SetAllProject(response.data.map((valor)=>{
-              return {
-                value:valor.I_CODIGO,
-                label:valor.C_NOMBRE_PROYECTO,
-                data:valor
-              }
-           
-          }))
-          }else{
-            SetAllProject([])
-          }
-        }).catch((err)=>{
-            
-          SetAllProject([])
-        })
-
-}
-const callDeudaProject = (idProject)=>{
-    let bearerToken={
-      headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` }
-    }
-        axios.get("/contractByProject/"+idProject, {},bearerToken)
-        .then((response) => {
-          if(response.status===200){
-          if(response.data.showByProject.length>0){
-            SetAllDeuda(response.data.showByProject.map((itemvalor)=>{
-                return({
-                    value:itemvalor.I_CODIGO,
-                    label:"Codigo-"+itemvalor.I_CODIGO+"-Monto-"+itemvalor.MONTO_SOLICITADO,
-                    data:itemvalor
-                })
-            }))
-          }else{
-            toast("No have contract")
-          }
-          }
-          
-        }).catch((err)=>{
-            if(err.response){
-                if(err.response.data){
-                  if(err.response.status===401){
-                    navigates('/')
-                  }else{
-                    if(err.response.data.message){
-                      toast(err.response.data.message)
-                    }else{
-                      let message="";
-                      let valorKeys=Object.keys(err.response.data.error)
-                      valorKeys.forEach(element => {
-                        err.response.data.error[element].forEach((mensaje)=>{
-                          message+=mensaje+" ,"
-                        })
-                      });
-                      
-                      toast(message);
-                    }
-                  }
-                  
-                }
-              }
-        })
-
-}
 
 const callProjectOwner=(idProject)=>{
     let bearerToken={
@@ -158,23 +85,40 @@ const callProjectOwner=(idProject)=>{
   }
   })
   }
-
-const SelecProject = (event) => {
-    if(event){
-     setIdProyecto(event.data.I_CODIGO)
-     callDeudaProject(event.data.I_CODIGO)
+  useEffect(()=>{
+    if(AprovalInfo){
+      if(AprovalInfo.APPROVAL_DATE){
+        setDeuda(AprovalInfo.DEUDA_I_CODIGO)
+        dispatch({ field: "Approval_date", value:AprovalInfo.APPROVAL_DATE})
+        dispatch({ field: "Number_of_certificate", value:AprovalInfo.NUMBER_CERTIFICATE})
+        dispatch({ field: "Approval_date", value:AprovalInfo.APPROVAL_DATE})
+        dispatch({ field: "Number_agreement", value:AprovalInfo.NUMBER_AGREEMENT})
+        dispatch({ field: "Total_amount", value:AprovalInfo.TOTAL_AMOUNT})
+        dispatch({ field: "Remarks", value:AprovalInfo.REMARKS})
+        setRating(AprovalInfo.SCORE)
+        setDisable(true)
+        if(AprovalInfo.STATUS==="aproved")SetOption("opcion1")
+        if(AprovalInfo.STATUS==="postpone")SetOption("opcion2")
+        if(AprovalInfo.STATUS==="rejected")SetOption("opcion3")
+      }
+      
     }
-  }
-  const SelecDeud = (event) => {
-    if(event){
-      SetOwner(event.data.OWNER_I_CODIGO)
-      setDeuda(event.data.I_CODIGO)
-      callProjectOwner(event.data.OWNER_I_CODIGO)
-    }
-  }
+  },[AprovalInfo]);
+  useEffect(()=>{
+    setIdProyecto(id_proyectos)
+  },[id_proyectos]);
 useEffect(()=>{
-    callListProjects()
-  },[one]);
+  if(id_owners){
+    SetOwner(id_owners)
+    callProjectOwner(id_owners)
+  }
+  },[id_owners]);
+  useEffect(()=>{
+    if(Deuda){
+      setDeuda(Deuda)
+    }
+  },[Deuda]);
+  
 const [rating, setRating] = useState(0);
 
 const changeval =(event)=>{
@@ -194,14 +138,13 @@ let valor={
   TOTAL_AMOUNT:Total_amount,
   REMARKS:Remarks,
   SCORE:rating,
-  STATUS:opcionbutton==='option1'?'aproved':opcionbutton==='option2'?'postpone':'rejected'
+  STATUS:opcionbutton==='opcion1'?'aproved':opcionbutton==='opcion2'?'postpone':'rejected'
 }
       axios.post("/contractmanagementAprob/"+id_deuda+"/"+id_owner+"/"+id_proyecto,valor,bearerToken)
       .then((response) => {
         toast("Created Succes");
         navigates(-1)
       }).catch((err)=>{
-        console.log(err)
         if(err.response){
           if(err.response.data){
             if(err.response.status===401){
@@ -232,14 +175,8 @@ let valor={
         
         <FinancialHead text={ language.deuda_leasing.aproval_info } hideBtn={`dn`} />
         <form action="" method="post" onSubmit={handleSubmit}>
-            
-        <label htmlFor="Code">{language.deuda_leasing.project_id}</label>  
-                      <Select options={projects} onChange={SelecProject} />
-                      
-        <label htmlFor="Code">{language.deuda_leasing.deuda_id}</label>  
-                      <Select options={alldeuda} onChange={SelecDeud} />
             <ul className="Esheet">
-                <Input label={ language.deuda_leasing.aproval_date_reques} type={`date`} name={`Date_Of_Reques`} value={Date_Of_Reques} placeholder={`DD/MM/YYYY`} onChange={onChange} />
+                <Input disa={disabled} label={ language.deuda_leasing.aproval_date_reques} type={`date`} name={`Date_Of_Reques`} value={Date_Of_Reques} placeholder={`DD/MM/YYYY`} onChange={onChange} />
                 <Input label={ language.deuda_leasing.aproval_debtor_name_surname} disa={true}  type={`text`} name={`Debtors_Name_And_Surname`} value={Debtors_Name_And_Surname} placeholder={`Enter Name`} onChange={onChange} />
                 <SelectVal label={ language.deuda_leasing.aproval_debtor_document_type} disa={true} name={`Document_type`} value={Document_type} placeholder={`Select`} onChange={onChange} value1={`Document_type-1`} value2={`Document_type-2`} value3={`Document_type-3`} value4={`Document_type-4`} hideValue5={`dn`}/>
                 <Input label={ language.deuda_leasing.aproval_debtor_document} disa={true} type={`text`} name={`Document`} value={Document} placeholder={`Enter`} onChange={onChange} />
@@ -257,7 +194,13 @@ let valor={
                     </div>
                     <p className="rating">{rating}</p>
                     <p>{ language.deuda_leasing.aproval_score}</p>
+                    {disabled?<>
+                    <input disabled type="range" min="0" max="1000" onChange={changeval}  value={rating} step="1"/>
+                    
+                    </>:<>
                     <input type="range" min="0" max="1000" onChange={changeval}  value={rating} step="1"/>
+                    
+                    </>}
                     {/* <span onClick={()=>{setRating(rating+10)}} style={{fontSize: "14px", marginRight: "10px", cursor: "pointer"}}>increase</span>
                     <span onClick={()=>{setRating(rating-10)}} style={{fontSize: "14px", marginRight: "10px", cursor: "pointer"}}>descrease</span> */}
                 </div>
@@ -269,17 +212,19 @@ let valor={
                 <RatingBtn text={language.deuda_leasing.aproval_reject} bg={opcionbutton==='opcion3'?`var(--secondary-color)`:'#ffffff'} smallbg={opcionbutton==='opcion3'?'#ffffff':`var(--secondary-color)`} color={opcionbutton==='opcion3'?'#ffffff':`var(--secondary-color)`} border={`1px solid var(--secondary-color)`} click={()=>{SetOption("opcion3")}}  />
             </div>
             <ul className="Esheet">
-                <Input label={language.deuda_leasing.aproval_date} type={`date`} name={`Approval_date`} value={Approval_date} placeholder={`MM/DD/YYYY`} onChange={onChange} />
-                <Input label={language.deuda_leasing.aproval_numbercertifi} type={`text`} name={`Number_of_certificate`} value={Number_of_certificate} placeholder={`Enter`} onChange={onChange} />
-                <Input label={language.deuda_leasing.aproval_numberagree} type={`text`} name={`Number_agreement`} value={Number_agreement} placeholder={`Enter`} onChange={onChange} />
-                <Input label={language.deuda_leasing.aproval_totalamount} type={`text`} name={`Total_amount`} value={Total_amount} placeholder={`Enter`} onChange={onChange} />
+                <Input disa={disabled} label={language.deuda_leasing.aproval_date} type={`date`} name={`Approval_date`} value={Approval_date} placeholder={`MM/DD/YYYY`} onChange={onChange} />
+                <Input disa={disabled} label={language.deuda_leasing.aproval_numbercertifi} type={`text`} name={`Number_of_certificate`} value={Number_of_certificate} placeholder={`Enter`} onChange={onChange} />
+                <Input disa={disabled} label={language.deuda_leasing.aproval_numberagree} type={`text`} name={`Number_agreement`} value={Number_agreement} placeholder={`Enter`} onChange={onChange} />
+                <Input disa={disabled} label={language.deuda_leasing.aproval_totalamount} type={`text`} name={`Total_amount`} value={Total_amount} placeholder={`Enter`} onChange={onChange} />
             </ul>
             <ul className="Esheet">
-                <Textarea label={language.deuda_leasing.aproval_remark} name={`Remarks`} value={Remarks} cols={20} rows={6} placeholder={`Enter`} onChange={onChange} />
+              
+                <Textarea disa={disabled} label={language.deuda_leasing.aproval_remark} name={`Remarks`} value={Remarks} cols={20} rows={6} placeholder={`Enter`} onChange={onChange} />
              </ul>
             <div className="Esheet-submit">
-                <Button text={language.deuda_leasing.aproval_comunicate}  background={`var(--primary-color)`} types={`button`} click={callApiAproval}/>
-            </div>
+              {disabled?<></>:<><Button text={language.deuda_leasing.aproval_comunicate}  background={`var(--primary-color)`} types={`button`} click={callApiAproval}/>
+           </>}
+                 </div>
         </form>
       </div>
     </>

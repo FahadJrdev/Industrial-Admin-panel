@@ -3,7 +3,7 @@ import { Button, ButtonWithArrow } from '../../component/buttons';
 import { DownloadIcon } from '../../component/icon/icon';
 import axios from "../../api/axios.js";
 import {toast} from "react-toastify";
-import { useNavigate,Link} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import './due.css';
 const initialState = {
     code: ''

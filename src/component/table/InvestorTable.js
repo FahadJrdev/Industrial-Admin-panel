@@ -5,14 +5,13 @@ import {Button} from '../buttons';
 import axios from "../../api/axios.js";
 import {toast} from "react-toastify";
 import { useNavigate} from 'react-router-dom';
-import { BiRefresh } from 'react-icons/bi';
 
 export const InvestorDatosItem = ({info}) => {
     return(
         <Link  to={{ pathname: '/InvestorsDetail?'+info.INVERSIONISTA['id'], state:info.INVERSIONISTA['id'] }}>
             <ul key={info.INVERSIONISTA['id']} className="listBody">
-                <li className='listItem'>{JSON.parse(info.DATOS[0].INFORMACION_COORPORATIVA).COMPANY_NAME}</li>
-                <li className='listItem'>{JSON.parse(info.DATOS[0].INFORMACION_COORPORATIVA).CITY_CONSTITUTION}</li>
+                <li className='listItem'>{JSON.parse(info.INFORMACION_COORPORATIVA).COMPANY_NAME}</li>
+                <li className='listItem'>{JSON.parse(info.INFORMACION_COORPORATIVA).CITY_CONSTITUTION}</li>
                 <li className='listItem'>{info.INVERSION.length}</li>
                 <li className='listItem'>{info['TOTAL DE FONDOS ASIGNADOS']}</li>
                 <li className='listItem'>See more</li>
@@ -35,7 +34,33 @@ export const InvestorItem = ({info}) => {
         </Link>
     )
 }
-
+export const InvestorItemc = ({info}) => {
+  return(
+      <Link  to={{ pathname: '/InvestorsDetail?'+info.DATOS[0].INVERSIONISTA_I_CODIGO, state:info.DATOS[0].INVERSIONISTA_I_CODIGO }}>
+          <ul key={info.DATOS[0].INVERSIONISTA_I_CODIGO} className="listBody">
+              <li className='listItem'>{JSON.parse(info.DATOS[0].INFORMACION_COORPORATIVA).COMPANY_NAME}</li>
+              <li className='listItem'>{JSON.parse(info.DATOS[0].INFORMACION_COORPORATIVA).CITY_CONSTITUTION}</li>
+              <li className='listItem'>{info.INVERSION.length}</li>
+              <li className='listItem'>{info['TOTAL DE FONDOS ASIGNADOS']}</li>
+              <li className='listItem'>See more</li>
+          </ul>
+      </Link>
+  )
+}
+export const InvestorItemcs = ({info}) => {
+  console.log(info)
+  return(
+      <Link  to={{ pathname: '/InvestorsDetail?'+info.ID, state:info.ID }}>
+          <ul key={info.ID} className="listBody">
+              <li className='listItem'>{info.NAME}</li>
+              <li className='listItem'>{info.COUNTRY}</li>
+              <li className='listItem'>{info.INV_PRO}</li>
+              <li className='listItem'>{info.INVERTIDOS}</li>
+              <li className='listItem'>See more</li>
+          </ul>
+      </Link>
+  )
+}
 export const FundItem = ({info}) => {
     return(
         <Link to={{ pathname: '/FundDetails?'+info.I_CODIGO, state: info.I_CODIGO}}>
@@ -52,16 +77,16 @@ export const FundItem = ({info}) => {
 export const ProjectItem =({info, i, setProjectStatus}) => {
     let colors=''
     let valor=''
-    if(info.C_ESTADO_PROYECTO=='start'){
+    if(info.C_ESTADO_PROYECTO==='start'){
         colors='green'
         valor='Start'
-    }else if(info.C_ESTADO_PROYECTO=='implement'){
+    }else if(info.C_ESTADO_PROYECTO==='implement'){
         colors='yellow'
         valor='Implementing'
-    }else if(info.C_ESTADO_PROYECTO=='monitorin'){
+    }else if(info.C_ESTADO_PROYECTO==='monitorin'){
         colors='blue'
         valor='Monitoring'
-    }else if(info.C_ESTADO_PROYECTO=='disinvestmt'){
+    }else if(info.C_ESTADO_PROYECTO==='disinvestmt'){
         colors='black'
         valor='Disinvestement'
     }
@@ -82,10 +107,6 @@ export const ProjectItem =({info, i, setProjectStatus}) => {
 export const RiskItem = ({info,language,refresh}) => {
     const navigates = useNavigate();
     const [isEdit, setEdit] = useState(false);
-    const initialState = {
-        Data: '',
-        Description:''
-    }
 
     function reducer(state, { field, value }) {
         return {
@@ -220,51 +241,176 @@ export const RiskItem = ({info,language,refresh}) => {
 
 export const BillingItem = ({info}) => {
   return(
-      <Link to="/DetalleFacturasFondo">
           <ul className="listBody">
-              <li className='listItem'>{info.Nombre}</li>
-              <li className='listItem'>{info.facturas}</li>
-              <li className='listItem'>{info.totalFocturas}</li>
-              <li className='listItem'>{info.Actions}</li>
-          </ul>
+              <li className='listItem'>{info.NOMBRE}</li>
+              <li className='listItem'>{info.NUMERO_FACTURAS}</li>
+              <li className='listItem'>{info.IMPORTE}</li>
+              
+      <Link to={{ pathname: '/DetalleFacturasFondo?'+info.ID_FONDO, state: info.ID_FONDO}}>
+              <li className='listItem'>see more</li>
+              
       </Link>
+          </ul>
   )
 }
 export const BillingDetailItem = ({info}) => {
+  let valor={
+    id:info.ID,
+    state:info.STATUS?"Pagado":"Sin pagar"
+  }
+  let color=info.STATUS?{color: "#85B900", fontWeight: '600'}:{color: "#DE5753", fontWeight: '600'}
   return(
-      <Link to="#">
           <ul className="listBody">
-              <li className='listItem'>{info.Invoicing_date}</li>
-              <li className='listItem'>{info.Ndeg}</li>
-              <li className='listItem'>{info.Amount}</li>
-              <li className='listItem'>{info.Actions}</li>
+              <li className='listItem'>{info.INVOICE_DATE}</li>
+              <li className='listItem'>{info.TIPO_CONTRATO}</li>
+              <li className='listItem'>{info.NUMERO_FACTURA}</li>
+              <li className='listItem'>{info.AMOUNT}</li>
+              <li className='listItem' style={color} >{valor.state}</li>
+              <li className='listItem'><span data-state={JSON.stringify(valor)} className="invoiceBtn2"><Button text={`see more`} background={`var(--primary-color)`} types={`button`} /></span> <span data-state={info.state} className="invoiceBtn"><Button text={`Anular`} background={`var(--primary-color)`} types={`button`} /></span></li>
           </ul>
-      </Link>
   )
 }
 export const BankConfigItem = ({info}) => {
   return(
-      <Link to="/AccountDetail">
+      <Link to={{ pathname: '/BankDetail?'+info.I_CODIGO, state: info.I_CODIGO}}>
           <ul className="listBody">
-              <li className='listItem'>{info.Code}</li>
-              <li className='listItem'>{info.Country}</li>
-              <li className='listItem'>{info.Names}</li>
-              <li className='listItem'>{info.Identity}</li>
-              <li className='listItem'>{info.Actions}</li>
+              <li className='listItem'>{info.CODE_BANK_FILE}</li>
+              <li className='listItem'>{info.COUNTRY_BANK_FILE}</li>
+              <li className='listItem'>{info.NAME_BANK_FILE}</li>
+              <li className='listItem'>{info.I_CODIGO}</li>
+              <li className='listItem'>See more</li>
           </ul>
       </Link>
   )
 }
-export const ContractManagementItem = ({info, link}) => {
+export const ContractManagementItem = ({info, link,opcions}) => {
+  let color={}
+  let texto=""
+  let nombre=""
+  let fechas=""
+  let stado=""
+ if(opcions==="1"){
+  stado=info.STATUS
+ }else if(opcions==="2"){
+  stado=info.STATUS
+
+ }else{
+  stado=info.STATUS
+ }
+  if(stado==="aproved"){
+    color={
+     color:'#a3cb40',
+     fontWeight:700
+   }
+   texto="APROVED"
+ }else if (stado==="rejected"){
+   color={
+     color:'#f1abab',
+     fontWeight:700
+   }
+   texto="REJECTED"
+ }else if (stado==="postpone"){
+   color={
+     color:'#ffd47f',
+     fontWeight:700
+   }
+   texto="POSTPONED"
+ }else{
+   color={
+     color:'black',
+     fontWeight:700
+   }
+   texto="SOLICITED"
+ }
+ if(opcions==="1"){
+  fechas=info.created_at.split("T")[0]
+   let jsoncorporativa=info.INFORMACION_COORPORATIVA
+  nombre=JSON.parse(jsoncorporativa)['NAMES']+" "+JSON.parse(jsoncorporativa)['SURNAMES']
+}else if(opcions==="2"){
+   let jsoncorporativa=info.INFORMACION_COORPORATIVA
+   nombre=JSON.parse(jsoncorporativa)['NAMES']+" "+JSON.parse(jsoncorporativa)['SURNAMES']
+   fechas=info.created_at.split("T")[0]
+}else{
+  let jsoncorporativa=info.INFORMACION_COORPORATIVA
+  if(JSON.parse(jsoncorporativa)){
+    nombre=JSON.parse(jsoncorporativa)['COMPANY_NAME']
+    fechas=info.created_at.split("T")[0]
+
+  }
+
+}
+if(opcions==="1"){
+ 
+  return( <Link to={{ pathname: link+'?'+info.ID_CONTRATO, state: info.I_CODIGO}}>
+  <ul className="listBody">
+      <li className='listItem'>{info.ID_CONTRATO}</li>
+      <li className='listItem'>{fechas}</li>
+      <li className='listItem'>{nombre}</li>
+      <li className='listItem' style={color}>{texto}</li>
+      <li className='listItem'>{"See more"}</li>
+  </ul>
+</Link>
+)
+}else{
   return(
-      <Link to={link}>
-          <ul className="listBody">
-              <li className='listItem'>{info.item1}</li>
-              <li className='listItem'>{info.item2}</li>
-              <li className='listItem'>{info.item3}</li>
-              <li className='listItem' style={{color: `${info.color}`, fontWeight: 700}}>{info.item4}</li>
-              <li className='listItem'>{info.item5}</li>
-          </ul>
-      </Link>
+    <Link to={{ pathname: link+'?'+info.ID_CONTRATO, state: info.I_CODIGO}}>
+        <ul className="listBody">
+            <li className='listItem'>{info.ID_CONTRATO}</li>
+            <li className='listItem'>{fechas}</li>
+            <li className='listItem'>{nombre}</li>
+            <li className='listItem' style={color}>{texto}</li>
+            <li className='listItem'>{"See more"}</li>
+        </ul>
+    </Link>
+  )
+}
+
+ 
+}
+export const InvoiceItem = ({info}) => {
+  return(
+    <ul className="listBody">
+        <li className="listItem">{info.item1}</li>
+        <li className="listItem">{info.item2}</li>
+        <li className="listItem">{info.item3}</li>
+    </ul>
+  )
+}
+
+export const RevenueItem1 = ({info}) => {
+  return(
+    <ul className="listBody">
+        <div className="listItem">{info.item1}</div>
+        <div className="listItem">{info.item2}</div>
+        <div className="listItem">{info.item3}</div>
+    </ul>
+  )
+}
+export const RevenueItem2 = ({info,setPagoManual}) => {
+  const botonclick = (event)=>{
+    if(event.target.dataset.state==="NO PAGO"){
+      setPagoManual("open")
+    }
+  }
+  return(
+    <ul className="listBody">
+        <div className="listItem">{info.item1}</div>
+        <div className="listItem">{info.item2}</div>
+        <div className="listItem">{info.item3}</div>
+        <div className="listItem status"  data-state={info.item4} onClick={botonclick} style={{color: info.color, textDecoration: info.decoration}} >{info.item4}</div>
+    </ul>
+  )
+}
+
+export const ItemPermision = ({index,info,setDelete}) => {
+
+  return(
+    <ul className="listBody">
+        <div className="listItem">{info.name}</div>
+        <div className="listItem">{info.id}</div>
+        <div className="listItem"  onClick={()=>{
+      setDelete({numero:index,id:info.id})
+  }}> <span  ><AiOutlineDelete /></span> </div>
+    </ul>
   )
 }

@@ -82,33 +82,33 @@ export const ConfigCard = ({language}) => {
   return(
     <div className="configCards">
       <div className="configCard">
-        <h1>Expiration</h1>
+        <h1>{language.revenues.configcardexp}</h1>
         <div className="progress-bar secondary-bar">
           <div className="progress-fill secondary-progress" style={{width: "15%"}}></div>
         </div>
         <div className="card-desc">
           <ul>
-            <h5>Overdue</h5>
+            <h5>{language.revenues.configcardexpover}</h5>
             <p>4 - $52,862.91</p>
           </ul>
           <ul>
-            <h5>Not yet expired</h5>
+            <h5>{language.revenues.configcardexpbnot}</h5>
             <p>14 - $852,862.91</p>
           </ul>
         </div>
       </div>
       <div className="configCard">
-        <h1>Payment</h1>
+        <h1>{language.revenues.configcardPaymen}</h1>
         <div className="progress-bar tartiary-bar">
           <div className="progress-fill tartiary-progress" style={{width: "45%"}}></div>
         </div>
         <div className="card-desc">
           <ul>
-            <h5>Not deposited</h5>
+            <h5>{language.revenues.configcardPaymennodepo}</h5>
             <p>4 - $52,862.91</p>
           </ul>
           <ul>
-            <h5>Deposited</h5>
+            <h5>{language.revenues.configcardPaymendepo}</h5>
             <p>14 - $852,862.91</p>
           </ul>
         </div>

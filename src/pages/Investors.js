@@ -3,7 +3,7 @@ import './pageStyle.css';
 import { InvestorCard } from '../component/cards';
 import Header from '../sectionBlock/Header';
 import Tab from '../component/tab';
-import { FundTable } from '../component/table';
+import { FundTable2 } from '../component/table';
 import InvestorCustomizer from '../sectionBlock/Investor-Sidebar';
 import Navbar from '../sectionBlock/Navigation/Navbar';
 import axios from "../api/axios.js";
@@ -89,7 +89,7 @@ const Investors = ({lang,setLang, language, responsive}) => {
         </div>
         <div className="fund-table">
           <Tab hideTab1={`dn`} hideTab2={`dn`} hideTab3={`dn`} hideTab4={`dn`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} inactive={`inactive`} />
-          <FundTable header1={language.investor.header1}  header2={language.investor.header2}  header3={language.investor.header3}  header4={language.investor.header4}  header5={language.investor.header5} data={listinvestors} currentPage={currentPage1} setCurrentPage={setCurrentPage1} />
+          <FundTable2 header1={language.investor.header1}  header2={language.investor.header2}  header3={language.investor.header3}  header4={language.investor.header4}  header5={language.investor.header5} data={listinvestors} currentPage={currentPage1} setCurrentPage={setCurrentPage1} />
         </div>
       </main>
     </>

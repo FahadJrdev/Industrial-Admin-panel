@@ -281,6 +281,7 @@
 .configCards .configCard .card-desc {
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
 }
 
 .configCards .configCard .card-desc ul {
