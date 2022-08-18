@@ -5,7 +5,7 @@ import Header from '../sectionBlock/Header';
 import Tab from '../component/tab';
 import ContractCreationInvestor from '../sectionBlock/ManageInvestor/ContractCreationInvestor';
 import ApprovalDenalInvestor from '../sectionBlock/ManageInvestor/ApprovalDenalInvestor';
-import ContractFormalizationInvestor from '../sectionBlock/ManageInvestor/ContractFormalizationInvestor';
+import DocumentGenerate from '../sectionBlock/ManageInvestor/DocumentGenerate';
 import './pageStyle.css';
 import axios from "../api/axios.js";
 import {toast} from "react-toastify";
@@ -22,6 +22,8 @@ const ManageInvestor = ({lang, setLang, language, responsive}) => {
     const [ID,setID]=useState('');
     const [valores,setValor]=useState({})
     const [buscar]=useState(useLocation().search);
+    const [funcion,setFuncional] = useState(true);
+    const [tab2,setTab2] = useState('Contract creation');
     const [tab,setTab] = useState('Contract creation');
     const callIndividualValue= (id)=>{
         let bearerToken={
@@ -84,26 +86,35 @@ const ManageInvestor = ({lang, setLang, language, responsive}) => {
        callIndividualValue(info.codigo)
       }
    },[info,funcioGloal])
+   useEffect(()=>{
+    if(deud){
+      setTab2(tab)
+      setTab2(tab)
+      setFuncional(false)
+     }else{
+      setFuncional(true)
+     }
+  },[tab,setTab])
   return (
     <>
         <div className="ManageInvestor">
             <Navbar responsive={responsive} lang={lang} setLang={setLang} language={language} />
             <Header responsive={responsive} lang={lang} setLang={setLang} displayArrowBtn={`show`} colorArrowBtn={`var(--primary-color)`} textArrowBtn={language.global.back}  pageTitle={language.contract_inver_invest.title} displaySearch={`show`} />
             <main className='main configuration'>
-                <Tab action={setTab} tab1={`Contract creation`} tab2={`Approval/ Denial`} tab3={`Contract formalization`} hideTab4={`dn`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} hideCustomizer={`dn`} tabs1={language.deuda_leasing.tab1} tabs2={language.deuda_leasing.tab2} tabs3={language.deuda_leasing.tab3} />
+                <Tab active={funcion} action={setTab2} tab1={`Contract creation`} tab2={`Approval/ Denial`} tab3={`Document Generate`} hideTab4={`dn`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} hideCustomizer={`dn`} tabs1={language.deuda_leasing.tab1} tabs2={language.deuda_leasing.tab2} tabs3={`Document Generate`} />
                 {
-                    tab === 'Contract creation'
-                    ?<ContractCreationInvestor  valorExtraido={valores} valorIdFondo={IDFondo} valorIDInversor={IdInversor}  language={language} Deuda={deud}  isUpdates={isUpdate} funcion={funcioGloal}/>
+                    tab2 === 'Contract creation'
+                    ?<ContractCreationInvestor  valorExtraido={valores} valorIdFondo={IDFondo} valorIDInversor={IdInversor}  language={language} Deuda={deud}  isUpdates={isUpdate} funcion={funcioGloal} edit={true}/>
                     :<></>
                 }
                 {
-                    tab === 'Approval/ Denial'
-                    ?<ApprovalDenalInvestor language={language} AprovalInf={AprovalInfo}  idFondos={IDFondo} idInversors={IdInversor} Deuda={deud}/>
+                    tab2 === 'Approval/ Denial'
+                    ?<ApprovalDenalInvestor language={language} AprovalInf={AprovalInfo}  idFondos={IDFondo} idInversors={IdInversor} Deuda={deud} edit={true}/>
                     :<></>
                 }
                 {
-                    tab === 'Contract formalization'
-                    ?<ContractFormalizationInvestor language={language} />
+                    tab2 === 'Document Generate' 
+                    ?<DocumentGenerate language={language} />
                     :<></>
                 }
             </main>

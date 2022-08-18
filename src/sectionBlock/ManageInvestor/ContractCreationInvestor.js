@@ -1,6 +1,7 @@
 import React, {useReducer,useEffect,useState} from 'react';
 import { Input, SelectVal, ManageProjectTable} from '../Leasing-section/Leasing-Component';
 import {Button} from '../../component/buttons';
+import { AiFillEdit } from "react-icons/ai";
 import { useNavigate} from 'react-router-dom';
 import axios from "../../api/axios.js";
 import {toast} from "react-toastify";
@@ -30,7 +31,7 @@ const initialState = {
       }
   }
 
-const ContractCreationInvestor = ({ language ,valorExtraido,valorIdFondo,valorIDInversor,isUpdates,funcion,Deuda}) => {
+const ContractCreationInvestor = ({ language ,valorExtraido,valorIdFondo,valorIDInversor,isUpdates,funcion,Deuda,edit}) => {
     const navigates = useNavigate();
     const [facturas,SeFacturas] = useState([]);
     const [allFund,setAllFund]=useState([])
@@ -299,51 +300,164 @@ const ContractCreationInvestor = ({ language ,valorExtraido,valorIdFondo,valorID
           }
           callListFundsWithInvestor()
         },[valorIdFondo]);
+        const [editing, isEditing] = useState(edit);
     return ( 
         <div className="Contract-creation">
+            <div className="editing"><span onClick={()=>{isEditing(!editing)}} ><AiFillEdit /></span></div>
             <form action="" method="post" onSubmit={handleSubmit}>
                 <div className="inputs-part">
                     <p className="inputsTitle">{language.contract_inver_invest.information_proejct}</p>
                     <ul className="Esheet">
-                        
-                    <li className="select">
-                      <label htmlFor="Fund_to_invest">{language.contract_inver_invest.funt_invest}</label>  
-                      <Select isDisabled={isUpdates} value={fondoSelec} options={allFund} onChange={selectFund} />
-                    </li>
-                        <Input  disa={true} label={language.contract_inver_invest.inverment_object} type={`text`} name={`Investment_objective`} value={Investment_objective} placeholder={`Enter`} onChange={onChange} />
-                        <SelectVal disa={true} label={language.contract_inver_invest.country} name={`Country1`} value={Country1} placeholder={`select`}  array={[]} onChange={onChange} />
-                        <SelectVal  disa={true} label={language.contract_inver_invest.city} name={`City1`} value={City1} placeholder={`select`}  array={[]} onChange={onChange} />
+                      {
+                        editing
+                        ?<>
+                          <li className="select">
+                            <label htmlFor="Fund_to_invest">{language.contract_inver_invest.funt_invest}</label>  
+                            <Select isDisabled={isUpdates} value={fondoSelec} options={allFund} onChange={selectFund} />
+                          </li>
+                        </>
+                        :<>
+                          <li className="savedInfo">
+                            <label>{language.contract_inver_invest.funt_invest}</label>
+                            {/* <p>{fondoSelec}</p> */}
+                          </li>
+                        </>
+                      }
+                        {
+                          editing
+                          ?<>
+                            <Input  disa={true} label={language.contract_inver_invest.inverment_object} type={`text`} name={`Investment_objective`} value={Investment_objective} placeholder={`Enter`} onChange={onChange} />
+                            <SelectVal disa={true} label={language.contract_inver_invest.country} name={`Country1`} value={Country1} placeholder={`select`}  array={[]} onChange={onChange} />
+                            <SelectVal  disa={true} label={language.contract_inver_invest.city} name={`City1`} value={City1} placeholder={`select`}  array={[]} onChange={onChange} />
+                          </>
+                          :<>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_invest.inverment_object}</label>
+                              <p>{Investment_objective}</p>
+                            </li>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_invest.country}</label>
+                              <p>{Country1}</p>
+                            </li>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_invest.city}</label>
+                              <p>{City1}</p>
+                            </li>
+                          </>
+                        }
                     </ul>
                     <ul className="Esheet"> 
-                        <Input  disa={true} label={language.contract_inver_invest.investment_amount} type={`number`} name={`Investment_amount`} value={Investment_amount} placeholder={`$`} onChange={onChange} />
+                        {
+                          editing
+                          ?<>
+                            <Input  disa={true} label={language.contract_inver_invest.investment_amount} type={`number`} name={`Investment_amount`} value={Investment_amount} placeholder={`$`} onChange={onChange} />
+                          </>
+                          :<>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_invest.investment_amount}</label>
+                              <p>{Investment_amount}</p>
+                            </li>
+                          </>
+                        }
                      </ul>
                 </div>
                 <div className="inputs-part">
                     <p className="inputsTitle">{language.contract_inver_invest.investorinfo}</p>
                    
                     <ul className="Esheet">
-                    <li className="select">
-                      <label htmlFor="Fund_to_invest">{language.contract_inver_invest.inversor}</label>  
-                      <Select isDisabled={isUpdates} value={InverSele} options={allInversors} onChange={selectInversor} />
-                    </li>
-                        <Input disa={true} label={language.contract_inver_invest.datereque} type={`date`} name={`Date_of_request`} value={Date_of_request} placeholder={`select`}  onChange={onChange} />
-                        <Input disa={true} label={language.contract_inver_invest.invertorfirstlast} type={`text`} name={`Investors_first_and_last_names`} value={Investors_first_and_last_names} placeholder={`Enter`} onChange={onChange} />
-                        <SelectVal disa={true} label={language.contract_inver_invest.document_type} name={`Type_of_document`} value={Type_of_document} placeholder={`select`} array={[]} onChange={onChange} />
-                                         </ul>
-                    <ul className="Esheet">  
-                    <Input disa={true} label={language.contract_inver_invest.document} type={`text`} name={`Document`} value={Document} placeholder={`Enter`} onChange={onChange} />
-  
-                        <Input disa={true} label={language.contract_inver_invest.country} name={`Country2`} value={Country2} placeholder={`select`}  array={[]} onChange={onChange} />
-                        <Input disa={true} label={language.contract_inver_invest.city} name={`City2`} value={City2} placeholder={`select`}  array={[]} onChange={onChange} />
+                        {
+                          editing
+                          ?<>
+                            <li className="select">
+                              <label htmlFor="Fund_to_invest">{language.contract_inver_invest.inversor}</label>  
+                              <Select isDisabled={isUpdates} value={InverSele} options={allInversors} onChange={selectInversor} />
+                            </li>
+                          </>
+                          :<>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_invest.inversor}</label>
+                              {/* <p>{InverSele}</p> */}
+                            </li>
+                          </>
+                        }
+                        {
+                          editing
+                          ?<>
+                            <Input disa={true} label={language.contract_inver_invest.datereque} type={`date`} name={`Date_of_request`} value={Date_of_request} placeholder={`select`}  onChange={onChange} />
+                            <Input disa={true} label={language.contract_inver_invest.invertorfirstlast} type={`text`} name={`Investors_first_and_last_names`} value={Investors_first_and_last_names} placeholder={`Enter`} onChange={onChange} />
+                            <SelectVal disa={true} label={language.contract_inver_invest.document_type} name={`Type_of_document`} value={Type_of_document} placeholder={`select`} array={[]} onChange={onChange} />
+                          </>
+                          :<>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_invest.datereque}</label>
+                              <p>{Date_of_request}</p>
+                            </li>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_invest.invertorfirstlast}</label>
+                              <p>{Investors_first_and_last_names}</p>
+                            </li>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_invest.document_type}</label>
+                              <p>{Type_of_document}</p>
+                            </li>
+                          </>
+                        }
+                    </ul>
+                    <ul className="Esheet">
+                      {
+                        editing
+                        ?<>
+                          <Input disa={true} label={language.contract_inver_invest.document} type={`text`} name={`Document`} value={Document} placeholder={`Enter`} onChange={onChange} />
+                          <Input disa={true} label={language.contract_inver_invest.country} name={`Country2`} value={Country2} placeholder={`select`}  array={[]} onChange={onChange} />
+                          <Input disa={true} label={language.contract_inver_invest.city} name={`City2`} value={City2} placeholder={`select`}  array={[]} onChange={onChange} />
+                        </>
+                        :<>
+                          <li className="savedInfo">
+                            <label>{language.contract_inver_invest.document}</label>
+                            <p>{Document}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.contract_inver_invest.country}</label>
+                            <p>{Country2}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.contract_inver_invest.city}</label>
+                            <p>{City2}</p>
+                          </li>
+                        </>
+                      }
                     </ul>
                 </div>
                 <div className="inputs-part">
                     <p className="inputsTitle">{language.contract_global.inver_terms}</p>
                     <ul className="Esheet">
-                        <SelectVal  disa={ isUpdates} label={language.contract_global.periocity} name={`Perioricity`} value={Perioricity} placeholder={`select`} array={periooci} onChange={onChange} />
-                        <Input  disa={ isUpdates}   label={language.contract_global.start_date} type={`date`} name={`Start_date`} value={Start_date} placeholder={`Enter`} onChange={onChange} />
-                        <Input disa={ isUpdates}  label={language.contract_global.form_payment} type={`text`} name={`Form_of_payment`} value={Form_of_payment} placeholder={`Enter`} onChange={onChange} />
-                        <SelectVal  disa={ isUpdates} label={language.contract_global.number_fee} name={`Number_of_quotas`} value={Number_of_quotas} placeholder={`select`} array={tarif} onChange={onChange} />
+                      {
+                        editing
+                        ?<>
+                          <SelectVal  disa={ isUpdates} label={language.contract_global.periocity} name={`Perioricity`} value={Perioricity} placeholder={`select`} array={periooci} onChange={onChange} />
+                          <Input  disa={ isUpdates}   label={language.contract_global.start_date} type={`date`} name={`Start_date`} value={Start_date} placeholder={`Enter`} onChange={onChange} />
+                          <Input disa={ isUpdates}  label={language.contract_global.form_payment} type={`text`} name={`Form_of_payment`} value={Form_of_payment} placeholder={`Enter`} onChange={onChange} />
+                          <SelectVal  disa={ isUpdates} label={language.contract_global.number_fee} name={`Number_of_quotas`} value={Number_of_quotas} placeholder={`select`} array={tarif} onChange={onChange} />
+                        </>
+                        :<>
+                          <li className="savedInfo">
+                            <label>{language.contract_global.periocity}</label>
+                            <p>{Perioricity}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.contract_global.start_date}</label>
+                            <p>{Start_date}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.contract_global.form_payment}</label>
+                            <p>{Form_of_payment}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.contract_global.number_fee}</label>
+                            <p>{Number_of_quotas}</p>
+                          </li>
+                        </>
+                      }
                     </ul>
                 </div>
                 <div className="project-submit">
@@ -352,8 +466,14 @@ const ContractCreationInvestor = ({ language ,valorExtraido,valorIdFondo,valorID
             </form>
             <ManageProjectTable header1={language.contract_global.payment_date} header2={language.contract_global.form_payment} header3={`Value`} ProjectInfo={facturas} />
              <div className="Esheet-submit">
-              {isUpdates?<></>:<> <Button text={language.contract_global.create_cont} background={`var(--primary-color)`} types={`button`}  click={opcionBoton} />
-            </>}
+              {
+                editing
+                ?<>
+                    {isUpdates?<></>:<> <Button text={language.contract_global.create_cont} background={`var(--primary-color)`} types={`button`}  click={opcionBoton} />
+                  </>}
+                </>
+                :<></>
+              }
                </div>
         </div>
     )

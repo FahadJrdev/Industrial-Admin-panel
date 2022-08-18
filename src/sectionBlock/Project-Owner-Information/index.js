@@ -29,9 +29,9 @@ function reducer(state, {field,value}) {
   }
 }
 
-const ProjectOwnerInfo = ({title,language,datoRetorno,idproject,setOwner,idOwner,setIdOwner}) => {
+const ProjectOwnerInfo = ({title,language,datoRetorno,idproject,setOwner,idOwner,setIdOwner, edit}) => {
   const navigates = useNavigate();
-  const [isEditing, setEditing] = useState('no');
+  const [isEditing, setEditing] = useState(edit);
   useEffect(()=>{
     const editElement = document.querySelector('.ProjectOwnerInfo ul li svg');
     if(editElement){

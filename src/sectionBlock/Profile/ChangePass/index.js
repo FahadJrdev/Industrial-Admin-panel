@@ -1,5 +1,6 @@
 import React from 'react';
 import './changePass.css';
+import {useNavigate} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Button } from '../../../component/buttons';
 import { useReducer } from 'react';
@@ -19,6 +20,7 @@ function reducer(state, {field,value}) {
 }
 
 const ChangePass = ({language}) => {
+  const navigate = useNavigate();
     const [state, dispatch] = useReducer(reducer, initialState);
   const onChange =(e)=>{
       dispatch({field: e.target.name, value: e.target.value})
@@ -32,7 +34,7 @@ const ChangePass = ({language}) => {
         }
         axios.post("/change-password", valor)
         .then((response) => {
-          console.log(response)
+          navigate('/dashboard', {replace: true})
         }).catch((err)=>{
           if(err.response){
             if(err.response.data){

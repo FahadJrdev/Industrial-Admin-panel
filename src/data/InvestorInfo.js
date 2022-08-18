@@ -855,79 +855,567 @@ export const RevenueInfo2 = [{
         item2: '121324',
         item3: '$60000',
         item4: 'PAGADO',
+        item5: 'FACTURA',
         color: '#85B900',
-        decoration: 'none'
+        decoration: 'none',
+        actionHide: 'vn',
+        action: 'Register'
     },
     {
         item1: '1010345654',
         item2: '23243',
         item3: '$60000',
         item4: 'NO PAGO',
+        item5: 'FACTURA',
         color: '#DE5753',
-        decoration: 'underline'
+        decoration: 'underline',
+        action: 'Register',
+        actionbg: '#FF2116',
+        reg: 'reg1'
     },
     {
         item1: '1010345654',
         item2: '24353',
         item3: '$60000',
         item4: 'PAGADO',
+        item5: 'INVERSIONISTA',
         color: '#85B900',
-        decoration: 'none'
+        decoration: 'none',
+        action: 'Register',
+        actionbg: '#FF7A17',
+        reg: 'reg2'
     },
     {
         item1: '1010345654',
         item2: '123420',
         item3: '$60000',
         item4: 'PAGADO',
+        item5: 'OTRO',
+        color: '#85B900',
+        decoration: 'none',
+        action: 'Register',
+        actionbg: '#85B900',
+        reg: 'reg3'
+    }
+]
+
+export const ConfigurationSettingInfo = [
+    {
+        item1: '123342353534',
+        item2: 'USA'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Colombia'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Peru'
+    },
+    {
+        item1: '123342353534',
+        item2: 'USA'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Colombia'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Peru'
+    },
+    {
+        item1: '123342353534',
+        item2: 'USA'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Colombia'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Peru'
+    },
+    {
+        item1: '123342353534',
+        item2: 'USA'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Colombia'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Peru'
+    },
+    {
+        item1: '123342353534',
+        item2: 'USA'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Colombia'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Peru'
+    },
+    {
+        item1: '123342353534',
+        item2: 'USA'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Colombia'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Peru'
+    },
+    {
+        item1: '123342353534',
+        item2: 'USA'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Colombia'
+    },
+    {
+        item1: '123342353534',
+        item2: 'Peru'
+    }
+]
+
+export const ConfigArchivoInfo = [
+    {
+        item1: 'CODIGO DE FACTURA',
+        item2: '1',
+        item3: 'ingresar',
+        item4: 'ingresar',
+        item5: 'ingresar',
+    },
+    {
+        item1: 'CÓDIGO',
+        item2: '2',
+        item3: 'ingresar',
+        item4: 'ingresar',
+        item5: 'ingresar',
+    },
+    {
+        item1: 'IDENTIFICACIÓN',
+        item2: '3',
+        item3: 'ingresar',
+        item4: 'ingresar',
+        item5: 'ingresar',
+    },
+    {
+        item1: 'NOMBRES',
+        item2: '4',
+        item3: 'ingresar',
+        item4: 'ingresar',
+        item5: 'ingresar',
+    },
+    {
+        item1: 'APELLIDOS',
+        item2: '5',
+        item3: 'ingresar',
+        item4: 'ingresar',
+        item5: 'ingresar',
+    },
+    {
+        item1: 'CONCEPTO',
+        item2: '6',
+        item3: 'ingresar',
+        item4: 'ingresar',
+        item5: 'ingresar',
+    },
+    {
+        item1: 'VALOR',
+        item2: '7',
+        item3: 'ingresar',
+        item4: 'ingresar',
+        item5: 'ingresar',
+    },
+    {
+        item1: 'FECHA',
+        item2: '8',
+        item3: 'ingresar',
+        item4: 'ingresar',
+        item5: 'ingresar',
+    },
+]
+
+export const LastPagoInfo2 = [
+    {
+        item1: 'Ingresar',
+        item2: 'Ingresar',
+        item3: 'Ingresar',
+        item4: 'Ingresar',
+        item5: 'Ingresar',
+        item6: 'Ingresar',
+        item7: 'Ingresar',
+        item8: 'Ingresar',
+        item9: 'Ingresar',
+    },
+    {
+        item1: 'Ingresar',
+        item2: 'Ingresar',
+        item3: 'Ingresar',
+        item4: 'Ingresar',
+        item5: 'Ingresar',
+        item6: 'Ingresar',
+        item7: 'Ingresar',
+        item8: 'Ingresar',
+        item9: 'Ingresar',
+    },
+    {
+        item1: 'Ingresar',
+        item2: 'Ingresar',
+        item3: 'Ingresar',
+        item4: 'Ingresar',
+        item5: 'Ingresar',
+        item6: 'Ingresar',
+        item7: 'Ingresar',
+        item8: 'Ingresar',
+        item9: 'Ingresar',
+    },
+]
+export const LastPagoInfo = [
+    {
+        item1: 'Ingresar',
+        item2: 'Ingresar',
+        item3: 'Ingresar',
+        item4: 'Ingresar',
+        item5: 'Ingresar',
+    },
+    {
+        item1: 'Ingresar',
+        item2: 'Ingresar',
+        item3: 'Ingresar',
+        item4: 'Ingresar',
+        item5: 'Ingresar',
+    },
+]
+
+export const ExpensesInfo = [
+    {
+        item1: 'Fondo 1',
+        item2: '1234',
+        item3: '$3,979.92'
+    },
+    {
+        item1: 'Fondo 2',
+        item2: '1234',
+        item3: '$3,979.92'
+    },
+    {
+        item1: 'Fondo 3',
+        item2: '1234',
+        item3: '$3,979.92'
+    },
+    {
+        item1: 'Fondo 4',
+        item2: '1234',
+        item3: '$3,979.92'
+    },
+    {
+        item1: 'Fondo 5',
+        item2: '1234',
+        item3: '$3,979.92'
+    },
+    {
+        item1: 'Fondo 6',
+        item2: '1234',
+        item3: '$3,979.92'
+    },
+    {
+        item1: 'Fondo 1',
+        item2: '1234',
+        item3: '$3,979.92'
+    },
+    {
+        item1: 'Fondo 7',
+        item2: '1234',
+        item3: '$3,979.92'
+    },
+    {
+        item1: 'Fondo 8',
+        item2: '1234',
+        item3: '$3,979.92'
+    },
+    {
+        item1: 'Fondo 1',
+        item2: '1234',
+        item3: '$3,979.92'
+    },
+    {
+        item1: 'Fondo 9',
+        item2: '1234',
+        item3: '$3,979.92'
+    },
+    {
+        item1: 'Fondo 10',
+        item2: '1234',
+        item3: '$3,979.92'
+    },
+    {
+        item1: 'Fondo 11',
+        item2: '1234',
+        item3: '$3,979.92'
+    }
+]
+
+export const GatosInfo = [
+    {
+      item1:'242453647',
+      item2:'Mexico',
+      item3:'Brief description of expense',
+      item4:'12/01/2022',
+      item5:'$3,979.92',
+      item6:'CREADO',
+      width1:'10%',
+      width2:'14%',
+      width3:'20%',
+      width4:'14%',
+      width5:'14%',
+      width6:'14%',
+      width7:'10%'
+    },
+    {
+      item1:'242453647',
+      item2:'Colombia ',
+      item3:'Brief description of expense',
+      item4:'12/01/2022',
+      item5:'$3,979.92',
+      item6:'CREADO',
+      color: '',
+      width1:'10%',
+      width2:'14%',
+      width3:'20%',
+      width4:'14%',
+      width5:'14%',
+      width6:'14%',
+      width7:'10%'
+    },
+    {
+      item1:'242453647',
+      item2:'Costa Rica',
+      item3:'Brief description of expense',
+      item4:'12/01/2022',
+      item5:'$3,979.92',
+      item6:'CREADO',
+      color: '',
+      width1:'10%',
+      width2:'14%',
+      width3:'20%',
+      width4:'14%',
+      width5:'14%',
+      width6:'14%',
+      width7:'10%'
+    },
+    {
+      item1:'242453647',
+      item2:'Panamá',
+      item3:'Brief description of expense',
+      item4:'12/01/2022',
+      item5:'$3,979.92',
+      item6:'CREADO',
+      color: '',
+      width1:'10%',
+      width2:'14%',
+      width3:'20%',
+      width4:'14%',
+      width5:'14%',
+      width6:'14%',
+      width7:'10%'
+    },
+    {
+      item1:'242453647',
+      item2:'Brazil',
+      item3:'Brief description of expense',
+      item4:'12/01/2022',
+      item5:'$3,979.92',
+      item6:'CREADO',
+      color: '',
+      width1:'10%',
+      width2:'14%',
+      width3:'20%',
+      width4:'14%',
+      width5:'14%',
+      width6:'14%',
+      width7:'10%'
+    },
+    {
+      item1:'242453647',
+      item2:'Costa Rica',
+      item3:'Brief description of expense',
+      item4:'12/01/2022',
+      item5:'$3,979.92',
+      item6:'CREADO',
+      color: '',
+      width1:'10%',
+      width2:'14%',
+      width3:'20%',
+      width4:'14%',
+      width5:'14%',
+      width6:'14%',
+      width7:'10%'
+    },
+    {
+      item1:'242453647',
+      item2:'Panamá',
+      item3:'Brief description of expense',
+      item4:'12/01/2022',
+      item5:'$3,979.92',
+      item6:'CREADO',
+      color: '',
+      width1:'10%',
+      width2:'14%',
+      width3:'20%',
+      width4:'14%',
+      width5:'14%',
+      width6:'14%',
+      width7:'10%'
+    },
+    {
+      item1:'242453647',
+      item2:'Brazil',
+      item3:'Brief description of expense',
+      item4:'12/01/2022',
+      item5:'$3,979.92',
+      item6:'CREADO',
+      color: '',
+      width1:'10%',
+      width2:'14%',
+      width3:'20%',
+      width4:'14%',
+      width5:'14%',
+      width6:'14%',
+      width7:'10%'
+    }
+]
+
+export const UtilidadesInfo1=[
+    {
+        item1: '1',
+        item2: 'Ingreso',
+        item3: 'Pago de factura',
+        item4: 'Activo',
+        item5: 'Cargado',
         color: '#85B900',
         decoration: 'none'
     },
     {
-        item1: '1010345654',
-        item2: '23243',
-        item3: '$60000',
-        item4: 'NO PAGO',
-        color: '#DE5753',
+        item1: '2',
+        item2: 'Ingreso',
+        item3: 'Pago de factura',
+        item4: 'Activo',
+        item5: 'Cargado',
+        color: '#85B900',
+        decoration: 'none'
+    },
+    {
+        item1: '3',
+        item2: 'Egreso',
+        item3: 'Transferencia inversionista',
+        item4: 'Activo',
+        item5: 'Error de carga',
+        color: '#FF2116',
         decoration: 'underline'
     },
     {
-        item1: '1010345654',
-        item2: '24353',
-        item3: '$60000',
-        item4: 'PAGADO',
+        item1: '4',
+        item2: 'Egreso',
+        item3: 'Otros ingresos',
+        item4: 'Activo',
+        item5: 'Cargado',
         color: '#85B900',
         decoration: 'none'
     },
     {
-        item1: '1010345654',
-        item2: '123420',
-        item3: '$60000',
-        item4: 'PAGADO',
+        item1: '5',
+        item2: 'Egreso',
+        item3: 'Pago a proveedores - proyecto',
+        item4: 'Activo',
+        item5: 'Cargado',
         color: '#85B900',
         decoration: 'none'
     },
     {
-        item1: '1010345654',
-        item2: '23243',
-        item3: '$60000',
-        item4: 'NO PAGO',
-        color: '#DE5753',
-        decoration: 'underline'
-    },
-    {
-        item1: '1010345654',
-        item2: '24353',
-        item3: '$60000',
-        item4: 'PAGADO',
+        item1: '6',
+        item2: 'Egreso',
+        item3: 'Pago a proveedores - proyecto',
+        item4: 'Activo',
+        item5: 'Cargado',
         color: '#85B900',
         decoration: 'none'
+    }
+]
+export const UtilidadesInfo2=[
+    {
+        item1: '1',
+        item2: 'Ingreso',
+        item3: 'Pago de factura',
+        item4: 'Activo',
+        item5: 'Encontrado en plataforma',
+        color: '#85B900',
+        item6: 'Registar',
+        background: '#85B900',
+        action: 'reg'
     },
     {
-        item1: '1010345654',
-        item2: '123420',
-        item3: '$60000',
-        item4: 'PAGADO',
-        color: '#85B900',
-        decoration: 'none'
+        item1: '2',
+        item2: 'Ingreso',
+        item3: 'Pago de factura',
+        item4: 'Activo',
+        item5: 'No encontrado en plataforma',
+        color: '#FF2116',
+        item6: 'Registar',
+        background: '#FF2116',
+        action: 'regRed'
     },
+    {
+        item1: '3',
+        item2: 'Egreso',
+        item3: 'Transferencia inversionista',
+        item4: 'Activo',
+        item5: 'Encontrado en plataforma',
+        color: '#85B900',
+        item6: 'Registar',
+        background: '#85B900',
+        action: 'reg'
+    },
+    {
+        item1: '4',
+        item2: 'Egreso',
+        item3: 'Otros ingresos',
+        item4: 'Activo',
+        item5: 'Encontrado en plataforma',
+        color: '#85B900',
+        item6: 'Registar',
+        background: '#85B900',
+        action: 'reg'
+    },
+    {
+        item1: '5',
+        item2: 'Egreso',
+        item3: 'Pago a proveedores - proyecto',
+        item4: 'Activo',
+        item5: 'No encontrado en plataforma',
+        color: '#FF7A17',
+        item6: 'Verificar',
+        action: 'ver',
+        background: '#FF7A17'
+    },
+    {
+        item1: '6',
+        item2: 'Egreso',
+        item3: 'Pago a proveedores - proyecto',
+        item4: 'Activo',
+        item5: 'Encontrado en plataforma',
+        color: '#85B900',
+        item6: 'Verificar',
+        action: 'reg',
+        background: '#85B900'
+    }
 ]

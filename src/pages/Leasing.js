@@ -5,7 +5,7 @@ import Header from '../sectionBlock/Header';
 import Tab from '../component/tab';
 import ContractCreation from '../sectionBlock/Leasing-section/Contract-creation';
 import ApprovalDenal from '../sectionBlock/Leasing-section/ApprovalDenal';
-import ContractFormalization from '../sectionBlock/Leasing-section/Contract-formalization';
+import DocumentGenerate from '../sectionBlock/Leasing-section/Document-generate';
 import GenerationOfInvoices from '../sectionBlock/Leasing-section/Generation-of-invoices';
 import './pageStyle.css';
 import { useLocation} from "react-router-dom";
@@ -24,6 +24,8 @@ const Leasing = ({lang, setLang, language, responsive}) => {
     const [idDeuda,setDeuda]=useState('')
     const [idProject,setProject]=useState('')
     const [valor,setValor]=useState({})
+    const [funcion,setFuncional] = useState(true);
+    const [tab2,setTab2] = useState('Contract creation');
     const [tab,setTab] = useState('Contract creation');
     const callIndividualValue= (id)=>{
         let bearerToken={
@@ -50,6 +52,7 @@ const Leasing = ({lang, setLang, language, responsive}) => {
             Document_type: '',
             Document_type2: '',
             Document: '',
+            moun_interes:retorno.INTERES_CREDITO,
             Credit_line:retorno.LINEA_CREDITO,
             Credit_quota: retorno.CUPO_CREDITO,
             Maximum_period: retorno.PLAZO_MAXIMO,
@@ -111,31 +114,35 @@ const Leasing = ({lang, setLang, language, responsive}) => {
             
         }
     },[buscar])
+    useEffect(()=>{
+      console.log(idDeuda)
+     if(idDeuda){
+      setTab2(tab)
+      setFuncional(false)
+     }else{
+      setFuncional(true)
+     }
+   },[tab,setTab,idDeuda])
   return (
     <>
         <div className="leasingConfig">
             <Navbar responsive={responsive} lang={lang} setLang={setLang} language={language} />
             <Header responsive={responsive} lang={lang} setLang={setLang} displayArrowBtn={`show`} colorArrowBtn={`var(--primary-color)`} textArrowBtn={language.global.back}  pageTitle={language.deuda_leasing.title} pageDesc ={language.deuda_leasing.descrip} displaySearch={`show`} />
             <main className='main configuration'>
-                <Tab action={setTab} tab1={`Contract creation`} tab2={`Approval/ Denial`} tab3={`Contract formalization`} tab4={`Generation of invoices`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} hideCustomizer={`dn`} tabs1={language.deuda_leasing.tab1} tabs2={language.deuda_leasing.tab2} tabs3={language.deuda_leasing.tab3} tabs4={`Generation of invoices`}/>
+                <Tab active={funcion} action={setTab2} tab1={`Contract creation`} tab2={`Approval/ Denial`} tab3={`Document Generate`} hideTab4={`dn`} hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} hideCustomizer={`dn`} tabs1={language.deuda_leasing.tab1} tabs2={language.deuda_leasing.tab2} tabs3={`Document Generate`} />
                 {
-                    tab === 'Contract creation'
-                    ?<ContractCreation language={language} valorData={valor} valorIDProyecto={idProject} valorIDOwner={idOwner} isUpdates={isUpdate} Deuda={idDeuda}  funcion={funcioGloal}/>
+                    tab2 === 'Contract creation'
+                    ?<ContractCreation language={language} valorData={valor} valorIDProyecto={idProject} valorIDOwner={idOwner} isUpdates={isUpdate} Deuda={idDeuda}  funcion={funcioGloal} edit={true}/>
                     :<></>
                 }
                 {
-                    tab === 'Approval/ Denial'
-                    ?<ApprovalDenal language={language} Deuda={idDeuda}AprovalInfo={AprovalInfo} id_proyectos={idProject} id_owners={idOwner} />
+                    tab2 === 'Approval/ Denial' 
+                    ?<ApprovalDenal language={language} Deuda={idDeuda}AprovalInfo={AprovalInfo} id_proyectos={idProject} id_owners={idOwner} edit={true} />
                     :<></>
                 }
                 {
-                    tab === 'Contract formalization'
-                    ?<ContractFormalization language={language} />
-                    :<></>
-                }
-                {
-                    tab === 'Generation of invoices'
-                    ?<GenerationOfInvoices language={language} />
+                    tab2 === 'Document Generate'
+                    ?<DocumentGenerate language={language} />
                     :<></>
                 }
             </main>

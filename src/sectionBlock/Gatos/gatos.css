@@ -1,0 +1,301 @@
+.adding-investor.approval {
+    width: 70%;
+}
+
+.adding-investor-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 19.58%);
+    z-index: 100;
+    top: 0;
+    left: 0;
+    position: fixed;
+}
+
+.adding-investor.generate {
+    background-color: var(--bg-primary-color);
+    -webkit-transition: width .4s ease, background-color .4s ease, border-color .4s;
+    transition: width .4s ease, background-color .4s ease, border-color .4s;
+    height: 100%;
+    box-shadow: var(--drop-box-shadow);
+    width: 48.6%;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    border-radius: 20px 0px 0px 20px;
+    position: fixed;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.investor-add {
+    width: 100%;
+    -webkit-transition: border-color .4s;
+    transition: border-color .4s;
+    scrollbar-width: none;
+    overflow-x: hidden;
+    padding: 20px 40px;
+}
+
+.investor-add .header-add {
+    display: flex;
+    align-items: center;
+}
+
+.investor-add .header-add button {
+    padding: 10px 25px;
+}
+
+.investor-add .header-add h1 {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-low-dark);
+    line-height: 180%;
+    margin-left: 20px;
+}
+
+.information .submit-button {
+    margin: 30px 0px;
+    text-align: end;
+}
+
+.investor-add .gatos ul {
+    flex-direction: column;
+}
+.investor-add .gatos ul li{
+    height: auto;
+    margin-bottom: 0px;
+}
+.investor-add .gatos ul li label{
+    padding-left: 0px;
+    color: #000000;
+}
+
+.investor-add .gatos ul li input{
+    border-radius: 0px;
+}
+.investor-add .gatos ul li textarea{
+    border-radius: 0px;
+}
+.investor-add .genrarGatos ul li{
+    height: auto;
+    margin-bottom: 0px;
+}
+.investor-add .genrarGatos ul li label{
+    padding-left: 0px;
+    color: #000000;
+}
+
+.investor-add .genrarGatos ul li input{
+    border-radius: 0px;
+    height: 30px;
+}
+.investor-add .genrarGatos ul li select{
+    top: 29px;
+    border: 1px solid var(--stroke-color);
+}
+.investor-add .genrarGatos ul:first-child li:last-child svg{
+    left: 216px;
+}
+.investor-add .genrarGatos ul li select svg{
+    top: 28px;
+    left: 150px;
+}
+.investor-add .genrarGatos ul li textarea{
+    border-radius: 0px;
+}
+.investor-add .genrarGatos h3{
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: #69B644;  
+    margin: 10px 0px;  
+}
+.investor-add .genrarGatos h2{
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    color: #000000;    
+}
+.investor-add .genrarGatos .dueno button{
+    width: 30%;
+    margin: 10px 0px 15px 0px;
+}
+.investor-add .genrarGatos .duenoPro{
+    display: flex;
+    flex-direction: column;
+}
+.investor-add .genrarGatos .duenoPro li{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.08px;
+    color: #858585;   
+    padding: 10px 20px;
+    width: 80%;
+    border-bottom: 1px solid #D3DAE6;
+}
+
+.investor-add .genrarGatos .duenoPro li:first-child{
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.24px;
+    color: #69B644;
+}
+
+.investor-add .PagoFactura-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.PagoFactura .investor-add {
+    height: 100%;
+}
+
+.PagoFactura .investor-add form {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.PagoFactura .PagoFactura-body button {
+    width: 30%;
+    margin-left: 15px;
+    margin-bottom: 25px;
+}
+.PagoFactura .PagoFactura-body ul {
+    display: flex;
+}
+
+.PagoFactura .PagoFactura-body li {
+    margin: 10px 0px 30px 20px;
+    width: 220px;
+    margin-left: 0px;
+    margin-right: 20px;
+}
+.PagoFactura .PagoFactura-body h4 {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: #69B644;
+    margin-top: 20px;
+}
+.PagoFactura .PagoFactura-body .button {
+    width: 30%;
+}
+
+.PagoFactura .PagoFacturaForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.PagoFactura .PagoFacturaForm .submit {
+    display: flex;
+    justify-content: center;
+}
+.PagoFactura .LastPagoTable{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.PagoFactura .lastPagoTable{
+    margin-top: 10px;
+    display: flex;
+    width: 100%;
+}
+.PagoFactura .lastPagoTable .LastPagoTable{
+    width: 100%;
+}
+.PagoFactura .LastPagoTable ul{
+    margin: 5px 0px;
+    border-bottom: 1px solid var(--border-secondary-color);
+}
+.PagoFactura .LastPagoTable li{
+    margin: 5px 0px;
+}
+
+.PagoFactura .lastPagoTable ul{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid var(--border-secondary-color);
+    border-radius: 9px;
+}
+.PagoFactura .lastPagoTable .LastPagoTable ul{
+    flex-direction: row;
+    border: none;
+    border-bottom: 1px solid var(--border-secondary-color);
+}
+.PagoFactura .lastPagoTable ul h3{
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: #69B644;
+}
+
+.PagoFactura .Esheet-submit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media screen and (max-width: 768px) {
+    .investor-add .genrarGatos ul {
+        flex-direction: column;
+    }
+    .investor-add .genrarGatos ul li.select{
+        margin-bottom: 40px;
+    }
+    .investor-add .genrarGatos ul li select~svg {
+        left: 185px;
+    }
+    .investor-add .genrarGatos ul:first-child li:last-child svg {
+        left: 185px;
+    }
+    .investor-add .genrarGatos .dueno button{
+        width: 100%;
+        padding: 10px 35px;
+    }
+    .investor-add .genrarGatos .submit-button button{
+        width: 100%;
+        padding: 10px 28px;
+    }
+    .PagoFactura .PagoFactura-body .button {
+        width: 70%;
+    }
+    .PagoFactura .Esheet-submit button {
+        width: 100%;
+    }
+    .PagoFactura .PagoFactura-body ul {
+        flex-direction: column;
+    }
+    .PagoFactura .LastPagoTable ul{
+        flex-direction: row;
+    }
+    .PagoFactura .LastPagoTable .responsiveAuto{
+        width: 300%;
+    }
+    .PagoFactura .PagoFactura-body li {
+        width: 100%;
+        margin: 10px 0px 30px 0px;
+    }
+    .PagoFactura .PagoFactura-body ul:nth-child(2) li:nth-child(2) {
+        width: 100%;
+    }
+    .PagoFactura .PagoFactura-body ul:nth-child(3) li:nth-child(2) {
+        width: 100%;
+    }
+    .PagoFactura .PagoFactura-body p {
+        margin-left: 0px;
+        margin-bottom: 10px;
+    }  
+    .PagoFactura .lastPagoTable{
+        flex-direction: column;
+    }
+}

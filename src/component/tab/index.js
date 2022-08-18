@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './tab.css';
 import { Configuration, Download, Print, TabIcon } from '../icon/icon';
-const Tab = ({tab1, tab2, tab3, tab4, tab5, tab6, tab7, tabs1, tabs2, tabs3, tabs4, tabs5, tabs6, tabs7, hideTab1, hideTab2, hideTab3, hideTab4, hideTab5, hideTab6, hideTab7, hideCustomizer, inactive,action}) => {
+const Tab = ({active,tab1, tab2, tab3, tab4, tab5, tab6, tab7, tabs1, tabs2, tabs3, tabs4, tabs5, tabs6, tabs7, hideTab1, hideTab2, hideTab3, hideTab4, hideTab5, hideTab6, hideTab7, hideCustomizer, inactive,action}) => {
     setTimeout(()=>{
         const Li = Array.from(document.querySelectorAll('.tab ul li'));
         Li.forEach((li,i)=>{
@@ -9,10 +9,16 @@ const Tab = ({tab1, tab2, tab3, tab4, tab5, tab6, tab7, tabs1, tabs2, tabs3, tab
                 if(action){
                     action(li.dataset.tab)
                 }
-                Li.forEach((li)=>{
-                    li.classList.remove('active');
-                })
-                Li[i].classList.add('active');
+                if(active){
+
+                }
+                if(action){
+                    Li.forEach((li)=>{
+                        li.classList.remove('active');
+                    })
+                    Li[i].classList.add('active');
+                }
+               
             })
         })
     })
@@ -30,6 +36,7 @@ const Tab = ({tab1, tab2, tab3, tab4, tab5, tab6, tab7, tabs1, tabs2, tabs3, tab
    const responsive = {
     responsiveTab: width < 769
   }
+  
   const {responsiveTab} = responsive;
   return (
       <>{

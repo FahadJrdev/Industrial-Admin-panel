@@ -177,6 +177,65 @@
     text-decoration: underline;
 }
 
+.table.configArchivoTable .listHeader .listHeaderItem{
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.24px;
+    color: #69B644;
+}
+.table.configArchivoTable .listBody .listItem{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.08px;
+    color: #343741;
+}
+.table.configArchivoTable .listItem{
+    width: 100%;
+}
+.table.configArchivoTable .listBody .listItem.firstItem{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.08px;
+    color: #69B644;
+}
+.table.LastPagoTable .listHeader .listHeaderItem{
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.24px;
+    color: #69B644;
+}
+.table.LastPagoTable .listBody .listItem{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.08px;
+    color: #343741;
+}
+.table.LastPagoTable .listItem{
+    width: 100%;
+}
+.table.LastPagoTable .listBody .listItem.firstItem{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.08px;
+    color: #858585;
+}
+
+.seeMore{
+    cursor: pointer;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 163.42%;
+    text-decoration-line: underline;
+    color: var(--text-low-dark); 
+}
+
 @media screen and (max-width: 768px) {
     .table .table-lists {
         margin-left: 0px;

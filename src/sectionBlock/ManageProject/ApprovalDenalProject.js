@@ -4,6 +4,7 @@ import {Button, RatingBtn} from '../../component/buttons';
 import Select from 'react-select' ;
 
 import './MP.css';
+import { AiFillEdit } from "react-icons/ai";
 
 import { useNavigate} from 'react-router-dom';
 import axios from "../../api/axios.js";
@@ -29,7 +30,7 @@ function reducer(state, { field, value }) {
   }
 }
 
-const ApprovalDenalProject = ({language,AprovalInf,idFondos,Deuda,idproyecto,valoridOwner}) => {
+const ApprovalDenalProject = ({language,AprovalInf,idFondos,Deuda,idproyecto,valoridOwner,edit}) => {
   const navigates = useNavigate();
   const[allInversors,setallInversor]=useState([])
   const [disabled,setDisable]=useState(false)
@@ -160,21 +161,61 @@ let valor={
         setIdProyecto(idproyecto)
       }
     },[idFondos,idproyecto,Deuda,valoridOwner]);
+    const [editing, isEditing] = useState(edit);
   return (
     <>
       <div className="Approval-denal">
+        <div className="editing"><span onClick={()=>{isEditing(!editing)}} ><AiFillEdit /></span></div>
         <form action="" method="post" onSubmit={handleSubmit}>
         <div className="inputs-part">
                     <p className="inputsTitle">{language.contract_inver_proyec.aproval_info}</p>
                     <ul className="Esheet">
-                        <Input disa={true}  label={language.contract_inver_proyec.code} type={`text`} name={`Code`} value={Code} placeholder={``} onChange={onChange} />
-                        <Input  disa={true}  label={language.contract_inver_proyec.Project_Name} type={`text`} name={`Project_name`} value={Project_name} placeholder={`Enter`} onChange={onChange} />
-                        <Input disa={true}  label={language.contract_inver_proyec.inverment_object} type={`text`} name={`Investment_objective`} value={Investment_objective} placeholder={`Enter`} onChange={onChange} />
-                        <SelectVal disa={true}  label={language.contract_inver_proyec.country} name={`Country1`} value={Country1} placeholder={`select`} value1={`Country-1`} value2={`Country-2`} value3={`Country-3`} value4={`Country-4`} hideValue5={`dn`} onChange={onChange} />
+                        {
+                          editing
+                          ?<>
+                            <Input disa={true}  label={language.contract_inver_proyec.code} type={`text`} name={`Code`} value={Code} placeholder={``} onChange={onChange} />
+                            <Input  disa={true}  label={language.contract_inver_proyec.Project_Name} type={`text`} name={`Project_name`} value={Project_name} placeholder={`Enter`} onChange={onChange} />
+                            <Input disa={true}  label={language.contract_inver_proyec.inverment_object} type={`text`} name={`Investment_objective`} value={Investment_objective} placeholder={`Enter`} onChange={onChange} />
+                            <SelectVal disa={true}  label={language.contract_inver_proyec.country} name={`Country1`} value={Country1} placeholder={`select`} value1={`Country-1`} value2={`Country-2`} value3={`Country-3`} value4={`Country-4`} hideValue5={`dn`} onChange={onChange} />
+                          </>
+                          :<>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_proyec.code}</label>
+                              <p>{Code}</p>
+                            </li>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_proyec.Project_Name}</label>
+                              <p>{Project_name}</p>
+                            </li>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_proyec.inverment_object}</label>
+                              <p>{Investment_objective}</p>
+                            </li>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_proyec.country}</label>
+                              <p>{Country1}</p>
+                            </li>
+                          </>
+                        }
                     </ul>
                     <ul className="Esheet"> 
-                        <SelectVal disa={true}  label={language.contract_inver_proyec.city} name={`City1`} value={City1} placeholder={`select`} value1={`City-1`} value2={`City-2`} value3={`City-3`} value4={`City-4`} hideValue5={`dn`} onChange={onChange} />
-                        <Input disa={true}  label={language.contract_inver_proyec.responsi} type={`text`} name={`Responsible`} value={Responsible} placeholder={`Enter`} onChange={onChange} />
+                        {
+                          editing
+                          ?<>
+                            <SelectVal disa={true}  label={language.contract_inver_proyec.city} name={`City1`} value={City1} placeholder={`select`} value1={`City-1`} value2={`City-2`} value3={`City-3`} value4={`City-4`} hideValue5={`dn`} onChange={onChange} />
+                            <Input disa={true}  label={language.contract_inver_proyec.responsi} type={`text`} name={`Responsible`} value={Responsible} placeholder={`Enter`} onChange={onChange} />
+                          </>
+                          :<>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_proyec.city}</label>
+                              <p>{City1}</p>
+                            </li>
+                            <li className="savedInfo">
+                              <label>{language.contract_inver_proyec.responsi}</label>
+                              <p>{Responsible}</p>
+                            </li>
+                          </>
+                        }
                     </ul>
                 </div>
                 <div className="inputs-part">
@@ -184,23 +225,63 @@ let valor={
             <div className="inputs-part">
               <p className="inputsTitle">{language.contract_global.contract_cualifi}</p>
               <div className="analsis-state">
-              <RatingBtn text={language.deuda_leasing.aproval_aproved} bg={opcionbutton==='opcion1'?`#69b644`:'#ffffff'} smallbg={opcionbutton==='opcion1'?'#ffffff':`#69b644`} color={opcionbutton==='opcion1'?'#ffffff':`#69b644`} border={opcionbutton==='opcion1'?'':`1px solid #69b644`}click={()=>{SetOption("opcion1")}}/>
+                <RatingBtn text={language.deuda_leasing.aproval_aproved} bg={opcionbutton==='opcion1'?`#69b644`:'#ffffff'} smallbg={opcionbutton==='opcion1'?'#ffffff':`#69b644`} color={opcionbutton==='opcion1'?'#ffffff':`#69b644`} border={opcionbutton==='opcion1'?'':`1px solid #69b644`}click={()=>{SetOption("opcion1")}}/>
                 <RatingBtn text={language.deuda_leasing.aproval_postpone} bg={opcionbutton==='opcion2'?'var(--primary-color)':'#ffffff'} smallbg={opcionbutton==='opcion2'?'#ffffff':`var(--primary-color)`} color={opcionbutton==='opcion2'?'#ffffff':`var(--primary-color)`} border={`1px solid var(--primary-color)`} click={()=>{SetOption("opcion2")}}  />
                 <RatingBtn text={language.deuda_leasing.aproval_reject} bg={opcionbutton==='opcion3'?`var(--secondary-color)`:'#ffffff'} smallbg={opcionbutton==='opcion3'?'#ffffff':`var(--secondary-color)`} color={opcionbutton==='opcion3'?'#ffffff':`var(--secondary-color)`} border={`1px solid var(--secondary-color)`} click={()=>{SetOption("opcion3")}}  />
 ¡             </div>
               <ul className="Esheet">
-                  <Input disa={disabled} label={language.deuda_leasing.aproval_date} type={`date`} name={`Approval_date`} value={Approval_date} placeholder={`MM/DD/YYYY`} onChange={onChange} />
-                  <Input disa={disabled} label={language.deuda_leasing.aproval_numbercertifi} type={`number`} name={`Number_of_certificate`} value={Number_of_certificate} placeholder={`Enter`} onChange={onChange} />
-                  <Input disa={disabled} label={language.deuda_leasing.aproval_numberagree} type={`number`} name={`Number_agreement`} value={Number_agreement} placeholder={`Enter`} onChange={onChange} />
-                  <Input disa={disabled} label={language.deuda_leasing.aproval_totalamount} type={`number`} name={`Total_amount`} value={Total_amount} placeholder={`Enter`} onChange={onChange} />
+                  {
+                    editing
+                    ?<>
+                      <Input disa={disabled} label={language.deuda_leasing.aproval_date} type={`date`} name={`Approval_date`} value={Approval_date} placeholder={`MM/DD/YYYY`} onChange={onChange} />
+                      <Input disa={disabled} label={language.deuda_leasing.aproval_numbercertifi} type={`number`} name={`Number_of_certificate`} value={Number_of_certificate} placeholder={`Enter`} onChange={onChange} />
+                      <Input disa={disabled} label={language.deuda_leasing.aproval_numberagree} type={`number`} name={`Number_agreement`} value={Number_agreement} placeholder={`Enter`} onChange={onChange} />
+                      <Input disa={disabled} label={language.deuda_leasing.aproval_totalamount} type={`number`} name={`Total_amount`} value={Total_amount} placeholder={`Enter`} onChange={onChange} />
+                    </>
+                    :<>
+                        <li className="savedInfo">
+                          <label>{language.deuda_leasing.aproval_date}</label>
+                          <p>{Approval_date}</p>
+                        </li>
+                        <li className="savedInfo">
+                          <label>{language.deuda_leasing.aproval_numbercertifi}</label>
+                          <p>{Number_of_certificate}</p>
+                        </li>
+                        <li className="savedInfo">
+                          <label>{language.deuda_leasing.aproval_numberagree}</label>
+                          <p>{Number_agreement}</p>
+                        </li>
+                        <li className="savedInfo">
+                          <label>{language.deuda_leasing.aproval_totalamount}</label>
+                          <p>{Total_amount}</p>
+                        </li>
+                    </>
+                  }
               </ul>
               <ul className="Esheet">
-                  <Textarea disa={disabled} label={language.deuda_leasing.aproval_remark} name={`Remarks`} value={Remarks} cols={20} rows={6} placeholder={`Enter`} onChange={onChange} />
+                {
+                  editing
+                  ?<>
+                    <Textarea disa={disabled} label={language.deuda_leasing.aproval_remark} name={`Remarks`} value={Remarks} cols={20} rows={6} placeholder={`Enter`} onChange={onChange} />
+                  </>
+                  :<>
+                    <li className="savedInfo">
+                      <label>{language.deuda_leasing.aproval_remark}</label>
+                      <p>{Remarks}</p>
+                    </li>
+                  </>
+                }
               </ul>
             </div>
             <div className="Esheet-submit">
-            {disabled?<></>:<>  <Button text={language.deuda_leasing.aproval_comunicate}  background={`var(--primary-color)`} types={`button`} click={callApiAproval}/>
-           </>}
+              {
+                editing
+                ?<>
+                  {disabled?<></>:<>  <Button text={language.deuda_leasing.aproval_comunicate}  background={`var(--primary-color)`} types={`button`} click={callApiAproval}/>
+                </>}
+                </>
+                :<></>
+              }
                
             </div>
         </form>

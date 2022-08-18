@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {Button, ButtonWithArrow } from '../../component/buttons';
 import './II.css';
 import axios from "../../api/axios.js";
-const Invoice = ({ title ,language, idinvoce, color, state}) => {
+const Invoice = ({ title ,language, idinvoce, color, state,close}) => {
     const [status, setStatus] = useState("start");
     const [idStar,setid] = useState("");
     const [Star] = useState("");
@@ -11,6 +11,7 @@ const Invoice = ({ title ,language, idinvoce, color, state}) => {
     const [Fecha, setFechaFact] = useState("");
     const [tipo, setContrato] = useState("");
     const [statuss, setStatuss] = useState(false);
+    const [Anulado, setAnulado] = useState(false);
     const [MontoFact, setMontoFact] = useState(0);
     const LoadData =()=>{
         let bearerToken={
@@ -19,7 +20,7 @@ const Invoice = ({ title ,language, idinvoce, color, state}) => {
               axios.get("/revenuemanagementInvoiceDetail/"+idStar, {},bearerToken)
               .then((response) => {
                 if(response.status===200){
-
+                    setAnulado(response.data.ANULADO)
                     setNumberFact(response.data.FACTURA)
                     setNAmeDeudo(response.data.DEUDOR)
                     setMontoFact(response.data['TOTAL A PAGAR'])
@@ -32,7 +33,6 @@ const Invoice = ({ title ,language, idinvoce, color, state}) => {
                     }else{
                         setStatus("paid")
                     }
-                    console.log(response)
                 }else{
                 }
               }).catch((err)=>{
@@ -45,6 +45,9 @@ const Invoice = ({ title ,language, idinvoce, color, state}) => {
       useEffect(()=>{
         LoadData()
       },[idStar,setid]);
+      const cerrar=()=>{
+        close('close')
+      }
    return ( <>
         <div className = "adding-investor-overlay"></div> 
         <div className = "adding-investor invoice">
@@ -55,7 +58,8 @@ const Invoice = ({ title ,language, idinvoce, color, state}) => {
                </div> 
                 <div className="invoice-desc">
                     <h2 className="N">{language.billing_detail.invoice_detinvonum} {NumberFactura}</h2>
-                    <p className="state" style={{color: color}}>{state}</p>
+                    {Anulado?<> <p className="state" style={{color: "red"}}>Anulado</p></>:<> <p className="state" style={{color: color}}>{state}</p></>}
+
                     <p className="tipo">{language.billing_detail.invoice_detitypecontr}: {tipo} <br />{language.billing_detail.invoice_detdeud}: {Deudor}</p>
                     <p className="pay">{language.billing_detail.invoice_detpaytotla}</p>
                     <h1 className="dollar">$ {MontoFact}</h1>
@@ -103,7 +107,7 @@ const Invoice = ({ title ,language, idinvoce, color, state}) => {
                         </ul>
                     </div>
                     <div className="submit">
-                        <Button text={language.global.accept} background={`var(--primary-color)`} types={`button`} />
+                        <Button text={language.global.accept} background={`var(--primary-color)`} types={`button`}  click={cerrar}/>
                     </div>
                 </div>
             </div>

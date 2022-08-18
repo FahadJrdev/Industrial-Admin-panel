@@ -5,15 +5,26 @@ import './component.css';
 import LeasingItem from './LeasingItem';
 import {ProjectItem,ProjectItem2} from './ProjectItem';
 export const Input = ({label,type,name,value,placeholder,onChange,disa}) => {
-    
+
+
+   const keydown = (event)=>{
+        if(type==="number"){
+            if(event.keyCode === 69 || event.keyCode === 101){
+                event.preventDefault();
+                event.stopPropagation();
+        
+            }
+        }
+ 
+   }
     return(
         <li className="input">
             <label htmlFor={name}>{label}</label>
 
             {disa?<>
-            <input type={type} disabled name={name} placeholder={placeholder}  value={value} onChange={onChange} />
+            <input type={type} disabled name={name} placeholder={placeholder}  value={value} onChange={onChange} onKeyDown={keydown}/>
             </>:<>
-            <input type={type} name={name} placeholder={placeholder}  value={value} onChange={onChange} />
+            <input type={type} name={name} placeholder={placeholder}  value={value} onChange={onChange} onKeyDown={keydown}/>
             </>}
         </li>
     )

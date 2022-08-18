@@ -4,16 +4,17 @@ import Header from '../sectionBlock/Header';
 import { useNavigate } from 'react-router-dom';
 import Tab from '../component/tab';
 import {BankConfigTable} from '../component/table';
-import BankAccountInput from '../sectionBlock/BankAccountInput';
+import {BankAccountInput} from '../sectionBlock/BankAccountInput';
 import GeneralInfoSearch from '../sectionBlock/General-info-search';
 import PayOffice from '../sectionBlock/Pay-Office';
+import ConfigurationSettings from '../sectionBlock/Configuration-setting';
 import './pageStyle.css';
 import axios from "../api/axios.js";
-import {toast} from "react-toastify";
 
 const BankFileConfiguration = ({responsive, lang, setLang, language}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [allBank, setBankAll] = useState([]);
+    const [allfilebank, setBankFile] = useState([]);
     const [idInfo, setIdInfo] = useState("");
     const navigate = useNavigate();
     const [isNavigate, setNavigate] = useState(false);
@@ -36,7 +37,25 @@ const BankFileConfiguration = ({responsive, lang, setLang, language}) => {
             setBankAll([])
           })
     }
+    
+    const callConfigArchivo =()=>{
+      let bearerToken={
+        headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` }
+      }
+          axios.get("/plantillaconfigbanck", {},bearerToken)
+          .then((response) => {
+            if(response.status===200){
+              setBankFile(response.data)
+            }else{
+              setBankFile([])
+            }
+          }).catch((err)=>{
+              
+            setBankFile([])
+          })
+    }
     useEffect(()=>{
+      callConfigArchivo()
       callBankFileConfigAll()
     },[one])
     useEffect(()=>{
@@ -56,7 +75,7 @@ const BankFileConfiguration = ({responsive, lang, setLang, language}) => {
         <Navbar responsive={responsive} lang={lang} setLang={setLang} language={language} />
         <Header responsive={responsive} lang={lang} setLang={setLang} pageTitle={language.bankfile_config.title} displayArrowBtn={`show`} textArrowBtn={language.global.back} colorArrowBtn={`var(--primary-color)`} displaySearch={`show`} />
         <main className="main bankfileconfig"> 
-              <Tab action={setTabName} tab1={`Account configuration`} tab2={`Pay office`} tab3={`Others`} hideTab4={`dn`} tabs1={language.bankfile_config.tab1}  tabs2={language.bankfile_config.tab2}  tabs3={language.bankfile_config.tab3}  hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} hideCustomizer={`dn`} />
+              <Tab action={setTabName} tab1={`Account configuration`} tab2={`Pay office`} tab3={`Configuration setting`} hideTab4={`dn`} tabs1={language.bankfile_config.tab1}  tabs2={language.bankfile_config.tab2}  tabs3={language.bankfile_config.tab3}  hideTab5={`dn`} hideTab6={`dn`} hideTab7={`dn`} hideCustomizer={`dn`} />
               {
                 tabName === 'Account configuration'
                 ?<>
@@ -78,8 +97,8 @@ const BankFileConfiguration = ({responsive, lang, setLang, language}) => {
                 :<></>
               }
               {
-                tabName === 'Others'
-                ?<></>
+                tabName === 'Configuration setting'
+                ?<ConfigurationSettings language={language} allfilebanks={allfilebank} />
                 :<></>
               }
         </main>

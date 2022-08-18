@@ -162,7 +162,7 @@ const FundDetails = ({lang, setLang, language, responsive}) => {
             <Header responsive={responsive} lang={lang} setLang={setLang} displayArrowBtn={`show`} pageTitle={`Investors`}/>
             <main className='main fundDetails'>
               <div className="fundDetail">
-                <FundTable header1={language.investor.header1}  header2={language.investor.header2}  header3={language.investor.header3}  header4={language.investor.header4}  header5={language.investor.header5} data={ListInversores} currentPage={currentPage1} setCurrentPage={setCurrentPage1} />    
+                <FundTable2 header1={language.investor.header1}  header2={language.investor.header2}  header3={language.investor.header3}  header4={language.investor.header4}  header5={language.investor.header5} data={ListInversores} currentPage={currentPage1} setCurrentPage={setCurrentPage1} opcion={"1"} />    
               </div>
             </main>
           </>

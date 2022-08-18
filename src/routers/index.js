@@ -7,6 +7,7 @@ import Projects from '../pages/Projects';
 import ProjectDetails from '../pages/ProjectDetails';
 import Revenues from '../pages/Revenues';
 import Expenses from '../pages/Expenses';
+import GatosFondo from '../pages/GatosFondo';
 import Reports from '../pages/Reports';
 import Configuration from '../pages/Configuration';
 import Help from '../pages/Help';
@@ -20,10 +21,14 @@ import ContractManagement from '../pages/ContractManagement';
 import Leasing from '../pages/Leasing';
 import ManageProject from '../pages/ManageProject';
 import ManageInvestor from '../pages/ManageInvestor';
+import DebtDetail from '../pages/DebtDetail';
+import ProjectDetail from '../pages/InvestmentProjectsDetail';
+import InvestorDetail from '../pages/InvestmentInvestorsDetail';
 import Billing from '../pages/Billing';
 import BillingDetail from '../pages/DetalleFacturasFondo';
 import BankFileConfiguration from '../pages/BankFileConfiguration';
 import BankAccountDetail from '../pages/BankAccountDetail';
+import ConfigurationArchivo from '../pages/ConfigurationArchivo';
 import {English, Spanish} from '../language/language';
 
 function Routers(){
@@ -59,6 +64,7 @@ function Routers(){
           <Route path='/InvestorsDetail' exact element = {<InvestorsDetail lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/Revenues' exact element = {<Revenues lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/Expenses' exact element = {<Expenses lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/GatosFondo' exact element = {<GatosFondo lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/Reports' exact element = {<Reports lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/Configuration' exact element = {<Configuration lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/FundDetails' exact element = {<FundDetails lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />} />
@@ -70,10 +76,14 @@ function Routers(){
           <Route path='/Leasing' exact element = {<Leasing lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/ManageProject' exact element = {<ManageProject lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/ManageInvestor' exact element = {<ManageInvestor lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/DebtDetail' exact element = {<DebtDetail lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/ProjectsInvestmentDetail' exact element = {<ProjectDetail lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/InvestorsInvestmentDetail' exact element = {<InvestorDetail lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/Billing' exact element = {<Billing lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/DetalleFacturasFondo' exact element = {<BillingDetail lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/BankFileConfiguration' exact element = {<BankFileConfiguration lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
           <Route path='/BankDetail' exact element = {<BankAccountDetail lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
+          <Route path='/ConfigureArchivo' exact element = {<ConfigurationArchivo lang={lang} setLang={setLang} language ={lang==='us'?English:Spanish} responsive={responsive} />}/>
         </Routes>
       </BrowserRouter>
     </>

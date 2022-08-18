@@ -79,17 +79,17 @@ export const PlanTable = ({data, language}) => {
         <div className="table-responsive">
             <div className="table-lists">
                 <ul className="listHeader">
-                    <li className='listHeaderItem listItem'>Payment date</li>
-                    <li className='listHeaderItem listItem'>Payment No. </li>
-                    <li className='listHeaderItem listItem'>Interests</li>
-                    <li className='listHeaderItem listItem'>Capital value</li>
-                    <li className='listHeaderItem listItem'>Quota value</li>
-                    <li className='listHeaderItem listItem'>Balance</li>
+                    <li className='listHeaderItem listItem'>{language.deuda_leasing.payment_plan_head1}</li>
+                    <li className='listHeaderItem listItem'>{language.deuda_leasing.payment_plan_head2} </li>
+                    <li className='listHeaderItem listItem'>{language.deuda_leasing.payment_plan_head3}</li>
+                    <li className='listHeaderItem listItem'>{language.deuda_leasing.payment_plan_head4}</li>
+                    <li className='listHeaderItem listItem'>{language.deuda_leasing.payment_plan_head5}</li>
+                    <li className='listHeaderItem listItem'>{language.deuda_leasing.payment_plan_head6}</li>
                 </ul>
                 {
                     currentItems.map((info, i) => {
                         return(
-                            <PlanItem key={i} info={info} />
+                            <PlanItem key={i} info={info} pagonumber={i+((currentPage-1)*itemsPerPage)} max={data.length}/>
                         )
                     })
                 }

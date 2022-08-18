@@ -6,7 +6,9 @@ import { VscChevronDown } from "react-icons/vsc";
 import axios from "../../api/axios.js";
 import {toast} from "react-toastify";
 import { useNavigate } from 'react-router-dom';
-import { AiFillCheckCircle } from "react-icons/ai";
+import { AiFillCheckCircle, AiFillEdit } from "react-icons/ai";
+import { AddIcon } from '../../component/icon/icon';
+
 const initialState = {
   Nit: '',
   Company_name: '',
@@ -25,7 +27,9 @@ const initialState = {
   Permit_description_1: '',
   Permit_description_2: '',
   Permit_description_3: '',
-  add_special_permits: true
+  add_special_permits: true,
+  restrict_number: '',
+  restrict_edit: ''
 }
 
 function reducer(state, {field,value}) {
@@ -156,7 +160,7 @@ let bearerToken={
       }
     })
   }else{
-    axios.post("/investors/2", valor,bearerToken)
+    axios.post("/investors", valor,bearerToken)
     .then((response) => {
       if(response.status===200){
         if(response.data){
@@ -190,7 +194,7 @@ let bearerToken={
     })
   }
   }
-  const {Nit, Company_name, Date_of_constitution, City_of_constitution, Constitution_Department, Country_of_Constitution, Economic_activity, Company_object, Sociodemographic_Department, Sociodemographic_Country, Address_main_office, Sociodemographic_City, Telephone, Email, Permit_description_1, Permit_description_2, Permit_description_3} = state;
+  const {Nit, Company_name, Date_of_constitution, City_of_constitution, Constitution_Department, Country_of_Constitution, Economic_activity, Company_object, Sociodemographic_Department, Sociodemographic_Country, Address_main_office, Sociodemographic_City, Telephone, Email, Permit_description_1, Permit_description_2, Permit_description_3, restrict_number, restrict_edit} = state;
   useEffect(()=>{
     if(Country_of_Constitution){
       callApiGetCitys(Country_of_Constitution,setCiudad)
@@ -207,14 +211,16 @@ let bearerToken={
   const [switchPill,setSwitchPill] = useState(DataInicial?DataInicial.add_special_permits:initialState.add_special_permits);
   setTimeout(()=>{
       const pill = document.querySelector('.switch input');
-      pill.addEventListener(`click`,()=>{
-            setSwitchPill(!switchPill);
-        })
-        if(switchPill === true){
-            pill.setAttribute(`checked`,``);
-        }else{
-            pill.removeAttribute(`checked`,``);
-        }
+      if(pill){
+        pill.addEventListener(`click`,()=>{
+              setSwitchPill(!switchPill);
+          })
+          if(switchPill === true){
+              pill.setAttribute(`checked`,``);
+          }else{
+              pill.removeAttribute(`checked`,``);
+          }
+      }
   })
   const agregarCountry=()=>{
     let count =countryPerm
@@ -240,9 +246,20 @@ let bearerToken={
       }
       selecCoun({})
     }
-
-  },[keydelete])
- 
+  },[keydelete, countryPerm, permi])
+  const restrictList = [10103284756, 10103284758];
+  const [restrictItem, setRestrictItem] = useState(restrictList);
+  // const [editRestrict, isEditRestrict] = useState(false);
+  const addRestrictNumber = () => {
+    const restrictInput = document.querySelector("#restrictInput");
+    console.log(restrictInput);
+    if(restrictInput){
+      restrictList.push(Number(restrictInput.value));
+      setRestrictItem(restrictList);
+      restrictInput.value = 0;
+    }
+    console.log({restrictItem, restrictList});
+  }
   return (
       <>
         <div className="adding-investor-overlay"></div>
@@ -286,7 +303,7 @@ let bearerToken={
                         <select id="input_170px" name='Country_of_Constitution' value={country.length>0?Country_of_Constitution:"Espere"}  onChange={onChange} placeholder='Country'>
                             { country.map((info,i)=>{                              return(
                                      
-                                <option value={info.I_CODIGO}>{info.C_NOMBRE}</option>
+                                <option key={i} value={info.I_CODIGO}>{info.C_NOMBRE}</option>
                                       )
                           })
                             }
@@ -299,7 +316,7 @@ let bearerToken={
                         <select id="input_146px" name='City_of_constitution' value={ciudad.length>0?City_of_constitution:"Espere"} onChange={onChange} placeholder='City'>
                         { ciudad.map((info,i)=>{                              return(
                                      
-                                     <option value={info.I_CODIGO}>{info.C_NOMBRE}</option>
+                                     <option key={i} value={info.I_CODIGO}>{info.C_NOMBRE}</option>
                                            )
                                })
                                  }
@@ -347,7 +364,7 @@ let bearerToken={
                         <select id="input_170px" name='Sociodemographic_Country' value={country.length>0?Sociodemographic_Country:"Espere"} onChange={onChange} placeholder='Country'>
                         { country.map((info,i)=>{                              return(
                                      
-                                     <option value={info.I_CODIGO}>{info.C_NOMBRE}</option>
+                                     <option key={i} value={info.I_CODIGO}>{info.C_NOMBRE}</option>
                                            )
                                })
                                  }
@@ -361,12 +378,12 @@ let bearerToken={
                         <li>
                         <label htmlFor="Sociodemographic_City">{language.investorform.city}</label>
                         <select id="input_146px" name='Sociodemographic_City' value={ciudadSocio.length>0?Sociodemographic_City:"Espere"} onChange={onChange} placeholder='City'>
-                        { ciudadSocio.map((info,i)=>{                              return(
-                                     
-                                     <option value={info.I_CODIGO}>{info.C_NOMBRE}</option>
+                        { ciudadSocio.map((info,i)=>{                              
+                          return(           
+                                     <option key={i} value={info.I_CODIGO}>{info.C_NOMBRE}</option>
                                            )
                                })
-                                 }
+                        }
 
                         </select> 
                         <VscChevronDown />
@@ -387,39 +404,60 @@ let bearerToken={
                     </ul>
                     </div>
                     <div className="information Permit-information">
-                    <h1>{language.investorform.specialinfo}</h1>
-                    <div className="toggle_permission">
-                        <p>No</p>
-                        <Pill />
-                        <p>{language.global.yes}</p>
-                    </div>
-                    {
-                        switchPill === true
-                        ?<>
-                    <ul>
-                        <li class="listItem">
-                        <label htmlFor="selecperm">{language.investorform.country}</label>
-                        <select id="input_170px" name='selecperm'  onChange={onChangs} placeholder='Country'>
-                                     <option value={""}>{""}</option>
-                        { countryPerm.map((info,i)=>{   
-                          return(
-                                     
-                                     <option value={info.I_CODIGO}>{info.C_NOMBRE}</option>
-                                           )
-                               })
-                                 }
-                        </select>
-                         <VscChevronDown />
-                        </li>
-                        <span onClick={agregarCountry} ><AiFillCheckCircle size={50} 
-                              color="blue"/></span>
-                    </ul>
-                         <TablePermision data={permi} language={language} deletes={borrado} />                        
-                        </>
-                        :<>
-
-                        </>
-                    }
+                      <h1>{language.investorform.specialinfo}</h1>
+                      <h6>Ingresa el código del parámetro restrictivo</h6>
+                      <div className="toggle_permission">
+                          <p>No</p>
+                          <Pill />
+                          <p>{language.global.yes}</p>
+                      </div>
+                      {
+                          switchPill === true
+                          ?<>
+                      <div className="restriction">
+                        <div className="restrict">
+                          <ul className="restrict-body">
+                            <li>Código de restricción</li>
+                            <li><input type="number" name='restrict_number' id="restrictInput" placeholder='Enter' value={restrict_number} onChange={onChange} /></li>
+                            {
+                              restrictItem.map((item, i) => {
+                                return(
+                                  <>
+                                      <li key={i}>{item}</li>
+                                  </>
+                                )
+                              })
+                            }
+                          </ul>
+                        </div>
+                        <div className="edit-restrict">
+                          <span onClick={addRestrictNumber} ><AddIcon /></span>
+                          <span><AiFillEdit /></span>
+                        </div>
+                      </div>
+                      <ul>
+                          <li className="listItem">
+                          <label htmlFor="selecperm">{language.investorform.country}</label>
+                          <select id="input_170px" name='selecperm'  onChange={onChangs} placeholder='Country'>
+                                      <option value={""}>{""}</option>
+                          { countryPerm.map((info,i)=>{   
+                            return(
+                                      
+                                      <option key={i} value={info.I_CODIGO}>{info.C_NOMBRE}</option>
+                                            )
+                                })
+                                  }
+                          </select>
+                          <VscChevronDown />
+                          </li>
+                          <span onClick={agregarCountry} ><AiFillCheckCircle size={50} 
+                                color="blue"/></span>
+                      </ul>
+                          <TablePermision data={permi} language={language} deletes={borrado} />                        
+                          </>
+                          :<>
+                          </>
+                      }
                     </div>
                     <div className="submit-form">
                     <Button text={id?language.global.save:language.global.add} background={`var(--primary-color)`} types={`button`} click={CallRegisterApiInvestor} />

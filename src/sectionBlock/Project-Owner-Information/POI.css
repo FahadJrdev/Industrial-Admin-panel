@@ -157,6 +157,9 @@
     left: 0;
     width: 100%;
 }
+.investor-add .information ul:nth-child(4) li:nth-child(1) .selectInput {
+    display: none;
+}
 
 .investor-add .ProjectOwnerInfo.information ul li select option:first-child {
     font-size: 14px;
@@ -191,6 +194,8 @@
 .investor-add .ProjectOwnerInfo.information ul {
     margin: 10px 0px 30px;
 }
+
+
 
 @media screen and (max-width: 768px) {
     .ProjectOwnerInfo ul li svg {

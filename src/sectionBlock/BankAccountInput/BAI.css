@@ -26,6 +26,11 @@
 
 .BankAccountInput .bank-submit {
     margin-bottom: 30px;
+    text-align: right;
+}
+
+.Expenses .inputs-part ul li:nth-child(4) label{
+    visibility: hidden;
 }
 
 .BankAccountInput .bank-submit span {

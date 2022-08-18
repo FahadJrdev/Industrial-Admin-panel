@@ -31,9 +31,14 @@ const Login = () => {
     .then((response) => {
       if(response.status===200){
         if(response.data){
-          sessionStorage.setItem("token",response.data.token)
-          sessionStorage.setItem("infoUser",JSON.stringify(response.data.user))
-          navigate('/Dashboard', {replace: true})
+          if(response.data.pass_temporal){
+            navigate('/change-password?token='+response.data.token)
+          }else{
+            sessionStorage.setItem("token",response.data.token)
+            sessionStorage.setItem("infoUser",JSON.stringify(response.data.user))
+            navigate('/Dashboard', {replace: true})
+          }
+          
         }
       }
     }).catch((err)=>{

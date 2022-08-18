@@ -1,20 +1,15 @@
-import React, { useReducer } from 'react';
+import React, { useReducer ,useEffect} from 'react';
 import { Button, ButtonWithArrow } from '../../component/buttons';
 import { DownloadIcon } from '../../component/icon/icon';
 import './pa.css';
 import { VscChevronDown } from "react-icons/vsc";
+
+import axios from "../../api/axios.js";
+import {toast} from "react-toastify";
 const initialState = {
-    nitValidate: '',
     Projected_date_of_release: '',
     Project_name: '',
-    Code: '',
-    Committed_capital: '',
-    USD_invested: '',
-    Description: '',
-    Country: '',
-    City: '',
-    Responsible: '',
-    Type_of_contract: ''
+    aprobado: '',
 }
 
 function reducer(state, { field, value }) {
@@ -23,15 +18,48 @@ function reducer(state, { field, value }) {
         [field]: value
     }
 }
-const Approval = ({ title, language }) => {
+const Approval = ({ title, language ,idprodject,close,aproveVal}) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const onChange = (e) => {
         dispatch({ field: e.target.name, value: e.target.value })
     }
-    const { nitValidate, Projected_date_of_release, Project_name, Code, Committed_capital, USD_invested, Description, Country, City, Responsible, Type_of_contract } = state;
+    const {  Projected_date_of_release, Project_name, aprobado } = state;
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(state);
+    }
+    useEffect(()=>{
+        if(aproveVal.fechaArob){
+            dispatch({ field: "Projected_date_of_release", value:aproveVal.fechaArob })
+            dispatch({ field: "Project_name", value: aproveVal.nombreapro })
+            dispatch({ field:  "aprobado", value: aproveVal.statusaprob })
+
+        }
+     
+       },[aproveVal]);
+    
+    const AproveProject = ()=>{
+        let bearerToken={
+            headers: { Authorization: `bearer ${sessionStorage.getItem("token")}` }
+          }
+    
+          let valor={
+            NOMBRE_APROBA:Project_name,
+            FECHA_APROBA:Projected_date_of_release,
+            STATUS_APROBA:aprobado
+            }
+            axios.put("/projectAprobaCommittee/"+idprodject, valor,bearerToken)
+            .then((response) => {
+                close('close')
+            }).catch((err)=>{
+              if(err.response){
+                if(err.response.data){
+                  if(err.response.data.message){
+                    alert(err.response.data.message)
+                  }
+                }
+              }
+            })
     }
     return ( <>
         <div className = "adding-investor-overlay"></div> 
@@ -44,74 +72,29 @@ const Approval = ({ title, language }) => {
                 <form className='approvalForm information' action="" method='POST' onSubmit={handleSubmit}>
                     <div className="approval-body">
                         <ul>
-                            <li>
-                                <label htmlFor="nitValidate">{ language.projectDetails.approvalNit }</label>
-                                <input type="text" name='nitValidate' value={nitValidate} onChange={onChange} placeholder='Enter'/>
-                            </li>
-                            <li>
+                             <li>
                                 <label htmlFor="Projected_date_of_release">{ language.projectDetails.approvalprojecdate }</label>
-                                <input type="text" name='Projected_date_of_release' value={Projected_date_of_release} onChange={onChange} placeholder='MM/DD/YYYY'/>
+                                <input type="date" name='Projected_date_of_release' value={Projected_date_of_release} onChange={onChange} placeholder='MM/DD/YYYY'/>
                             </li>
-                        </ul>
-                        <p className='approvalInformationHeader'>{ language.projectDetails.approvalprojecinfor }</p>
-                        <ul>
                             <li>
-                                <label htmlFor="Project_name">{ language.projectDetails.approvalprojectname }</label>
+                                    <label htmlFor="aprobado">{ language.projectDetails.approvalprojecestado }</label>
+                                    <select className="input_201px" name='aprobado' value={aprobado} onChange={onChange} placeholder='Select'>
+                                        <option value=""></option>
+                                        <option value="1">Aprobado</option>
+                                        <option value="2">Rechazado</option>
+                                    </select> 
+                                    <VscChevronDown />
+                                </li>
+                            
+                        </ul>
+                        <ul>
+                        <li>
+                                <label htmlFor="Project_name">{ language.projectDetails.aprrovalnombre }</label>
                                 <input type="text" name='Project_name' value={Project_name} onChange={onChange} placeholder='Name'/>
                             </li>
-                            <li>
-                                <label htmlFor="Code">{ language.projectDetails.approvalcode }</label>
-                                <input type="text" name='Code' value={Code} onChange={onChange} placeholder='Enter'/>
-                            </li>
+                            
                         </ul>
-                        <ul>
-                            <li>
-                                <label htmlFor="Committed_capital">{ language.projectDetails.approvalcommited }</label>
-                                <input type="text" name='Committed_capital' value={Committed_capital} onChange={onChange} placeholder='$'/>
-                            </li>
-                            <li>
-                                <label htmlFor="USD_invested">{ language.projectDetails.approvalinvedusd }</label>
-                                <input type="text" name='USD_invested' value={USD_invested} onChange={onChange} placeholder='$'/>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><label htmlFor="Description">{ language.projectDetails.approvalporjectdescrip }</label><textarea type="text" name='Description' value={Description} placeholder='Enter' onChange={onChange} rows={8} column={30}></textarea></li>
-                            <ul className='inputSelect'>
-                                <li>
-                                    <label htmlFor="Country">{ language.projectDetails.approvalcountry }</label>
-                                    <select className="input_201px" name='Country' value={Country} onChange={onChange} placeholder='Select'>
-                                        <option value=""></option>
-                                        <option value="Japan">Japan</option>
-                                        <option value="USA">USA</option>
-                                    </select> 
-                                    <input className='selectInput' type="text" name='Country' placeholder='Select' value={Country} onChange={onChange} /> 
-                                    <VscChevronDown />
-                                </li>
-                                <li>
-                                    <label htmlFor="City">{ language.projectDetails.approvalcity }</label>
-                                    <select className="input_201px" name='City' value={City} onChange={onChange} placeholder='Select'>
-                                        <option value=""></option>
-                                        <option value="Tokyo">Tokyo</option>
-                                        <option value="Newyork">Newyork</option>
-                                    </select> 
-                                    <input className='selectInput' type="text" name='City' placeholder='Select' value={City} onChange={onChange} /> 
-                                    <VscChevronDown />
-                                </li>
-                            </ul>
-                        </ul>
-                        <ul>
-                            <li>
-                                <label htmlFor="Responsible">{ language.projectDetails.approvalresponsa }</label>
-                                <input type="text" name='Responsible' value={Responsible} onChange={onChange} placeholder='Enter'/>
-                            </li>
-                            <li>
-                                <label htmlFor="Type_of_contract">{ language.projectDetails.approvaltipocontr }</label>
-                                <input type="text" name='Type_of_contract' value={Type_of_contract} onChange={onChange} placeholder='Enter'/>
-                            </li>
-                        </ul>
-                        <Button text={ language.projectDetails.approvalvalidate } background={`var(--tartiary-color)`} types={`submit`}/>
-                        <p className='title'>{ language.projectDetails.approvalconsultationresults }</p> 
-                        <button>Download PDF <DownloadIcon /></button>
+                        <Button text={ language.projectDetails.approvalvalidate } background={`var(--tartiary-color)`} types={`button`} click={AproveProject}/>
                     </div>
                 </form> 
             </div>

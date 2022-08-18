@@ -14,6 +14,25 @@
     margin-bottom: 5px;
 }
 
+.Esheet .savedInfo{
+    display: flex;
+    flex-direction: column;
+}
+.Esheet .savedInfo label{
+    margin: 7px 0px 5px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    color: #000000;
+}
+.Esheet .savedInfo p{
+    margin-left: 15px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: #A19F9D;
+}
+
 .Contract-creation .Esheet li {
     width: 20%;
     margin-right: 15px;

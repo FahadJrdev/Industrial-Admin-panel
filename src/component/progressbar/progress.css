@@ -1,0 +1,18 @@
+.progress-bar {
+    height: 10px;
+    border-radius: 9px;
+    overflow: hidden;
+}
+
+.progress-bar.primary-bar {
+    background: #EFF3F9;;
+}
+
+.progress-bar .progress-fill {
+    height: 10px;
+    border-radius: 9px;
+}
+
+.progress-bar .progress-fill.primary-progress {
+    background: var(--primary-color);
+}

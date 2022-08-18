@@ -7,7 +7,228 @@
     gap: 30px;
 }
 
+/* DashBoard */
+.specialBackground{
+    border-radius: 13px;
+    background-color: var(--bg-secondary-color);
+    border: 1px solid var(--border-secondary-color);
+    padding: 15px;
+}
 
+.dashboard .summary{
+    display: flex;
+    width: 100%;
+}
+
+.dashboard .summary .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dashboard .summary h1{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    color: var(--text-dark);
+}
+.dashboard .summary h5{
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--text-dark);
+}
+.dashboard .summary h6 {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: var(--text-dark);
+}
+.dashboard .summary ul{
+    display: flex;
+    align-items: center;
+}
+.dashboard .summary .pie ul{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 30%;
+    left: 70%;
+}
+.dashboard .summary ul li {
+    display: flex;
+    align-items: center;
+}
+.dashboard .summary .pie ul li {
+    margin-bottom: 5px;
+}
+.dashboard .summary ul li span{
+    position: relative;
+    z-index: 1;
+}
+.dashboard .summary ul li span input{
+    position: relative;
+    z-index: 1;
+}
+
+.dashboard .summary ul li span input + svg{
+    position: absolute;
+    top: 4px;
+    left: 5px;
+    cursor: pointer;
+    display: none;
+    z-index: 0;
+}
+.dashboard .summary ul li span input:checked + svg{
+    display: block;
+}
+.dashboard .summary ul li input{
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dashboard .summary ul li:first-child input{
+    border: 1px solid var(--primary-color);
+}
+.dashboard .summary ul li:last-child input{
+    border: 1px solid var(--secondary-color);
+}
+.dashboard .summary ul li div {
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 17.47px;
+    height: 12.98px;
+}
+.dashboard .summary .pie ul li div {
+    width: 13.38px;
+    height: 13.38px;
+}
+.dashboard .summary ul li:first-child div {
+    background: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+.dashboard .summary ul li:last-child div {
+    background: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+}
+.dashboard .summary ul li label {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+    color: var(--text-dark);
+    margin: 0px 30px 0px 10px;
+    cursor: pointer;
+}
+.dashboard .summary ul li p {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+    color: var(--text-dark);
+    margin: 0px 30px 0px 10px;
+}
+.dashboard .summary .graph{
+    width: 70%;
+    margin: 30px 20px 20px 0px;
+    height: 290px;
+}
+.dashboard .summary .pie{
+    width: 30%;
+    margin: 30px 0px;
+    height: 290px;
+    position: relative;
+}
+.dashboard .summary .pie .recharts-wrapper .recharts-layer text{
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    color: #FDFDFF;    
+}
+.dashboard .summary .chart{
+    width: 60%;
+    margin: 0px 20px 20px 0px;
+    height: 290px;
+}
+.dashboard .summary .graph .header{
+    margin-bottom: 20px;
+}
+.dashboard .summary .pie .header{
+    margin-bottom: 30px;
+}
+.dashboard .summary .graph .recharts-wrapper{
+    width: 100% !important;
+    height: auto !important;
+}
+.dashboard .summary .pie .recharts-wrapper{
+    margin-left: 20px;
+}
+.dashboard .summary .graph .recharts-wrapper .recharts-surface{
+    margin: 0 auto;
+    width: 1200px !important;
+    height: 210px !important;
+}
+.dashboard .summary .chart .header{
+    margin-bottom: 20px;
+}
+.dashboard .summary .chart .recharts-wrapper{
+    width: 100% !important;
+    height: auto !important;
+}
+.dashboard .summary .chart .recharts-wrapper .recharts-surface{
+    margin: 0 auto;
+    width: 1200px !important;
+    height: 210px !important;
+}
+.dashboard .summary .progress{
+    width: 40%;
+    margin: 0px 0px;
+    height: 290px;
+}
+.dashboard .summary .progress .header{
+    margin-bottom: 10px;
+}
+.dashboard .summary .progress .progress-report{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px ;
+    width: 100%;
+}
+.dashboard .summary .progress .progress-report:first-child{
+    margin: 10px 0px 20px 0px;
+}
+.dashboard .summary .progress .progress-report .report{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.dashboard .summary .progress .progress-report .report:first-child{
+    margin-right: 50px;
+}
+.dashboard .summary .progress .progress-report .report .country{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.dashboard .summary .progress .progress-report .report .country h4{
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+    color: var(--text-dark);
+}
+.dashboard .summary .progress .progress-report .report .country p{
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--text-light);
+}
 /* investor */
 
 .investor .cards .title {
@@ -243,6 +464,10 @@
     padding: 5px 90px 0px 80px;
 }
 
+.Expenses .table .table-lists.billingTable .listHeader {
+    padding: 0px 30px 0px 50px;
+}
+
 .Billing header .first-part {
     width: 50%;
 }
@@ -317,8 +542,23 @@
     padding: 10px 0px;
 }
 
+.cargar form{
+    display: flex;
+    align-items: center;
+}
+
+.cargar form .input{
+    margin-right: 10px;
+    width: auto;
+}
+.cargar form button{
+    margin-left: 10px;
+    width: 20%;
+}
+
 .revenues .tables {
     display: flex;
+    flex-direction: column;
 }
 
 .revenues .tables hr {
@@ -331,6 +571,14 @@
 .revenues .table {
     margin: 15px 0px 15px 45px;
     width: 50%;
+}
+
+.revenues .table:last-child{
+    width: 80%;
+    margin-left: 0px;
+}
+.revenues .table:last-child .listHeaderItem{
+    margin-right: 10px;
 }
 
 .revenues .table:first-child {
@@ -455,6 +703,209 @@
     text-decoration: none;
 }
 
+.billing-deatil .facturas{
+    margin: 20px 0px;
+    display: inline-block;
+}
+
+/* configSetting */
+.App .main.configSetting{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.configSetting ul{
+    display: flex;
+}
+
+.configSetting form ul:nth-child(2){
+    margin: 0px 0px 10px;
+}
+.configSetting form .table ul:nth-child(2){
+    margin: 0px;
+}
+.configSetting p{
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px;
+    color: var(--text-low-dark);
+}
+.configSetting ul li{
+    margin-right: 30px;
+}
+.configSetting .table{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    width: 90%;
+}
+.configSetting .table ul li{
+    margin-right: 0px;
+    padding: 5px;
+    border-bottom: 1px solid var(--border-secondary-color);
+}
+.configSetting ul h6{
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    color: #000000;
+}
+.configSetting ul button{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #A19F9D;
+    border: 1px solid #aaaaaa;
+    padding: 0px 10px;
+}
+.configSetting ul .tipo{
+    display: flex;
+    padding:5px;
+    border: 1px solid #aaaaaa;
+    flex-direction: column;
+}
+.configSetting ul .tipo .checkbox{
+    padding: 3px 0px;
+}
+.configSetting ul .seperator{
+    display: flex;
+    padding:5px;
+    border: 1px solid #aaaaaa;
+    margin-left: 40px;
+}
+.configSetting ul .seperator .checkbox{
+    padding: 3px 0px;
+}
+.configSetting ul div{
+    display: flex;
+}
+.configSetting ul .seperator ul{
+    display: flex;
+    flex-direction: column;
+}
+.configSetting .select select~svg {
+    right: 1px;
+}
+.configSetting .Esheet-submit{
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Expenses */
+.Expenses .GenerarBtn{
+    display: inline-block;
+    margin: 20px 0px 0px;
+}
+
+.Expenses .gatosAction{
+    display: flex;
+    justify-content: space-between;
+}
+.Expenses .gatosAction .part1 p{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 163.42%;
+    color: #85B900;    
+}
+.Expenses .gatosAction .part2 span{
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.Expenses .gatosAction .part2 span button{
+    padding: 5px 20px;
+}
+
+.UtilidadesEx .tables {
+    display: flex;
+    flex-direction: column;
+}
+
+.UtilidadesEx .tables hr {
+    width: 11px;
+    border-radius: 5px;
+    background: var(--text-low-dark);
+    border: none;
+}
+
+.UtilidadesEx .table {
+    margin: 15px 0px 15px 45px;
+    width: 80%;
+}
+
+.UtilidadesEx .table:last-child{
+    width: 100%;
+    margin-left: 0px;
+}
+.UtilidadesEx .table:last-child .listHeaderItem{
+    margin-right: 10px;
+}
+
+.UtilidadesEx .table:first-child {
+    margin: 15px 45px 15px 0px;
+    direction: rtl;
+}
+
+.UtilidadesEx .table:first-child p {
+    direction: ltr;
+}
+
+.UtilidadesEx .table:first-child ul {
+    direction: ltr;
+}
+
+.UtilidadesEx .table:first-child .Esheet-submit {
+    direction: ltr;
+}
+
+.UtilidadesEx .table .listHeader {
+    display: flex;
+}
+
+.UtilidadesEx .table .listBody {
+    display: flex;
+}
+
+.UtilidadesEx .table .revenueTableTitle {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #85B900;
+    padding: 10px 5px;
+}
+
+.UtilidadesEx .table .listItem {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.08px;
+    color: var(--text-dark);
+    padding: 10px 5px;
+    width: 100%;
+    border-bottom: 1px solid var(--border-secondary-color);
+}
+
+.UtilidadesEx .table .listItem.listHeaderItem {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.24px;
+    color: var(--tartiary-color);
+}
+
+.UtilidadesEx .table .listBody .listItem:first-child {
+    color: var(--tartiary-color);
+}
+
+.UtilidadesEx .table:last-child .listBody .listItem:last-child {
+    font-weight: 600;
+}
+
+.UtilidadesEx .table .Esheet-submit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
 @media screen and (min-width: 1500px) {
     .leasingConfig header .first-part .display.show {
         display: inline-block;
@@ -467,6 +918,63 @@
 }
 
 @media screen and (max-width: 768px) {
+    .dashboard .summary{
+        flex-direction: column;
+    }
+    .dashboard .summary .header{
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+    .dashboard .summary .header h5{
+        margin: 10px 0px 0px 0px;
+    }
+    .dashboard .summary .progress .header{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .dashboard .summary .header ul{
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin: 10px 0px 0px;
+    }
+    .dashboard .summary .header ul li{
+        margin: 5px 0px;
+    }
+    .dashboard .summary .graph{
+        width: 100%;
+        margin: 30px 0px 10px;
+        height: auto;
+    }
+    .dashboard .summary .pie{
+        width: 100%;
+        height: auto;
+    }
+    .dashboard .summary .pie .recharts-wrapper{
+        margin-left: 0px;
+    }
+    .dashboard .summary .chart{
+        width: 100%;
+        margin: 10px 0px;
+        height: auto;
+    }
+    .dashboard .summary .progress{
+        width: 100%;
+        margin: 30px 0px;
+        height: auto;
+    }
+    .dashboard .summary .progress .progress-report{
+        flex-direction: column;
+        margin-bottom: 0px;
+    }
+    .dashboard .summary .progress .progress-report .report{
+        margin-bottom: 20px;
+    }
+    .dashboard .summary .progress .progress-report .report:first-child{
+        margin-right: 0px;
+    }
     .Esheet-submit a {
         width: 100%;
     }
@@ -573,10 +1081,94 @@
     .revenues .table:first-child {
         direction: ltr;
     }
+    .revenues .table:last-child .responsiveAuto {
+        width: 300%;
+    }
+    .cargar form{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cargar form button{
+        width: 100%;
+        margin-left: 0px;
+    }
     .cargar h2 {
         font-size: 20px;
     }
     .cargar p {
         margin-bottom: 25px;
+    }
+    .configSetting ul{
+        flex-direction: column;
+    }
+    .configSetting .table ul{
+        flex-direction: row;
+    }
+    .configSetting ul .tipo{
+        margin-top: 20px;
+    }
+    .configSetting ul .seperator{
+        flex-direction: column;
+        margin-top: 20px;
+        
+        margin-left: 20px;
+    }
+    .configSetting ul .seperator .separator-header{
+        display: none;
+    }
+    .configSetting .Esheet-submit button{
+        width: 100%;
+    }
+    .configSetting .table{
+        width: 100%;
+    }
+    .configSetting .responsiveFix .responsiveAuto {
+        width: 300%;
+    }
+    .configSetting p{
+        margin-top: 20px;
+    }
+    .configSetting ul h6{
+        margin-bottom: 5px;
+    }
+    .Expenses .gatosAction{
+        flex-direction: column;
+    }
+    .Expenses .gatosAction .part2 span{
+        margin-bottom: 10px;
+    }
+    .Expenses .table .table-lists {
+        width: 330%;
+    }
+    .UtilidadesEx .table .Esheet-submit button {
+        width: 100%;
+    }
+    .UtilidadesEx .tables {
+        flex-direction: column;
+    }
+    .UtilidadesEx .table {
+        margin-left: 0px;
+        width: 100%;
+    }
+    .UtilidadesEx .tables hr {
+        width: auto;
+        height: 11px;
+    }
+    .responsiveFixBoth {
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+    .responsiveAutoBoth {
+        width: 200%;
+    }
+    .UtilidadesEx .table:first-child {
+        direction: ltr;
+    }
+    .UtilidadesEx .table:last-child .responsiveAuto {
+        width: 300%;
+    }
+    .UtilidadesEx .table {
+        width: 100%;
     }
 }

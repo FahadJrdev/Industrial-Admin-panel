@@ -2,6 +2,7 @@ import React, {useReducer, useState} from 'react';
 import {Link} from 'react-router-dom';
 import { Button } from '../component/buttons';
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
+import {useNavigate} from 'react-router-dom';
 
 import {toast} from "react-toastify";
 import axios from "../api/axios.js";
@@ -17,6 +18,7 @@ function reducer(state, {field,value}) {
 }
 
 const ForgetPassword = () => {
+  const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
   const onChange =(e)=>{
       dispatch({field: e.target.name, value: e.target.value})
@@ -33,7 +35,6 @@ const ForgetPassword = () => {
     axios.post("/forget-password", valor)
     .then((response) => {
         reset();
-      console.log(response)
     }).catch((err)=>{
       if(err.response){
         if(err.response.data){
@@ -44,6 +45,10 @@ const ForgetPassword = () => {
       }
     })
   }
+  const mover= ()=>{ 
+    navigate('/', {replace: true})
+
+  }
   return (
     <div className="welcome forget-password">
         <div onClick={reset} className={`forget-overlay ${isReset?``:`dn`}`}></div>
@@ -51,9 +56,7 @@ const ForgetPassword = () => {
             <IoCheckmarkCircleOutline/>
             <p>Tu clave ha sido enviada al</p>
             <p>correo suministrado</p>
-            <Link to='/change-password'>
-                <Button text={`Ok`} background={`var(--primary-color)`} />
-            </Link>
+                <Button text={`Ok`} background={`var(--primary-color)`} click={mover} />
         </div>
         <div className="welcoming">
             <img className='logo' src="img/navbar-icon/logo.png" alt="logo" />

@@ -1,0 +1,22 @@
+.configurationSetting button:first-child{
+    margin: 50px 30px 30px 0px;
+}
+
+.configurationSetting .setting-tab{
+    position: relative;
+}
+
+.configurationSetting .setting-tab .setting-table-header{
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px;
+    color: var(--text-low-dark);
+    margin-bottom: 20px;
+    margin-left: 5px;
+    position: absolute;
+    top: 10px;
+}
+.configurationSetting .setting-tab .table .listBody .listItem:last-child{
+    text-decoration: underline;
+    font-style: italic;
+}

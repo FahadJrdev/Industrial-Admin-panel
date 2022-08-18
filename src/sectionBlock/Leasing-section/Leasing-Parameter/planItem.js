@@ -1,15 +1,15 @@
 import React from 'react';
 
-const PlanItem = ({info}) => {
+const PlanItem = ({info,max,pagonumber}) => {
   return (
     <>
         <ul className="listBody">
-            <li className="listItem firstItem">{info.item1}</li>
-            <li className="listItem">{info.item2}</li>
-            <li className="listItem">{info.item3}</li>
-            <li className="listItem">{info.item4}</li>
-            <li className="listItem">{info.item5}</li>
-            <li className="listItem">{info.item6}</li>
+            <li className="listItem firstItem">{info.FECHA}</li>
+            <li className="listItem"> {pagonumber+1} of {max}</li>
+            <li className="listItem">{info.INTERES}</li>
+            <li className="listItem">$  0</li>
+            <li className="listItem">$  {info.CUOTAS}</li>
+            <li className="listItem">$  {info.CUOTAS+info.INTERES}</li>
         </ul>
     </>
   )

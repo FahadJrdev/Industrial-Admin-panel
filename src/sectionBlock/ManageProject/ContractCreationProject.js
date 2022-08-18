@@ -2,6 +2,7 @@ import React, {useReducer,useState,useEffect} from 'react';
 import { Input,SelectVal, ManageProjectTable,ManageProjectInvestorTable} from '../Leasing-section/Leasing-Component';
 import {Button} from '../../component/buttons';
 import './MP.css';
+import { AiFillEdit } from "react-icons/ai";
 import { useNavigate} from 'react-router-dom';
 import axios from "../../api/axios.js";
 import {toast} from "react-toastify";
@@ -27,7 +28,7 @@ const initialState = {
       }
   }
 
-const ContractCreationProject = ({ language ,valorExtraido,valorIdProyecto,valorIdFondo,valorIdOwner,isUpdates,funcion,Deuda}) => {
+const ContractCreationProject = ({ language ,valorExtraido,valorIdProyecto,valorIdFondo,valorIdOwner,isUpdates,funcion,Deuda,edit}) => {
     const navigates = useNavigate();
     const [projects,SetAllProject] = useState([]);
     const [facturas,SeFacturas] = useState([]);
@@ -340,26 +341,77 @@ const ContractCreationProject = ({ language ,valorExtraido,valorIdProyecto,valor
     },[valorIdFondo]);
 
     
+    const [editing, isEditing] = useState(edit);
     return ( 
         <div className="Contract-creation">
+            <div className="editing"><span onClick={()=>{isEditing(!editing)}} ><AiFillEdit /></span></div>
             <form action="" method="post" onSubmit={handleSubmit}>
                 <div className="inputs-part">
                     <p className="inputsTitle">{language.contract_inver_proyec.information_proejct}</p>
                    
                     <ul className="Esheet">
-                    <li className="select">
-                      <label htmlFor="Code">{language.deuda_leasing.project_id}</label>  
-                      <Select  isDisabled={isUpdates}  value={selected} options={projects} onChange={SelecProject} />
-                    </li>
-                        <Input  disa={true} label={language.contract_inver_proyec.code} type={`text`} name={`Code`} value={Code} placeholder={``} onChange={onChange} />
-                        <Input  disa={true} label={language.contract_inver_proyec.Project_Name} type={`text`} name={`Project_name`} value={Project_name} placeholder={`Enter`} onChange={onChange} />
-                        <Input  disa={true} label={language.contract_inver_proyec.inverment_object} type={`text`} name={`Investment_objective`} value={Investment_objective} placeholder={`Enter`} onChange={onChange} />
-                        
+                      {
+                        editing
+                        ?<>
+                          <li className="select">
+                            <label htmlFor="Code">{language.deuda_leasing.project_id}</label>  
+                            <Select  isDisabled={isUpdates}  value={selected} options={projects} onChange={SelecProject} />
+                          </li>
+                        </>
+                        :<>
+                          <li className="savedInfo">
+                            <label>{language.deuda_leasing.project_id}</label>
+                            <p>{selected}</p>
+                          </li>
+                        </>
+                      }
+                      {
+                        editing
+                        ?<>
+                          <Input  disa={true} label={language.contract_inver_proyec.code} type={`text`} name={`Code`} value={Code} placeholder={``} onChange={onChange} />
+                          <Input  disa={true} label={language.contract_inver_proyec.Project_Name} type={`text`} name={`Project_name`} value={Project_name} placeholder={`Enter`} onChange={onChange} />
+                          <Input  disa={true} label={language.contract_inver_proyec.inverment_object} type={`text`} name={`Investment_objective`} value={Investment_objective} placeholder={`Enter`} onChange={onChange} />
+                        </>
+                        :<>
+                          
+                          <li className="savedInfo">
+                            <label>{language.contract_inver_proyec.code}</label>
+                            <p>{Code}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.contract_inver_proyec.Project_Name}</label>
+                            <p>{Project_name}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.contract_inver_proyec.inverment_object}</label>
+                            <p>{Investment_objective}</p>
+                          </li>
+                        </>
+                      }
                     </ul>
                     <ul className="Esheet"> 
-                        <SelectVal  disa={true} label={language.contract_inver_proyec.country} name={`Country1`} value={Country1} onChange={onChange} array={[]} />
-                        <SelectVal  disa={true} label={language.contract_inver_proyec.city} name={`City1`} value={City1} placeholder={`select`} onChange={onChange}  array={[]}/>
-                        <Input  disa={true} label={language.contract_inver_proyec.responsi} type={`text`} name={`Responsible`} value={Responsible} placeholder={`Enter`} onChange={onChange} />
+                      {
+                        editing
+                        ?<>
+                          <SelectVal  disa={true} label={language.contract_inver_proyec.country} name={`Country1`} value={Country1} onChange={onChange} array={[]} />
+                          <SelectVal  disa={true} label={language.contract_inver_proyec.city} name={`City1`} value={City1} placeholder={`select`} onChange={onChange}  array={[]}/>
+                          <Input  disa={true} label={language.contract_inver_proyec.responsi} type={`text`} name={`Responsible`} value={Responsible} placeholder={`Enter`} onChange={onChange} />
+                        </>
+                        :<>
+                          <li className="savedInfo">
+                            <label>{language.contract_inver_proyec.country}</label>
+                            <p>{Country1}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.contract_inver_proyec.city}</label>
+                            <p>{City1}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.contract_inver_proyec.responsi}</label>
+                            <p>{Responsible}</p>
+                          </li>
+                        </>
+                      }
                     </ul>
                 </div>
                 <div className="inputs-part">
@@ -369,12 +421,33 @@ const ContractCreationProject = ({ language ,valorExtraido,valorIdProyecto,valor
                 <div className="inputs-part">
                     <p className="inputsTitle">{language.contract_global.inver_terms}</p>
                     <ul className="Esheet">
-                        
-                        <SelectVal  disa={ isUpdates} label={language.contract_global.periocity} name={`Perioricity`} value={Perioricity} placeholder={`select`} onChange={onChange} array={periooci}/>
-                       
-                        <Input  disa={ isUpdates} label={language.contract_global.start_date} type={`date`} name={`Start_date`} value={Start_date} placeholder={`Enter`} onChange={onChange} />
-                        <Input  disa={ isUpdates} label={language.contract_global.form_payment} type={`text`} name={`Form_of_payment`} value={Form_of_payment} placeholder={`Enter`} onChange={onChange} />
-                        <SelectVal  disa={ isUpdates} label={language.contract_global.number_fee} name={`Number_of_fees`} value={Number_of_fees} placeholder={`select`} onChange={onChange} array={tarif}/>
+                        {
+                          editing
+                          ?<>
+                            <SelectVal  disa={ isUpdates} label={language.contract_global.periocity} name={`Perioricity`} value={Perioricity} placeholder={`select`} onChange={onChange} array={periooci}/>
+                            <Input  disa={ isUpdates} label={language.contract_global.start_date} type={`date`} name={`Start_date`} value={Start_date} placeholder={`Enter`} onChange={onChange} />
+                            <Input  disa={ isUpdates} label={language.contract_global.form_payment} type={`text`} name={`Form_of_payment`} value={Form_of_payment} placeholder={`Enter`} onChange={onChange} />
+                            <SelectVal  disa={ isUpdates} label={language.contract_global.number_fee} name={`Number_of_fees`} value={Number_of_fees} placeholder={`select`} onChange={onChange} array={tarif}/>
+                          </>
+                          :<>
+                            <li className="savedInfo">
+                              <label>{language.contract_global.periocity}</label>
+                              <p>{Perioricity}</p>
+                            </li>
+                            <li className="savedInfo">
+                              <label>{language.contract_global.start_date}</label>
+                              <p>{Start_date}</p>
+                            </li>
+                            <li className="savedInfo">
+                              <label>{language.contract_global.form_payment}</label>
+                              <p>{Form_of_payment}</p>
+                            </li>
+                            <li className="savedInfo">
+                              <label>{language.contract_global.number_fee}</label>
+                              <p>{Number_of_fees}</p>
+                            </li>
+                          </>
+                        }
                     </ul>
                 </div>
                 <div className="project-submit">
@@ -383,9 +456,14 @@ const ContractCreationProject = ({ language ,valorExtraido,valorIdProyecto,valor
             </form>
             <ManageProjectTable header1={language.contract_global.payment_date} header2={language.contract_global.form_payment} header3={`Value`} ProjectInfo={facturas} />
             <div className="Esheet-submit">
-            {isUpdates?<></>:<><Button text={language.contract_global.create_cont} background={`var(--primary-color)`} types={`button`}  click={opcionBoton}/>
-            </>}
-                
+              {
+                editing
+                ?<>
+                  {isUpdates?<></>:<><Button text={language.contract_global.create_cont} background={`var(--primary-color)`} types={`button`}  click={opcionBoton}/>
+                  </>}
+                </>
+                :<></>
+              }
             </div>
         </div>
     )

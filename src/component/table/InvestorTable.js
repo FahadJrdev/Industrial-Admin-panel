@@ -48,7 +48,6 @@ export const InvestorItemc = ({info}) => {
   )
 }
 export const InvestorItemcs = ({info}) => {
-  console.log(info)
   return(
       <Link  to={{ pathname: '/InvestorsDetail?'+info.ID, state:info.ID }}>
           <ul key={info.ID} className="listBody">
@@ -253,12 +252,20 @@ export const BillingItem = ({info}) => {
           </ul>
   )
 }
-export const BillingDetailItem = ({info}) => {
+export const BillingDetailItem = ({info,funcionFact}) => {
   let valor={
     id:info.ID,
     state:info.STATUS?"Pagado":"Sin pagar"
   }
   let color=info.STATUS?{color: "#85B900", fontWeight: '600'}:{color: "#DE5753", fontWeight: '600'}
+  let botonAnular="Anular"
+  let anula=1
+  if(info.ANULADO){
+    anula=0
+    botonAnular="Reversar"
+    valor.state="Anulado"
+    color={color: "#DE5753", fontWeight: '600'}
+      }
   return(
           <ul className="listBody">
               <li className='listItem'>{info.INVOICE_DATE}</li>
@@ -266,7 +273,7 @@ export const BillingDetailItem = ({info}) => {
               <li className='listItem'>{info.NUMERO_FACTURA}</li>
               <li className='listItem'>{info.AMOUNT}</li>
               <li className='listItem' style={color} >{valor.state}</li>
-              <li className='listItem'><span data-state={JSON.stringify(valor)} className="invoiceBtn2"><Button text={`see more`} background={`var(--primary-color)`} types={`button`} /></span> <span data-state={info.state} className="invoiceBtn"><Button text={`Anular`} background={`var(--primary-color)`} types={`button`} /></span></li>
+              <li className='listItem'><span data-state={JSON.stringify(valor)} className="invoiceBtn2"><h5 className="seeMore">see more</h5></span> <span data-state={info.state} className="invoiceBtn"><Button text={botonAnular} background={`var(--primary-color)`} types={`button`} click={()=>{funcionFact({id:info.ID,value:anula})}}/></span></li>
           </ul>
   )
 }
@@ -380,24 +387,57 @@ export const InvoiceItem = ({info}) => {
 export const RevenueItem1 = ({info}) => {
   return(
     <ul className="listBody">
-        <div className="listItem">{info.item1}</div>
-        <div className="listItem">{info.item2}</div>
-        <div className="listItem">{info.item3}</div>
+        <div className="listItem">{info.linea[0].Identity}</div>
+        <div className="listItem">{info.linea[0].id_factura>0?info.linea[0].id_factura:info.linea[0].id_plan_pago}</div>
+        <div className="listItem">{info.linea[0].monto}</div>
     </ul>
   )
 }
-export const RevenueItem2 = ({info,setPagoManual}) => {
+export const RevenueItem2 = ({info,setPagoManual,setPagoInversionista,setPagoOtros}) => {
   const botonclick = (event)=>{
-    if(event.target.dataset.state==="NO PAGO"){
+    if(event.target.parentElement.dataset.state==="FACTURA"){
       setPagoManual("open")
+      setPagoInversionista("close")
+      setPagoOtros("close")
+    }else if(event.target.parentElement.dataset.state==="INVERSIONISTA"){
+      setPagoManual("close")
+      setPagoOtros("close")
+      setPagoInversionista("open")
+    }else{
+      setPagoManual("close")
+      setPagoOtros("open")
+      setPagoInversionista("close")
     }
+  }
+  let valorStyle={
+    color: "#85B900", textDecoration: "none"
+  }
+  let action="vn"
+let pagado="PAGADO"
+  if(info.error){
+    valorStyle={
+      color: "#DE5753", textDecoration: "underline"
+    }
+    pagado="NO PAGADO"
+    action="Register"
+  }
+  let tipodeFactura="OTRO"
+  let colorRegister="#85B900"
+  if(info.linea[0].id_factura>0){
+    tipodeFactura="FACTURA"
+    colorRegister="#FF2116"
+  }else if(info.linea[0].id_plan_pago>0){
+    tipodeFactura="INVERSIONISTA"
+    colorRegister="#FF7A17"
   }
   return(
     <ul className="listBody">
-        <div className="listItem">{info.item1}</div>
-        <div className="listItem">{info.item2}</div>
-        <div className="listItem">{info.item3}</div>
-        <div className="listItem status"  data-state={info.item4} onClick={botonclick} style={{color: info.color, textDecoration: info.decoration}} >{info.item4}</div>
+        <div className="listItem">{info.linea[0].Identity}</div>
+        <div className="listItem">{info.linea[0].id_factura>0?info.linea[0].id_factura:info.linea[0].id_plan_pago}</div>
+        <div className="listItem">{info.linea[0].monto}</div>
+        <div className="listItem status"    style={valorStyle} >{pagado}</div>
+        <div className="listItem">{tipodeFactura}</div>
+        <div className={`listItem ${action}`} data-state={tipodeFactura}> <Button text={"Register"} background={colorRegister} types={`button`}  click={botonclick}/> </div>
     </ul>
   )
 }
@@ -411,6 +451,96 @@ export const ItemPermision = ({index,info,setDelete}) => {
         <div className="listItem"  onClick={()=>{
       setDelete({numero:index,id:info.id})
   }}> <span  ><AiOutlineDelete /></span> </div>
+    </ul>
+  )
+}
+
+export const ConfigurationSettingItem = ({info,link}) => {
+console.log(info)
+  return(
+    <ul className="listBody">
+      <li className='listItem'>{info.I_CODIGO}</li>
+      <li className='listItem'>{info.NAME_P}</li>
+      <Link to={link+"?"+info.I_CODIGO}><li className='listItem'>{"See more"}</li></Link>
+  </ul>
+  )
+}
+
+
+
+export const LastPagoItem2 = ({info}) => {
+  return(
+      <ul className="listBody">
+        <li className="listItem">{info.item1}</li>
+        <li className="listItem">{info.item2}</li>
+        <li className="listItem">{info.item3}</li>
+        <li className="listItem">{info.item4}</li>
+        <li className="listItem">{info.item5}</li>
+        <li className="listItem">{info.item6}</li>
+        <li className="listItem">{info.item7}</li>
+        <li className="listItem">{info.item8}</li>
+        <li className="listItem">{info.item9}</li>
+      </ul>
+  )
+}
+export const LastPagoItem = ({info}) => {
+  return(
+      <ul className="listBody">
+        <li className="listItem">{info.item1}</li>
+        <li className="listItem">{info.item2}</li>
+        <li className="listItem">{info.item3}</li>
+        <li className="listItem">{info.item4}</li>
+        <li className="listItem">{info.item5}</li>
+      </ul>
+  )
+}
+export const ExpensesItem = ({info}) => {
+  return(
+      <Link to={{ pathname: '/GatosFondo'}}>
+          <ul className="listBody">
+              <li className='listItem'>{info.item1}</li>
+              <li className='listItem'>{info.item2}</li>
+              <li className='listItem'>{info.item3}</li>
+              <li className='listItem'>{`see more`}</li>
+          </ul>
+      </Link>
+  )
+}
+
+export const GatosItem = ({info}) => {
+  return(
+          <ul className="listBody">
+              <li className='listItem' style={{width: info.width1}}>{info.item1}</li>
+              <li className='listItem' style={{width: info.width2}}>{info.item2}</li>
+              <li className='listItem' style={{width: info.width3}}>{info.item3}</li>
+              <li className='listItem' style={{width: info.width4}}>{info.item4}</li>
+              <li className='listItem' style={{width: info.width5}}>{info.item5}</li>
+              <li className='listItem' style={{color: 'var(--primary-color)', fontWeight:'500', width: info.width6}} >{info.item6}</li>
+              <li className='listItem' style={{width: info.width7}}><input type="checkbox" /></li>
+          </ul>
+  )
+}
+
+export const UtilidadesItem1 = ({info}) => {
+  return(
+    <ul className="listBody">
+        <div className="listItem">{info.item1}</div>
+        <div className="listItem">{info.item2}</div>
+        <div className="listItem">{info.item3}</div>
+        <div className="listItem">{info.item4}</div>
+        <div className="listItem"  style={{color: info.color, textDecoration: info.decoration}}>{info.item5}</div>
+    </ul>
+  )
+}
+export const UtilidadesItem2 = ({info}) => {
+  return(
+    <ul className="listBody">
+        <div className="listItem">{info.item1}</div>
+        <div className="listItem">{info.item2}</div>
+        <div className="listItem">{info.item3}</div>
+        <div className="listItem status" style={{color: info.color}} >{info.item4}</div>
+        <div className="listItem" style={{color: info.color}}>{info.item5}</div>
+        <div className={`listItem ${info.action}`}><Button text={info.item6} background={info.background} types={`button`}/> </div>
     </ul>
   )
 }

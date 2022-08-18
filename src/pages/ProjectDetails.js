@@ -9,6 +9,8 @@ import ProjectGI from '../sectionBlock/Project-General-Information';
 import Approval from '../sectionBlock/ProjectApproval';
 import ProjectInfo from '../sectionBlock/Project-Information';
 import ProjectOwnerInfo from '../sectionBlock/Project-Owner-Information';
+import RegisterOwners from '../sectionBlock/Project-owner-register';
+import ProjectOwners from '../sectionBlock/Project-Own-info';
 import InvestorPlan from '../sectionBlock/Investor-plan';
 import FinancialProjection from '../sectionBlock/Financial-Projection';
 import Valuation from '../sectionBlock/Valuation';
@@ -41,6 +43,7 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
   const [fechaSalida,setSalida] = useState('');
   const [IdProject,setID] = useState(0);
   const [riskProjectAll,setRiskAll] = useState([]);
+  const [aprobacionValue,setAprobacionValue] = useState({});
   const [projecOwnerData,setProjectowner]= useState(prjectOwnerInitial)
   const [valorDeenvio,setValorEnvio] = useState({
     Code: 'Code',
@@ -63,6 +66,11 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
   const [attemptToProjectApproval, setAttemptToProjectApproval] = useState('close');
   const [ProjectInfoDisplay, setProjectInfoDisplay] = useState('close');
   const [ProjectOwnerInfoDisplay, setProjectOwnerInfoDisplay] = useState('close');
+  const [RegisterOwner, setRegisterOwner] = useState("close");
+  const [ProjectRegisterOwner, setProjectRegisterOwner] = useState("close");
+  const [ProjectRegisterDueno, setProjectRegisterDueno] = useState("close");
+  const [OwnerInfo, setOwnerInfo] = useState("close");
+  const [UpdateOwnerInfo, setUpdateOwnerInfo] = useState("close");
   const [investorPlan, setInvestorPlan] = useState('close');
   const [attempToAddRisk, setAttemptToAddRisk] = useState('close');
   setTimeout(()=>{
@@ -72,6 +80,11 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
         setAttemptToProjectApproval('close');
         setProjectInfoDisplay('close');
         setProjectOwnerInfoDisplay('close');
+        setRegisterOwner("close");
+        setProjectRegisterOwner("close");
+        setProjectRegisterDueno("close");
+        setOwnerInfo("close");
+        setUpdateOwnerInfo("close");
         setInvestorPlan('close');
         setAttemptToAddRisk("close");
       })
@@ -82,6 +95,11 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
         setAttemptToProjectApproval('close');
         setProjectInfoDisplay('close');
         setProjectOwnerInfoDisplay('close');
+        setRegisterOwner("close");
+        setProjectRegisterOwner("close");
+        setProjectRegisterDueno("close");
+        setOwnerInfo("close");
+        setUpdateOwnerInfo("close");
         setInvestorPlan('close');
         setAttemptToAddRisk("close");
       })
@@ -92,6 +110,11 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
         setAttemptToProjectApproval('close');
         setProjectInfoDisplay('close');
         setProjectOwnerInfoDisplay('close');
+        setRegisterOwner("close");
+        setProjectRegisterOwner("close");
+        setProjectRegisterDueno("close");
+        setOwnerInfo("close");
+        setUpdateOwnerInfo("close");
         setInvestorPlan('close');
         setAttemptToAddRisk("close");
       })
@@ -102,6 +125,11 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
         setAttemptToProjectApproval('close');
         setProjectInfoDisplay('close');
         setProjectOwnerInfoDisplay('close');
+        setRegisterOwner("close");
+        setProjectRegisterOwner("close");
+        setProjectRegisterDueno("close");
+        setOwnerInfo("close");
+        setUpdateOwnerInfo("close");
         setInvestorPlan('close');
         setAttemptToAddRisk("close");
       })
@@ -112,6 +140,11 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
         setAttemptToProjectApproval('close');
         setProjectInfoDisplay('close');
         setProjectOwnerInfoDisplay('close');
+        setRegisterOwner("close");
+        setProjectRegisterOwner("close");
+        setProjectRegisterDueno("close");
+        setOwnerInfo("close");
+        setUpdateOwnerInfo("close");
         setInvestorPlan('close');
         setAttemptToAddRisk("close");
       })
@@ -121,6 +154,11 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
         setAttemptToProjectApproval('close');
         setProjectInfoDisplay('close');
         setProjectOwnerInfoDisplay('close');
+        setRegisterOwner("close");
+        setProjectRegisterOwner("close");
+        setProjectRegisterDueno("close");
+        setOwnerInfo("close");
+        setUpdateOwnerInfo("close");
         setInvestorPlan('close');
         setAttemptToAddRisk("close");
       })
@@ -145,6 +183,31 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
     if(openInfo[2]){
       openInfo[2].addEventListener('click',()=>{
         setInvestorPlan('open');
+      })
+    }
+    if(openInfo[3]){
+      openInfo[3].addEventListener('click',()=>{
+        setRegisterOwner('open');
+      })
+    }
+    if(openInfo[4]){
+      openInfo[4].addEventListener('click',()=>{
+        setProjectRegisterOwner('open');
+      })
+    }
+    if(openInfo[5]){
+      openInfo[5].addEventListener('click',()=>{
+        setProjectRegisterDueno('open');
+      })
+    }
+    if(openInfo[6]){
+      openInfo[6].addEventListener('click',()=>{
+        setOwnerInfo('open');
+      })
+    }
+    if(openInfo[7]){
+      openInfo[7].addEventListener('click',()=>{
+        setUpdateOwnerInfo('open');
       })
     }
     const registerButton = document.querySelector('.ProjectInfo .register');
@@ -207,7 +270,13 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
     }
   axios.get("/project/"+id, {},bearerToken)
   .then((response) => {
+    setAprobacionValue({})
     if(response.status===200){
+      setAprobacionValue({
+        fechaArob:response.data[0].FECHA_APROBA,
+        nombreapro:response.data[0].NOMBRE_APROBA,
+        statusaprob:response.data[0].STATUS_APROBA
+      })
       setValorEnvio({
         Code: response.data[0].I_CODIGO,
         Project_name:response.data[0].C_NOMBRE_PROYECTO,
@@ -234,6 +303,7 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
       setSalida(response.data[0].F_FECHA_PROYECTADA_SALIDA)
     }
   }).catch((err)=>{
+    setAprobacionValue({})
     if(err.response){
       if(err.response.data){
         if(err.response.data.message){
@@ -252,7 +322,14 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
     }
 
   },[buscar,isNavigate,navigate]);
+  
+  useEffect(()=>{
+   if(IdProject){
+    callProjectID(IdProject)
+   }
 
+  },[attemptToProjectApproval,setAttemptToProjectApproval]);
+  
   useEffect(()=>{
     const backButton = document.querySelector('.first-part .buttonwitharrow');
     if(backButton){
@@ -307,7 +384,7 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
     <>
       {
         attemptToProjectApproval === 'open'
-        ?<Approval language={language} title={language.projectDetails.Approval_title} />
+        ?<Approval language={language} aproveVal={aprobacionValue} title={language.projectDetails.Approval_title} idprodject={IdProject} close={setAttemptToProjectApproval} />
         :<></>
       }
       {
@@ -317,7 +394,32 @@ const ProjectDetails = ({lang, setLang, language, responsive}) => {
       }
       {
         (ProjectOwnerInfoDisplay === 'open' && idProjectOwner)
-        ?<ProjectOwnerInfo setIdOwner={setIdProjectOwner} idOwner={idProjectOwner} language={language} title={language.projectDetails.projectowener}  idproject={IdProject}  datoRetorno={projecOwnerData} setOwner={setProjectowner}/>
+        ?<ProjectOwnerInfo setIdOwner={setIdProjectOwner} idOwner={idProjectOwner} language={language} edit={`no`} title={language.projectDetails.projectowener}  idproject={IdProject}  datoRetorno={projecOwnerData} setOwner={setProjectowner}/>
+        :<></>
+      }
+      {
+        RegisterOwner === 'open'
+        ?<RegisterOwners language={language} title={`Registration of project owners`} />
+        :<></>
+      }
+      {
+        ProjectRegisterOwner === 'open'
+        ?<ProjectOwnerInfo setIdOwner={setIdProjectOwner} idOwner={idProjectOwner} language={language} edit={`yes`} title={`Registration of project owners`}  idproject={IdProject}  datoRetorno={projecOwnerData} setOwner={setProjectowner}/>
+        :<></>
+      }
+      {
+        ProjectRegisterDueno === 'open'
+        ?<ProjectOwnerInfo setIdOwner={setIdProjectOwner} idOwner={idProjectOwner} language={language} edit={`yes`} title={`Registrar dueño de la empresa`}  idproject={IdProject}  datoRetorno={projecOwnerData} setOwner={setProjectowner}/>
+        :<></>
+      }
+      {
+        OwnerInfo === 'open'
+        ?<ProjectOwners language={language} title={`Project Owners Information`} />
+        :<></>
+      }
+      {
+        UpdateOwnerInfo === 'open'
+        ?<ProjectOwnerInfo setIdOwner={setIdProjectOwner} idOwner={idProjectOwner} language={language} edit={`yes`} title={`Update project owner information`}  idproject={IdProject}  datoRetorno={projecOwnerData} setOwner={setProjectowner}/>
         :<></>
       }
       {

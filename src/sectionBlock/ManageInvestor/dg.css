@@ -1,0 +1,111 @@
+.Esheet-submit {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.Contract-formalization .financial-head .header {
+    font-size: 20px;
+    line-height: 27px;
+    color: var(--text-dark);
+    font-weight: 400;
+    padding: 20px 5px 30px 5px;
+}
+
+
+.empresa{
+    margin: 20px 0px;
+}
+
+.empresa .editing{
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.empresa .empresaTable{
+    margin: 5px 0px;
+    width: 70%;
+}
+
+.empresa .empresaTable ul{
+    display: flex;
+    border-bottom: 1px solid #D3DAE6;
+    margin: 0px !important;
+}
+.empresa .empresaTable ul:last-child{
+    border-bottom: none;
+}
+.empresa .empresaTable ul:last-child button{  
+    margin: 10px 5px;
+}
+
+.empresa .empresaTable ul li{
+    padding: 10px 15px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.24px;
+    color: #69B644;
+    width: 100%;
+}
+.empresa .empresaTable ul li input{
+    margin: 0px;
+    padding: 0px 5px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.contrato{
+    display: flex;
+}
+.contrato input{
+    display: flex;
+    flex-direction: column;
+}
+.contrato li{
+    width: 20%;
+    margin-right: 20px;
+}
+.generate-contract h4{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #4A4A4A;
+    margin: 10px 0px;
+}
+.Contract-formalization .Esheet-submit {
+    margin: 0px 0px 25px;
+}
+.submit-button {
+    margin: 30px 0px;
+    text-align: end;
+}
+
+@media screen and (max-width: 768px) {
+    .Contract-formalization .Esheet-submit button {
+        width: 100%;
+        margin: 20px 2px;
+    }
+    .submit-button button{
+        width: 100%;
+    }
+    .empresa .empresaTable ul{
+        flex-direction: row;
+    }    
+    .contrato{
+        flex-direction: column;
+    }
+    .contrato li{
+        width: 100%;
+        margin-right: 0px;
+    }
+    .empresa .empresaTable{
+        width: 90%;
+        margin: 0 auto;
+    }
+    .empresa .editing{
+        width: 90%;
+    }
+    
+}

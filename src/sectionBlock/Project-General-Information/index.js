@@ -9,6 +9,11 @@ const ProjectGI = ({language}) => {
             <Button text={language.projectDetails.button1}  background={`var(--tartiary-color)`} />
             <Button text={language.projectDetails.button2}  background={`var(--secondary-color)`} />
             <Button text={language.projectDetails.button3} background={`var(--primary-color)`} />
+            <Button text={`Register Project Owners`}  background={`var(--tartiary-color)`} />
+            <Button text={`Project Owners Register`}  background={`var(--secondary-color)`} />
+            <Button text={`Register Dueno`}  background={`var(--primary-color)`} />
+            <Button text={`Owner Information`}  background={`var(--tartiary-color)`} />
+            <Button text={`Update Owner Information`}  background={`var(--secondary-color)`} />
         </div>
         <div className="GI-document">
           <h2>{language.projectDetails.document} </h2>

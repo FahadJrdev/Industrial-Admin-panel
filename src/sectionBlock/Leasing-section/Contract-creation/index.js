@@ -5,12 +5,14 @@ import {Button, Pill} from '../../../component/buttons';
 import LeasingParameter from '../Leasing-Parameter';
 import Select from 'react-select' ;
 
+import { AiFillEdit } from "react-icons/ai";
 import { useNavigate} from 'react-router-dom';
 import axios from "../../../api/axios.js";
 import {toast} from "react-toastify";
-const ContractCreation = ({language,valorData,valorIDProyecto,valorIDOwner,isUpdates,funcion,Deuda}) => {
+const ContractCreation = ({language,valorData,valorIDProyecto,valorIDOwner,isUpdates,funcion,Deuda,edit}) => {
   const navigates = useNavigate();
   const initialState = {
+    Radication: '',
     Date_Of_Reques: '',
     Debtors_Name_And_Surname: '',
     Document_type: '',
@@ -30,6 +32,7 @@ const ContractCreation = ({language,valorData,valorIDProyecto,valorIDOwner,isUpd
     Interest_rate_type: '',
     Interest_rate_historic: '',
     Deviation: '',
+    moun_interes:'',
     Period3: '',
     Gradient_type: '',
     Gradient_value: '',
@@ -96,7 +99,7 @@ const ContractCreation = ({language,valorData,valorIDProyecto,valorIDOwner,isUpd
   const onChange = (e) => {
       dispatch({ field: e.target.name, value: e.target.value })
   }
-  const {  Date_Of_Reques, Debtors_Name_And_Surname, Document_type,Document_type2, Document,Document2, Credit_line, Credit_quota, Maximum_period, Requested_amount, Period1, Perioricidad, Forma_de_pago, Type_grace, Period2, Format, Interest_type, Interest_rate_type, Interest_rate_historic, Deviation, Period3, Gradient_type, Gradient_value, 
+  const { Radication, Date_Of_Reques,moun_interes, Debtors_Name_And_Surname, Document_type,Document_type2, Document,Document2, Credit_line, Credit_quota, Maximum_period, Requested_amount, Period1, Perioricidad, Forma_de_pago, Type_grace, Period2, Format, Interest_type, Interest_rate_type, Interest_rate_historic, Deviation, Period3, Gradient_type, Gradient_value, 
     Type1, Value, Type2, Shape, Fees, Tipo_identificion1, Identity1, name1, Telephone1, city1, address1, Tipo_identificion2, Identity2, name2, Telephone2, city2, address2, Tipo_identificion3, Identity3, name3, Telephone3, city3, address3, Tipo_identificion4, Identity4, name4, Telephone4, city4, address4 } = state;
   const handleSubmit = (event) => {
       event.preventDefault();
@@ -148,7 +151,7 @@ const ContractCreation = ({language,valorData,valorIDProyecto,valorIDOwner,isUpd
     FORMATO:Format,
     INTEREST_TYPE:openExtraConcept?Interest_type:'',
     DATE_CON:Date_Of_Reques,
-
+    INTERES_CREDITO:moun_interes,
     INTEREST_RATE_TYPE:openExtraConcept?Interest_rate_type:'',
     INTEREST_RATE_HISTORIC:openExtraConcept?Interest_rate_historic:'',
     DEVIATION:openExtraConcept?Deviation:'',
@@ -219,7 +222,7 @@ const ContractCreation = ({language,valorData,valorIDProyecto,valorIDOwner,isUpd
       FORMATO:Format,
       INTEREST_TYPE:openExtraConcept?Interest_type:'',
       DATE_CON:Date_Of_Reques,
-  
+      INTERES_CREDITO:moun_interes,
       INTEREST_RATE_TYPE:openExtraConcept?Interest_rate_type:'',
       INTEREST_RATE_HISTORIC:openExtraConcept?Interest_rate_historic:'',
       DEVIATION:openExtraConcept?Deviation:'',
@@ -385,31 +388,79 @@ const ContractCreation = ({language,valorData,valorIDProyecto,valorIDOwner,isUpd
 
       }
     },[valorIDOwner]);
+    const [editing, isEditing] = useState(edit);
   return (
     <>
       {
         attemptToAddParameter === `open`
-        ?<LeasingParameter title={language.deuda_leasing.payment_plan} language={language} />
+        ?<LeasingParameter title={language.deuda_leasing.payment_plan} language={language}  cuotas={Credit_quota} fecha={Date_Of_Reques} Perioricitys={Perioricidad} formpay={Forma_de_pago} montocapital={Requested_amount} montointer={moun_interes}/>
         :<></>
       }
 
       <div className="Contract-creation">
         <FinancialHead text={language.deuda_leasing.debtor_info} btntext={language.deuda_leasing.payment_plan} />
+        <div className="editing"><span onClick={()=>{isEditing(!editing)}} ><AiFillEdit /></span></div>
         <form action="" method="post" onSubmit={handleSubmit}>
-            <ul className="Esheet">
-                    <li>
-                      <label htmlFor="Code">{language.deuda_leasing.project_id}</label>  
-                      <Select isDisabled={isUpdates} value={selected} options={projects} onChange={SelecProject} />
-                    </li>
-                <Input label={language.deuda_leasing.date_reques} disa={ isUpdates}  type={`date`} name={`Date_Of_Reques`} value={Date_Of_Reques} placeholder={`DD/MM/YYYY`} onChange={onChange} />
-                               </ul>
+            <ul className="Esheet ">
+              {
+                editing
+                ?<>
+                  <li className="savedInfo">
+                        <label htmlFor="Code">{language.deuda_leasing.project_id}</label>  
+                        <Select isDisabled={isUpdates} value={selected} options={projects} onChange={SelecProject} />
+                      </li>
+                  </>
+                :<></>
+              }
+              {
+                editing
+                ?<>
+                  <Input label={`Radication`} disa={ isUpdates}  type={`date`} name={`Radication`} value={Radication} placeholder={`Enter`} onChange={onChange} />
+                </>
+                :<>
+                  <li className="savedInfo">
+                    <label>{`Radication`}</label>
+                    <p>{Radication}</p>
+                  </li>
+                </>
+              }
+              {
+                editing
+                ?<>
+                    <Input label={language.deuda_leasing.date_reques} disa={ isUpdates}  type={`date`} name={`Date_Of_Reques`} value={Date_Of_Reques} placeholder={`DD/MM/YYYY`} onChange={onChange} />
+                </>
+                :<>
+                  <li className="savedInfo">
+                    <label>{language.deuda_leasing.date_reques}</label>
+                    <p>{Date_Of_Reques}</p>
+                  </li>
+                </>
+              }
+            </ul>
             <ul className="Esheet"> 
-            <Input label={language.deuda_leasing.debtor_name_surname} disa={true} type={`text`} name={`Debtors_Name_And_Surname`} value={Debtors_Name_And_Surname} placeholder={`Enter Name`} onChange={onChange} />
-            <SelectVal label={language.deuda_leasing.debtor_document_type} disa={true}  name={`Document_type`} value={Document_type} placeholder={`Select`} onChange={onChange} value1={`Document_type-1`} array={document_type_array}/>
-            <Input label={language.deuda_leasing.debtor_document_} disa={true} type={`text`} name={`Document`} value={Document } placeholder={`Enter`} onChange={onChange} />
-           
-
-                     </ul>
+            { 
+              editing
+              ?<>
+                <Input label={language.deuda_leasing.debtor_name_surname} disa={true} type={`text`} name={`Debtors_Name_And_Surname`} value={Debtors_Name_And_Surname} placeholder={`Enter Name`} onChange={onChange} />
+                <SelectVal label={language.deuda_leasing.debtor_document_type} disa={true}  name={`Document_type`} value={Document_type} placeholder={`Select`} onChange={onChange} value1={`Document_type-1`} array={document_type_array}/>
+                <Input label={language.deuda_leasing.debtor_document_} disa={true} type={`text`} name={`Document`} value={Document } placeholder={`Enter`} onChange={onChange} />
+              </>
+              :<>
+                <li className="savedInfo">
+                  <label>{language.deuda_leasing.debtor_name_surname}</label>
+                  <p>{Debtors_Name_And_Surname}</p>
+                </li>
+                <li className="savedInfo">
+                  <label>{language.deuda_leasing.debtor_document_type}</label>
+                  <p>{Document_type}</p>
+                </li>
+                <li className="savedInfo">
+                  <label>{language.deuda_leasing.debtor_document_}</label>
+                  <p>{Document}</p>
+                </li>
+              </>
+            }
+           </ul>
            {false?<>
             <div className="leasing-info-table">
                 <div className="title">{`Co-debtor(s) information`}</div>
@@ -512,25 +563,106 @@ const ContractCreation = ({language,valorData,valorIDProyecto,valorIDOwner,isUpd
            </>:<></>} 
             <p className="inputsTitle">{language.deuda_leasing.credit_Information}</p>
             <ul className="Esheet">
-                <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_line} name={`Credit_line`} value={Credit_line} placeholder={`Select`} onChange={onChange} array={line_cre}/>
-                <Input disa={ isUpdates} label={language.deuda_leasing.credit_quota} type={`number`} name={`Credit_quota`} value={Credit_quota} placeholder={`Enter`} onChange={onChange} />
-                <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_maximum_period} name={`Maximum_period`} value={Maximum_period} placeholder={`Select`} onChange={onChange} array={max_perio}/>
-                <Input disa={ isUpdates} label={language.deuda_leasing.credit_requesamount} type={`number`} name={`Requested_amount`} value={Requested_amount} placeholder={`Enter`} onChange={onChange} />
-                <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_period} name={`Period1`} value={Period1} placeholder={`Select`} onChange={onChange} array={perio}/>
+              {
+                editing
+                ?<>
+                  <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_line} name={`Credit_line`} value={Credit_line} placeholder={`Select`} onChange={onChange} array={line_cre}/>
+                  <Input disa={ isUpdates} label={language.deuda_leasing.credit_quota} type={`number`} name={`Credit_quota`} value={Credit_quota} placeholder={`Enter`} onChange={onChange} />
+                  <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_maximum_period} name={`Maximum_period`} value={Maximum_period} placeholder={`Select`} onChange={onChange} array={max_perio}/>
+                  <Input disa={ isUpdates} label={language.deuda_leasing.credit_requesamount} type={`number`} name={`Requested_amount`} value={Requested_amount} placeholder={`Enter`} onChange={onChange} />
+                  <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_period} name={`Period1`} value={Period1} placeholder={`Select`} onChange={onChange} array={perio}/>
+                </>
+                :<>
+                  <li className="savedInfo">
+                    <label>{language.deuda_leasing.credit_line}</label>
+                    <p>{Credit_line}</p>
+                  </li>
+                  <li className="savedInfo">
+                    <label>{language.deuda_leasing.credit_quota}</label>
+                    <p>{Credit_quota}</p>
+                  </li>
+                  <li className="savedInfo">
+                    <label>{language.deuda_leasing.credit_maximum_period}</label>
+                    <p>{Maximum_period}</p>
+                  </li>
+                  <li className="savedInfo">
+                    <label>{language.deuda_leasing.credit_requesamount}</label>
+                    <p>{Requested_amount}</p>
+                  </li>
+                  <li className="savedInfo">
+                    <label>{language.deuda_leasing.credit_period}</label>
+                    <p>{Period1}</p>
+                  </li>
+                </>
+              }
             </ul>
             <ul className="Esheet">
-                <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_periodicity} name={`Perioricidad`} value={Perioricidad} placeholder={`Select`} onChange={onChange} array={periooci}/>
-                <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_waypay} name={`Forma_de_pago`} value={Forma_de_pago} placeholder={`Select`} onChange={onChange} array={formpay}/>
+              {
+                editing
+                ?<>
+                  <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_periodicity} name={`Perioricidad`} value={Perioricidad} placeholder={`Select`} onChange={onChange} array={periooci}/>
+                  <Input disa={ isUpdates} label={language.deuda_leasing.credit_interes} type={`number`} name={`moun_interes`} value={moun_interes} placeholder={`Enter`} onChange={onChange} />
+                  <SelectVal disa={ isUpdates} label={language.deuda_leasing.credit_waypay} name={`Forma_de_pago`} value={Forma_de_pago} placeholder={`Select`} onChange={onChange} array={formpay}/>
+                </>
+                :<>
+                  <li className="savedInfo">
+                    <label>{language.deuda_leasing.credit_periodicity}</label>
+                    <p>{Perioricidad}</p>
+                  </li>
+                  <li className="savedInfo">
+                    <label>{language.deuda_leasing.credit_interes}</label>
+                    <p>{moun_interes}</p>
+                  </li>
+                  <li className="savedInfo">
+                    <label>{language.deuda_leasing.credit_waypay}</label>
+                    <p>{Forma_de_pago}</p>
+                  </li>
+                </>
+              }
             </ul>
             <p className="inputsTitle">{language.deuda_leasing.grace_parameters}</p>
             <ul className="Esheet">
-                <SelectVal disa={ isUpdates} label={language.deuda_leasing.grace_typegrace} name={`Type_grace`} value={Type_grace} placeholder={`Select`} onChange={onChange} array={typgra}/>
-                <SelectVal disa={ isUpdates} label={language.deuda_leasing.grace_Period} name={`Period2`} value={Period2} placeholder={`Select`} onChange={onChange} array={perio}/>
-                <SelectVal disa={ isUpdates} label={language.deuda_leasing.grace_Format} name={`Format`} value={Format} placeholder={`Select`} onChange={onChange} array={format}/>
+              {
+                editing
+                ?<>
+                  <SelectVal disa={ isUpdates} label={language.deuda_leasing.grace_typegrace} name={`Type_grace`} value={Type_grace} placeholder={`Select`} onChange={onChange} array={typgra}/>
+                  <SelectVal disa={ isUpdates} label={language.deuda_leasing.grace_Period} name={`Period2`} value={Period2} placeholder={`Select`} onChange={onChange} array={perio}/>
+                  <SelectVal disa={ isUpdates} label={language.deuda_leasing.grace_Format} name={`Format`} value={Format} placeholder={`Select`} onChange={onChange} array={format}/>
+                </>
+                :<>
+                <li className="savedInfo">
+                  <label>{language.deuda_leasing.grace_typegrace}</label>
+                  <p>{Type_grace}</p>
+                </li>
+                <li className="savedInfo">
+                  <label>{language.deuda_leasing.grace_Period}</label>
+                  <p>{Period2}</p>
+                </li>
+                <li className="savedInfo">
+                  <label>{language.deuda_leasing.grace_Format}</label>
+                  <p>{Format}</p>
+                </li>
+                </>
+              }
             </ul>
             <ul className="Esheet">
+              {
+                editing
+                ?<>
                 <SelectVal disa={ isUpdates} label={language.deuda_leasing.grace_document_type} name={`Document_type2`} value={Document_type2} placeholder={`Select`} onChange={onChange} array={document_type_array}/>
                 <Input disa={ isUpdates} label={language.deuda_leasing.grace_document} type={`text`} name={`Document2`} value={Document2} placeholder={`Enter`} onChange={onChange} />
+                </>
+                :<>
+                <li className="savedInfo">
+                  <label>{language.deuda_leasing.grace_document_type}</label>
+                  <p>{Document_type2}</p>
+                </li>
+                <li className="savedInfo">
+                  <label>{language.deuda_leasing.grace_document}</label>
+                  <p>{Document2}</p>
+                </li>
+                </>
+              }
             </ul>
             <div className="graceParam">
                 <p className="inputsTitle">{language.deuda_leasing.concept}</p>
@@ -540,41 +672,122 @@ const ContractCreation = ({language,valorData,valorIDProyecto,valorIDOwner,isUpd
             </div>
             {
               openExtraConcept?<>
-               <div className={`extraConcept`}>
-                <p className="small-text">{language.deuda_leasing.financed_atribute}</p>
-                <ul className="Esheet">
-                    <SelectVal disa={ isUpdates} label={language.deuda_leasing.financed_type_interested} name={`Interest_type`} value={Interest_type} placeholder={`Select`} onChange={onChange} array={tipointer}/>
-                    <SelectVal disa={ isUpdates} label={language.deuda_leasing.financed_Interested_rate} name={`Interest_rate_type`} value={Interest_rate_type} placeholder={`Select`} onChange={onChange} array={tipotasainter}/>
-                    <SelectVal disa={ isUpdates} label={language.deuda_leasing.financed_rate_historic} name={`Interest_rate_historic`} value={Interest_rate_historic} placeholder={`Select`} onChange={onChange} array={tasaintehist}/>
-                    <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.financed_deviation} name={`Deviation`} value={Deviation} placeholder={`Select`} onChange={onChange} />
-                    <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.financed_period} name={`Period3`} value={Period3} placeholder={`Select`} onChange={onChange} />
-                    <SelectVal disa={ isUpdates} label={language.deuda_leasing.financed_gradient} name={`Gradient_type`} value={Gradient_type} placeholder={`Select`} onChange={onChange} array={tipodegrada}/>
-                </ul>
-                <ul className="Esheet">
-                    <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.financed_gradientvalue} name={`Gradient_value`} value={Gradient_value} placeholder={`Enter`} onChange={onChange} />
-                </ul>
-             </div>
-              </>:<>
-              <div className={`extraConcept `}>
-                <p className="small-text">{language.deuda_leasing.disconted_attribute}</p>
-                <ul className="Esheet">
-                    <SelectVal disa={ isUpdates}  label={language.deuda_leasing.disconted_type} name={`Type1`} value={Type1} placeholder={`Select`} onChange={onChange} array={tip1}/>
-                    <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.disconted_value} name={`Value`} value={Value} placeholder={`Enter`} onChange={onChange} />
-                </ul>
-                <ul className="Esheet">
-                    <SelectVal disa={ isUpdates} label={language.deuda_leasing.disconted_type} name={`Type2`} value={Type2} placeholder={`Select`} onChange={onChange} array={tip2}/>
-                    <SelectVal disa={ isUpdates} label={language.deuda_leasing.disconted_shape} name={`Shape`} value={Shape} placeholder={`Select`} onChange={onChange} array={tip2forma}/>
-                    <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.disconted_fees} name={`Fees`} value={Fees} placeholder={`Enter`} onChange={onChange} />
-                </ul>
-           
+                <div className={`extraConcept`}>
+                  <p className="small-text">{language.deuda_leasing.financed_atribute}</p>
+                  <ul className="Esheet">
+                      {
+                        editing
+                        ?<>
+                          <SelectVal disa={ isUpdates} label={language.deuda_leasing.financed_type_interested} name={`Interest_type`} value={Interest_type} placeholder={`Select`} onChange={onChange} array={tipointer}/>
+                          <SelectVal disa={ isUpdates} label={language.deuda_leasing.financed_Interested_rate} name={`Interest_rate_type`} value={Interest_rate_type} placeholder={`Select`} onChange={onChange} array={tipotasainter}/>
+                          <SelectVal disa={ isUpdates} label={language.deuda_leasing.financed_rate_historic} name={`Interest_rate_historic`} value={Interest_rate_historic} placeholder={`Select`} onChange={onChange} array={tasaintehist}/>
+                          <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.financed_deviation} name={`Deviation`} value={Deviation} placeholder={`Select`} onChange={onChange} />
+                          <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.financed_period} name={`Period3`} value={Period3} placeholder={`Select`} onChange={onChange} />
+                          <SelectVal disa={ isUpdates} label={language.deuda_leasing.financed_gradient} name={`Gradient_type`} value={Gradient_type} placeholder={`Select`} onChange={onChange} array={tipodegrada}/>
+                        </>
+                        :<>
+                          <li className="savedInfo">
+                            <label>{language.deuda_leasing.financed_type_interested}</label>
+                            <p>{Interest_type}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.deuda_leasing.financed_Interested_rate}</label>
+                            <p>{Interest_rate_type}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.deuda_leasing.financed_rate_historic}</label>
+                            <p>{Interest_rate_historic}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.deuda_leasing.financed_deviation}</label>
+                            <p>{Deviation}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.deuda_leasing.financed_period}</label>
+                            <p>{Period3}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.deuda_leasing.financed_gradient}</label>
+                            <p>{Gradient_type}</p>
+                          </li>
+                        </>
+                      }
+                  </ul>
+                  <ul className="Esheet">
+                    {
+                      editing
+                      ?<>
+                        <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.financed_gradientvalue} name={`Gradient_value`} value={Gradient_value} placeholder={`Enter`} onChange={onChange} />
+                      </>
+                      :<>
+                          <li className="savedInfo">
+                            <label>{language.deuda_leasing.financed_gradientvalue}</label>
+                            <p>{Gradient_value}</p>
+                          </li>
+                      </>
+                    }
+                  </ul>
                 </div>
-              
+              </>
+              :<>
+                <div className={`extraConcept `}>
+                  <p className="small-text">{language.deuda_leasing.disconted_attribute}</p>
+                  <ul className="Esheet">
+                    {
+                      editing
+                      ?<>
+                        <SelectVal disa={ isUpdates}  label={language.deuda_leasing.disconted_type} name={`Type1`} value={Type1} placeholder={`Select`} onChange={onChange} array={tip1}/>
+                        <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.disconted_value} name={`Value`} value={Value} placeholder={`Enter`} onChange={onChange} />
+                      </>
+                      :<>
+                          <li className="savedInfo">
+                            <label>{language.deuda_leasing.disconted_type}</label>
+                            <p>{Type1}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.deuda_leasing.disconted_value}</label>
+                            <p>{Value}</p>
+                          </li>
+                      </>
+                    }
+                  </ul>
+                  <ul className="Esheet">
+                    {
+                      editing
+                      ?<>
+                        <SelectVal disa={ isUpdates} label={language.deuda_leasing.disconted_type} name={`Type2`} value={Type2} placeholder={`Select`} onChange={onChange} array={tip2}/>
+                        <SelectVal disa={ isUpdates} label={language.deuda_leasing.disconted_shape} name={`Shape`} value={Shape} placeholder={`Select`} onChange={onChange} array={tip2forma}/>
+                        <Input disa={ isUpdates} type={`number`} label={language.deuda_leasing.disconted_fees} name={`Fees`} value={Fees} placeholder={`Enter`} onChange={onChange} />
+                      </>
+                      :<>
+                          <li className="savedInfo">
+                            <label>{language.deuda_leasing.disconted_type}</label>
+                            <p>{Type2}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.deuda_leasing.disconted_shape}</label>
+                            <p>{Shape}</p>
+                          </li>
+                          <li className="savedInfo">
+                            <label>{language.deuda_leasing.disconted_fees}</label>
+                            <p>{Fees}</p>
+                          </li>
+                      </>
+                    }
+                  </ul>
+                </div>
               </>
             }
            
            
             <div className="Esheet-submit">
-              {isUpdates?<></>:<><Button disa={ isUpdates} text={language.global.save} background={`var(--primary-color)`} types={`button`} click={opcionBoton} /></>}
+              {
+                editing
+                ?<>
+                  {isUpdates?<></>:<><Button disa={ isUpdates} text={language.global.save} background={`var(--primary-color)`} types={`button`} click={opcionBoton} /></>}
+                </>
+                :<></>
+              }
                 
             </div>
         </form>
